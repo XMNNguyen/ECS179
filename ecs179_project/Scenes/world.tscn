@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=5 format=3 uid="uid://cusr3f70fll4u"]
 
-[ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_qqo46"]
+[ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
+[ext_resource type="Script" path="res://Scripts/tile_map.gd" id="2_fnfvh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
-texture = ExtResource("1_qqo46")
+texture = ExtResource("1_lsk4u")
 texture_region_size = Vector2i(64, 64)
 1:2/next_alternative_id = 2
 1:2/0 = 0
@@ -1551,6 +1552,9 @@ texture_region_size = Vector2i(64, 64)
 5:9/0/texture_origin = Vector2i(0, -16)
 4:9/0 = 0
 4:9/0/texture_origin = Vector2i(0, -16)
+9:0/0 = 0
+9:0/0/texture_origin = Vector2i(0, -16)
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -16, 32, 0, 0, 16, -32, 0)
 
 [sub_resource type="TileSet" id="TileSet_h0tvw"]
 tile_shape = 1
@@ -1582,3 +1586,4 @@ layer_3/name = "Layer3"
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 3
 layer_3/z_index = 3
+script = ExtResource("2_fnfvh")
