@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=6 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
 [ext_resource type="Script" path="res://Scripts/tile_map.gd" id="2_fnfvh"]
+[ext_resource type="PackedScene" uid="uid://dnsb3nki2wygw" path="res://Scenes/Player.tscn" id="3_drjvw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1546,3 +1547,6 @@ layer_3/y_sort_origin = 3
 layer_3/z_index = 3
 layer_3/tile_data = PackedInt32Array(-131036, 262144, 13, -458712, 65536, 13, -524248, 65536, 13, -589784, 65536, 13, -458710, 196608, 14, -393175, 196608, 14, -327639, 196608, 14, -327640, 196608, 14, -262105, 196608, 14, -196571, 196608, 14, -589783, 196608, 14, -589782, 196608, 14, -720855, 196608, 14, -393178, 196608, 14, -262106, 589824, 11, -131033, 589824, 11, -327641, 589824, 11, -393177, 589824, 11, -524246, 589824, 11, -262104, 589824, 11, -196568, 589824, 11, -196570, 589824, 11, -327643, 589824, 11, -393179, 589824, 11, -393180, 589824, 11, -655317, 589824, 11, -720854, 589824, 11)
 script = ExtResource("2_fnfvh")
+
+[node name="Player" parent="." instance=ExtResource("3_drjvw")]
+position = Vector2(229, -29)
