@@ -1589,4 +1589,4 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(7, -281)
+position = Vector2(220, -5)
