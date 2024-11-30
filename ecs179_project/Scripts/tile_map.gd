@@ -8,8 +8,13 @@ enum layers{
 	LEVEL_3 = 3,
 }
 
+
 # TODO: set up a couple more invisible collision tiles for tiles 1 layer above
 var boundery := Vector2i(9, 0)
+
+# TODO: fill out the slopes table of all the atlas coords of slopes
+# atlas coords of all the slopes in our tile set
+var slopes:Array[Vector2] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +24,7 @@ func _ready() -> void:
 # TODO: set up script to check player position and set up collision boxes accordingly
 func _process(delta: float) -> void:
 	pass
-
+	
 
 # sets up a collision boundery in the current layer
 func setup_boundery(current_layer: layers, source: int):
