@@ -1,3 +1,4 @@
+class_name TileMapController
 extends TileMap
 
 # NOTE: update this whenever we add new layers
@@ -12,39 +13,41 @@ enum layers{
 
 var boundery := Vector2i(9, 0)
 var wall_bounderies:Dictionary = {
-								Vector2(-1, 0) : Vector2(9, 1),
-								Vector2(1, 0) : Vector2(8, 1),
-								Vector2(0, -1) : Vector2(8, 2),
-								Vector2(0, 1) : Vector2(8, 0),
+								Vector2i(-1, 0) : Vector2i(9, 1),
+								Vector2i(1, 0) : Vector2i(8, 1),
+								Vector2i(0, -1) : Vector2i(8, 2),
+								Vector2i(0, 1) : Vector2i(8, 0),
+								Vector2i(1, 1) : Vector2i(9, 2),
+								Vector2i(0, 0) : Vector2i(7, 0),
 							  } 
 
 # atlas coords of all the slopes in our tile set
-var slopes:Array[Vector2] = [
-							Vector2(0, 3), Vector2(1, 3), Vector2(2, 3), Vector2(3, 3), 
-							Vector2 (5, 3), Vector2(6, 3), Vector2(7, 3), Vector2(8, 3), 
-							Vector2(0, 4), Vector2(1, 4), Vector2(2, 4), Vector2(3, 4),
+var slopes:Array[Vector2i] = [
+							Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), 
+							Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3), Vector2i(8, 3), 
+							Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4),
 							]
 
 # atlas coords of all the blocks in our tile set
-var blocks:Array[Vector2] = [
-							Vector2(4, 3), Vector2(4, 5), Vector2(5, 5), Vector2(0, 6),
-							Vector2(1, 6), Vector2(2, 6), Vector2(3, 6), Vector2(4, 6),
-							Vector2(5, 6), Vector2(1, 7), Vector2(2, 7), Vector2(3, 7),
-							Vector2(4, 7), Vector2(5, 7), Vector2(6, 7), Vector2(7, 7),
-							Vector2(8, 9), Vector2(9, 9),
+var blocks:Array[Vector2i] = [
+							Vector2i(4, 3), Vector2i(4, 5), Vector2i(5, 5), Vector2i(0, 6),
+							Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6),
+							Vector2i(5, 6), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7),
+							Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7),
+							Vector2i(8, 9), Vector2i(9, 9),
 							]
 
-var other:Array[Vector2] = [
-							Vector2(0, 5), Vector2(1, 5), Vector2(2, 5), Vector2(3, 5),
-							Vector2(6, 5), Vector2(7, 5), Vector2(8, 5), Vector2(9, 5),
-							Vector2(6, 6), Vector2(7, 6), Vector2(8, 6), Vector2(9, 6),
-							Vector2(0, 7), Vector2(0, 11), Vector2(1, 11), Vector2(2, 11),
-							Vector2(3, 11), Vector2(4, 11), Vector2(5, 11), Vector2(6, 11),
-							Vector2(7, 11), Vector2(8, 11), Vector2(9, 11), Vector2(0, 12),
-							Vector2(1, 12), Vector2(2, 12), Vector2(3, 12), Vector2(4, 12),
-							Vector2(5, 12), Vector2(6, 12), Vector2(7, 12), Vector2(8, 12),
-							Vector2(9, 12), Vector2(0, 13), Vector2(1, 13), Vector2(2, 14),
-							Vector2(3, 14), Vector2(4, 13), Vector2(5, 13),
+var other:Array[Vector2i] = [
+							Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5),
+							Vector2i(6, 5), Vector2i(7, 5), Vector2i(8, 5), Vector2i(9, 5),
+							Vector2i(6, 6), Vector2i(7, 6), Vector2i(8, 6), Vector2i(9, 6),
+							Vector2i(0, 7), Vector2i(0, 11), Vector2i(1, 11), Vector2i(2, 11),
+							Vector2i(3, 11), Vector2i(4, 11), Vector2i(5, 11), Vector2i(6, 11),
+							Vector2i(7, 11), Vector2i(8, 11), Vector2i(9, 11), Vector2i(0, 12),
+							Vector2i(1, 12), Vector2i(2, 12), Vector2i(3, 12), Vector2i(4, 12),
+							Vector2i(5, 12), Vector2i(6, 12), Vector2i(7, 12), Vector2i(8, 12),
+							Vector2i(9, 12), Vector2i(0, 13), Vector2i(1, 13), Vector2i(2, 14),
+							Vector2i(3, 14), Vector2i(4, 13), Vector2i(5, 13),
 							]
 							
 
@@ -74,16 +77,18 @@ func setup_boundery(current_layer: layers, source: int):
 					set_cell(current_layer, tile + offset, source, boundery)
 	
 	# go into the layer above i it exists and then add all the wall bounderies
-	if current_layer + 1 < len(layers):
-		var layer_above:Array[Vector2i] = get_used_cells(current_layer + 1)
-		for tile in layer_above:
-			# only place boundery tiles if the tile is of type block
-			var tile_atlas_coords:Vector2 = get_cell_atlas_coords(current_layer + 1, tile)
-			if tile_atlas_coords in blocks:
-				# check each direction to see if there is an empty tile,
-				# and place the wall collision appropriately
-				for offset in offset_direction:
-					if get_cell_source_id(current_layer + 1, tile + offset) == -1:
-						set_cell(current_layer + 1, tile + offset, source, wall_bounderies[Vector2(offset)])
-				
-			
+	var layer_above:Array[Vector2i] = get_used_cells(current_layer + 1)
+	for tile in layer_above:
+		# only place boundery tiles if the tile is of type block
+		if get_cell_atlas_coords(current_layer + 1, tile) in blocks:
+			# check each direction to see if there is an empty tile,
+			# and place the wall collision appropriately
+			for offset in offset_direction:
+				if get_cell_source_id(current_layer + 1, tile + offset) == -1:
+					set_cell(current_layer + 1, tile + offset, source, wall_bounderies[Vector2i(offset)])
+				elif (get_cell_atlas_coords(current_layer + 1, tile + offset) == Vector2i(9, 1) or 
+					  get_cell_atlas_coords(current_layer + 1, tile + offset) == Vector2i(8, 2)):
+					set_cell(current_layer + 1, tile + offset, source, wall_bounderies[Vector2i(0, 0)])
+				elif (get_cell_atlas_coords(current_layer + 1, tile + offset) == Vector2i(8, 1) or 
+					  get_cell_atlas_coords(current_layer + 1, tile + offset) == Vector2i(8, 0)):
+					set_cell(current_layer + 1, tile + offset, source, wall_bounderies[Vector2i(1, 1)])

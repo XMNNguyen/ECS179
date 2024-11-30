@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b7dqs305882cr" path="res://Assets/Necromancer.png" id="2_hlf2m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_22f7m"]
-height = 42.0
+radius = 1.0
+height = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou1h4"]
 atlas = ExtResource("2_hlf2m")
@@ -513,7 +514,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 script = ExtResource("1_k8kdr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+z_index = 1
+position = Vector2(0, 20.5)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_22f7m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -521,6 +524,7 @@ zoom = Vector2(2.21, 2.21)
 position_smoothing_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_23ojp")
 animation = &"idle"
 frame = 1
