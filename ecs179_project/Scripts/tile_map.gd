@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 	pass
 	
 
-# sets up a collision boundery in the current layer
+# sets up a collision bounderies in the current layer
 func setup_boundery(current_layer: layers, source: int):
 	var offset_direction: Array[Vector2i] = [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1)]
 	var layer:Array[Vector2i]  = get_used_cells(current_layer)
@@ -73,14 +73,17 @@ func setup_boundery(current_layer: layers, source: int):
 				if get_cell_source_id(current_layer, tile + offset) == -1:
 					set_cell(current_layer, tile + offset, source, boundery)
 	
-	# TODO: do one more set of checks on the layer above currrent_layer and add the corresponding collision bounderies for the walls
-	var layer_above:Array[Vector2i] = get_used_cells(current_layer + 1)
-	for tile in layer_above:
-		# only place boundery tiles if the tile is not a slope
-		if (get_cell_atlas_coords(current_layer + 1, tile) not in slopes and
-			get_cell_atlas_coords(current_layer + 1, tile) not in other):
-			for offset in offset_direction:
-				if get_cell_source_id(current_layer + 1, tile + offset) == -1:
-					set_cell(current_layer + 1, tile + offset, source, wall_bounderies[Vector2(offset)])
+	# go into the layer above i it exists and then add all the wall bounderies
+	if current_layer + 1 < len(layers):
+		var layer_above:Array[Vector2i] = get_used_cells(current_layer + 1)
+		for tile in layer_above:
+			# only place boundery tiles if the tile is of type block
+			var tile_atlas_coords:Vector2 = get_cell_atlas_coords(current_layer + 1, tile)
+			if tile_atlas_coords in blocks:
+				# check each direction to see if there is an empty tile,
+				# and place the wall collision appropriately
+				for offset in offset_direction:
+					if get_cell_source_id(current_layer + 1, tile + offset) == -1:
+						set_cell(current_layer + 1, tile + offset, source, wall_bounderies[Vector2(offset)])
 				
 			
