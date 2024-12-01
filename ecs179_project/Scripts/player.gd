@@ -34,7 +34,7 @@ func _physics_process(delta):
 		state = MOVE
 		velocity = input_vector.normalized() * MAX_SPEED
 		
-		# if our player is moving on a slope, adjust movement
+		# if our player is moving on a slope, adjust velocity accordingly
 		if is_on_slope():
 			move_on_slope(input_vector.normalized())
 			
