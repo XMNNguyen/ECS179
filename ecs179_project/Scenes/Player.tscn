@@ -511,7 +511,7 @@ states/move/position = Vector2(339, 148)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbkpj"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_remph"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_0vo35")]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pboi1"]
-radius = 6.0
+radius = 4.0
 height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -547,7 +547,8 @@ parameters/move/TimeScale/scale = 1.0
 parameters/move/move_blend/blend_position = Vector2(-0.00158983, 1)
 
 [node name="Head" type="Area2D" parent="."]
+rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-position = Vector2(-1, -8)
+position = Vector2(-15, 1)
 shape = SubResource("CapsuleShape2D_pboi1")

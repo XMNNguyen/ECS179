@@ -25,8 +25,6 @@ var state_keys = [
 func _physics_process(delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 	
-	adjust_z_index()
-	
 	if input_vector == Vector2.ZERO:
 		state = IDLE
 		velocity = Vector2.ZERO
@@ -36,7 +34,12 @@ func _physics_process(delta):
 		
 		# if our player is moving on a slope, adjust velocity accordingly
 		if is_on_slope():
+			on_slope = true
+			adjust_z_index()
 			move_on_slope(input_vector.normalized())
+		elif on_slope:
+			on_slope = false
+			adjust_z_index()
 			
 		blend_position = input_vector
 
@@ -48,7 +51,7 @@ func _physics_process(delta):
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index() -> void:
 	# get coordianates of the tile player is standing on then get the tile data
-	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
+	var player_tile_position:Vector2i = tile_map.local_to_map($CollisionShape2D.global_position - Vector2(0, 16))
 	var new_z_index:int = 0
 	
 	for i in range(tile_map.layers.keys().size()):
@@ -86,7 +89,7 @@ func move_on_slope(input_vector : Vector2):
 	if tile_map.get_cell_atlas_coords(z_index - 1, player_tile_position) in tile_map.up_right_slopes:
 		# add a y-bias based on input direction
 		if input_vector.x == 1:
-			velocity.y -= diagonal_bias
+			velocity.y -= diagonal_bias 
 		elif input_vector.x == -1:
 			velocity.y += diagonal_bias
 	
@@ -102,9 +105,9 @@ func move_on_slope(input_vector : Vector2):
 	elif tile_map.get_cell_atlas_coords(z_index - 1, player_tile_position) in tile_map.down_right_slopes:
 		# add a y-bias based on input direction
 		if input_vector.x == 1:
-			velocity.y += diagonal_bias
-		elif input_vector.x == -1:
 			velocity.y -= diagonal_bias
+		elif input_vector.x == -1:
+			velocity.y += diagonal_bias
 
 	# DOWN LEFT	
 	elif tile_map.get_cell_atlas_coords(z_index - 1, player_tile_position) in tile_map.down_left_slopes:
