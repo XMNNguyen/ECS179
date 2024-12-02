@@ -67,7 +67,7 @@ func adjust_z_index() -> void:
 # helper function to check if player is on a slope
 func is_on_slope() -> bool:
 	# get coordianates of the tile player is standing on then get the tile data
-	var player_tile_position:Vector2i = tile_map.local_to_map($CollisionShape2D.global_position - Vector2(0, 16))
+	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
 	
 	return (tile_map.get_cell_atlas_coords(z_index, player_tile_position) in tile_map.slopes ||
 			tile_map.get_cell_atlas_coords(z_index - 1, player_tile_position) in tile_map.slopes)
