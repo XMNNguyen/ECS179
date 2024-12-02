@@ -51,7 +51,7 @@ func _physics_process(delta):
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index() -> void:
 	# get coordianates of the tile player is standing on then get the tile data
-	var player_tile_position:Vector2i = tile_map.local_to_map($CollisionShape2D.global_position - Vector2(0, 16))
+	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
 	var new_z_index:int = 0
 	
 	for i in range(tile_map.layers.keys().size()):
