@@ -10,6 +10,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# NOTE: when we start making enemy scenes, we probably should adjust the z_index based on the head position since we are doing an isometric game,
+	# 	    it will most likely be very similar to how I did it for player.gd
 	adjust_z_index(global_position)
+	_current_health -= 1
+	die()
+	
 
 	

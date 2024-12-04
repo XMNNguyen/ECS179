@@ -3,13 +3,16 @@ extends CharacterBody2D
 
 # STATS
 var level: float = 1
-var health: float = 100
+var max_health: float = 100
 var defense: float = 10
 var base_damage: float = 10
 var base_speed: float = 10
 var base_atk_speed: float = 10
 var target: Player
 var aggro_range: float = 30 
+
+var _current_health: float = max_health
+var _aggro: bool = false
 
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
 
@@ -19,8 +22,11 @@ func calculate_damage() -> float:
 	return base_damage
 
 
-func is_dead() -> bool:
-	return health <= 0
+# function that tries to free our enemy instance once health is depleted
+func die() -> void:
+	if _current_health <= 0:
+		print("DEAD")
+		queue_free()
 
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
