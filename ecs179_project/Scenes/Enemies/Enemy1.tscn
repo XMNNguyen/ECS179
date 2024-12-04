@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmx1gf4qjo7lf"]
+
+[ext_resource type="Texture2D" uid="uid://crt0h1217ngnp" path="res://icon.svg" id="1_7dcxe"]
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy1.gd" id="1_ggdhm"]
+
+[node name="Enemy1" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_ggdhm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.999998, -6)
+scale = Vector2(0.515625, 0.476563)
+texture = ExtResource("1_7dcxe")

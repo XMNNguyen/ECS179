@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=7 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
 [ext_resource type="Script" path="res://Scripts/tile_map.gd" id="2_fnfvh"]
 [ext_resource type="PackedScene" uid="uid://dnsb3nki2wygw" path="res://Scenes/Player.tscn" id="3_drjvw"]
+[ext_resource type="PackedScene" uid="uid://cya5icw57awh1" path="res://Scenes/spawner.tscn" id="4_cchqb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1559,7 +1560,7 @@ tile_size = Vector2i(64, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ugaeo")
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -1587,5 +1588,9 @@ layer_3/tile_data = PackedInt32Array(-131036, 262144, 13, -458712, 65536, 13, -5
 script = ExtResource("2_fnfvh")
 
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
+unique_name_in_owner = true
 z_index = 1
 position = Vector2(216, -7)
+
+[node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
+position = Vector2(388, -105)

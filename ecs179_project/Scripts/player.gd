@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 const MAX_SPEED = 120
@@ -63,6 +64,7 @@ func adjust_z_index() -> void:
 	if z_index != new_z_index:
 		signals.entered_new_layer.emit(max(new_z_index, 1), z_index)
 	z_index = max(new_z_index, 1)
+
 
 # helper function to check if player is on a slope
 func is_on_slope() -> bool:
