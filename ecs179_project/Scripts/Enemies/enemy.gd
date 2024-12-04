@@ -25,7 +25,7 @@ func calculate_damage() -> float:
 # function that tries to free our enemy instance once health is depleted
 func die() -> void:
 	if _current_health <= 0:
-		print("DEAD")
+		#print("DEAD")
 		queue_free()
 
 
