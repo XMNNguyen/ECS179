@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dnsb3nki2wygw"]
+[gd_scene load_steps=55 format=3 uid="uid://dnsb3nki2wygw"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_k8kdr"]
 [ext_resource type="Texture2D" uid="uid://b7dqs305882cr" path="res://Assets/Necromancer.png" id="2_hlf2m"]
@@ -514,6 +514,10 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 radius = 4.0
 height = 12.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e0wt5"]
+radius = 8.0
+height = 40.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_k8kdr")
 
@@ -552,3 +556,10 @@ rotation = 1.5708
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 position = Vector2(-15, 1)
 shape = SubResource("CapsuleShape2D_pboi1")
+
+[node name="hurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+shape = SubResource("CapsuleShape2D_e0wt5")
+
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

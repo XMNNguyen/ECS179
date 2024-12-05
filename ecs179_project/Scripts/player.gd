@@ -7,6 +7,9 @@ enum {IDLE, MOVE}
 var state = IDLE
 var on_slope: bool = false
 
+var currentHealth: int = 4
+
+
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 @onready var tile_map: TileMapController = %TileMap
@@ -48,6 +51,10 @@ func _physics_process(delta):
 	state_machine.travel(state_keys[state])
 	animationTree.set(blend_paths[state], blend_position)
 	
+
+	
+
+
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index() -> void:
@@ -137,3 +144,7 @@ func move_on_slope(input_vector : Vector2):
 	
 	
 	
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
