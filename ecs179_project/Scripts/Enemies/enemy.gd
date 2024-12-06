@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 # STATS
 var level: float = 1
-var max_health: float = 100
+var max_health: float = 10
 var defense: float = 10
 var base_damage: float = 10
 var base_speed: float = 10

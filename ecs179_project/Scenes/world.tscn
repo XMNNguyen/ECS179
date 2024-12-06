@@ -1568,7 +1568,7 @@ y_sort_enabled = true
 script = ExtResource("1_5dhhd")
 
 [node name="Test_enemy" parent="." instance=ExtResource("7_va1s3")]
-position = Vector2(363, -5)
+position = Vector2(538, 98)
 
 [node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
