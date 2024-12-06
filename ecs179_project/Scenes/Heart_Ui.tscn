@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwr40pn1tsioi"]
+[gd_scene load_steps=3 format=3 uid="uid://bwr40pn1tsioi"]
 
+[ext_resource type="Script" path="res://Scripts/heart_ui.gd" id="1_07amd"]
 [ext_resource type="Texture2D" uid="uid://cxuyo42ogs2qt" path="res://Assets/heart.png" id="1_aiy75"]
 
 [node name="Panel" type="Panel"]
@@ -7,6 +8,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(45, 38)
 offset_right = 45.0
 offset_bottom = 38.0
+script = ExtResource("1_07amd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -5)

@@ -1,13 +1,17 @@
 class_name Player
 extends CharacterBody2D
 
+
+signal healthChange
+
 const MAX_SPEED = 120
 
 enum {IDLE, MOVE}
 var state = IDLE
 var on_slope: bool = false
 
-var currentHealth: int = 4
+@export var maxHeart: float = 8
+@onready var health: float = maxHeart
 
 
 @onready var animationTree:AnimationTree = $AnimationTree
@@ -142,9 +146,20 @@ func move_on_slope(input_vector : Vector2):
 		elif input_vector.x == 1:
 			velocity.y += diagonal_bias
 	
-	
-	
 
-
-func _on_hurt_box_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+func _on_hurt_box_area_entered(area: Area2D) -> void: # When a damaging collision hits the player
+	if area.name == "hitBox": # Change this to the name of the collision that will damage the player
+		health -= 0.5
+		if health < 0: # Making sure that health doesn't go negative
+			health = 0
+		healthChange.emit(health)
+		if health == 0:
+			pass # Actions for player death here
+	if area.name == "hitBox2": # This can be the hit box of a boss doing double damage
+		health -= 2
+		if health < 0: # Making sure that health doesn't go negative
+			health = 0
+		healthChange.emit(health)
+		if health == 0:
+			pass # Actions for player death here
+		

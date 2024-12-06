@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=10 format=3 uid="uid://cusr3f70fll4u"]
 
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
 [ext_resource type="Script" path="res://Scripts/tile_map.gd" id="2_fnfvh"]
 [ext_resource type="PackedScene" uid="uid://dnsb3nki2wygw" path="res://Scenes/Player.tscn" id="3_drjvw"]
 [ext_resource type="PackedScene" uid="uid://cya5icw57awh1" path="res://Scenes/spawner.tscn" id="4_cchqb"]
 [ext_resource type="PackedScene" uid="uid://c2ay5rxk3o4ts" path="res://Scenes/hearts.tscn" id="5_x1rp2"]
+[ext_resource type="PackedScene" uid="uid://4m1d73i53aab" path="res://Scenes/test_enemy.tscn" id="7_va1s3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1563,6 +1565,10 @@ sources/0 = SubResource("TileSetAtlasSource_ugaeo")
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_5dhhd")
+
+[node name="Test_enemy" parent="." instance=ExtResource("7_va1s3")]
+position = Vector2(363, -5)
 
 [node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
