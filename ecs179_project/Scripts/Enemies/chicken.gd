@@ -57,4 +57,6 @@ func follow_target() -> void:
 	move_and_slide()
 	state_machine.travel(state_keys[cur_state])
 	animationTree.set(blend_paths[cur_state], blend_position)
+	#print("cur_state: " + str(cur_state))
+	#print(state_machine.get_current_node())
 	

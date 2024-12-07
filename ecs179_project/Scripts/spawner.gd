@@ -16,6 +16,8 @@ var _spawn_timer: Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(tile_map.boundery)
+	print(tile_map.wall_bounderies.values())
 	refresh_spawn_timer()
 
 
@@ -45,9 +47,10 @@ func spawn_enemy() -> void:
 	# randomly set the spawn location somewhere around our spawner no more then spawn_radius away
 	# if the spawn location is invalid (off map), change the spawn location
 	var spawn_location: Vector2 = get_random_spawn_location()
-	while (tile_map.get_cell_source_id(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == -1 &&
-			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) != tile_map.boundery &&
-			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) not in tile_map.wall_bounderies):
+	while (tile_map.get_cell_source_id(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == -1 ||
+			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == tile_map.boundery ||
+			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) in tile_map.wall_bounderies.values()):
+		print(tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)))
 		spawn_location = get_random_spawn_location()
 		
 	enemy_instance.global_position = spawn_location
