@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc4efv4ef1xnv"]
+
+[ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_0p5gy"]
+[ext_resource type="Texture2D" uid="uid://6ywa3ni4mhan" path="res://Assets/Options_Menu.png" id="2_5l7y1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3e6w5"]
+texture = ExtResource("2_5l7y1")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mevup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptuls"]
+bg_color = Color(0.571397, 0.150307, 0.169373, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn7nk"]
+bg_color = Color(0.44523, 0.107625, 0.123315, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k64ge"]
+bg_color = Color(0.728068, 0.211223, 0.23184, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0p5gy")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -575.0
+offset_top = -324.0
+offset_right = 575.0
+offset_bottom = 321.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_3e6w5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -282.0
+offset_top = 230.0
+offset_right = 282.0
+offset_bottom = 649.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 27
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mevup")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ptuls")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qn7nk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_k64ge")
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_button_pressed_back"]
