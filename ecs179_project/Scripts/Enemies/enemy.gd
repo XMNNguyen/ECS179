@@ -10,6 +10,7 @@ var base_speed: float = 10
 var base_atk_speed: float = 10
 var target: Player
 var aggro_range: float = 30 
+var attack_range: float = 30
 
 var _current_health: float = max_health
 var _aggro: bool = false

@@ -16,8 +16,6 @@ var _spawn_timer: Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(tile_map.boundery)
-	print(tile_map.wall_bounderies.values())
 	refresh_spawn_timer()
 
 
@@ -50,7 +48,6 @@ func spawn_enemy() -> void:
 	while (tile_map.get_cell_source_id(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == -1 ||
 			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == tile_map.boundery ||
 			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) in tile_map.wall_bounderies.values()):
-		print(tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)))
 		spawn_location = get_random_spawn_location()
 		
 	enemy_instance.global_position = spawn_location
@@ -59,7 +56,8 @@ func spawn_enemy() -> void:
 func spawn_enemy_pack() -> void:
 	for i in range(pack_size):
 		spawn_enemy()
-		
+
+
 func refresh_spawn_timer() -> void:
 	_spawn_timer = Timer.new()
 	_spawn_timer.one_shot = true

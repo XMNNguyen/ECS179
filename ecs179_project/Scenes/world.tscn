@@ -1610,4 +1610,4 @@ pack_spawn = false
 [node name="Hearts" parent="CanvasLayer" instance=ExtResource("5_x1rp2")]
 
 [node name="Chicken" parent="." instance=ExtResource("8_q84ec")]
-position = Vector2(-190, 133)
+position = Vector2(-6, 108)
