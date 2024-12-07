@@ -75,29 +75,35 @@ func follow_target() -> void:
 
 
 func start_peck_attack() -> void:
+	# set state to attack state and get the direction towards the target
 	cur_state = state.ATTACK
 	var target_direction: Vector2 = (target.global_position - global_position).normalized()
 	
+	# set up a wind up timer before chicken launches itself
 	wind_up_timer = Timer.new()
 	wind_up_timer.one_shot = true
 	add_child(wind_up_timer)
 	velocity = Vector2(0, 0)
 	wind_up_timer.start(0.56)
 	
+	# update state machine
 	blend_position = Vector2(target_direction.x, -target_direction.y)
 	move_and_slide()
 	state_machine.travel(state_keys[cur_state])
 	animationTree.set(blend_paths[cur_state], blend_position)
 
 func peck_attack() -> void:
+		# if the wind up timer just ended, launch the chicken in direction of target
 		if !_pecking:
 			var target_direction: Vector2 = (target.global_position - global_position).normalized()
 			velocity = target_direction * 230
 			_pecking = true
 			move_and_slide()
+		# start slowing down the chicken
 		elif _pecking && abs(velocity) >= Vector2(10, 10):
 			velocity *= 0.95
 			move_and_slide()
+		# the peck attack has ended
 		else:
 			cur_state = state.MOVE
 			_pecking = false
