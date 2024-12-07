@@ -488,7 +488,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sqjha"]
-graph_offset = Vector2(-224.083, -23.9082)
+graph_offset = Vector2(163.987, 66.9597)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_nikck")
 nodes/TimeScale/position = Vector2(697.273, 218.015)
 nodes/move_blend/node = SubResource("AnimationNodeBlendSpace2D_463k3")
@@ -519,6 +519,8 @@ radius = 8.0
 height = 40.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_k8kdr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -55,10 +55,8 @@ func is_on_slope(position: Vector2) -> bool:
 			
 
 # add movement bias based on direction the enemy is moving in
-func move_on_slope(position: Vector2, input_vector : Vector2):
+func move_on_slope(position: Vector2, input_vector : Vector2, horizontal_bias: float, diagonal_bias:float):
 	var slow_scaling: float = 0.80
-	var horizontal_bias:float = 40
-	var diagonal_bias:float = 25
 	
 	# get the tile position of the slope we are on
 	var enemy_tile_position = tile_map.local_to_map(position)
@@ -69,7 +67,7 @@ func move_on_slope(position: Vector2, input_vector : Vector2):
 	# UP RIGHT
 	if tile_map.get_cell_atlas_coords(z_index - 1, enemy_tile_position) in tile_map.up_right_slopes:
 		# add a y-bias based on input direction
-		if input_vector.x < 0:
+		if input_vector.x > 0:
 			velocity.y -= diagonal_bias 
 		elif input_vector.x < 0:
 			velocity.y += diagonal_bias
@@ -77,9 +75,9 @@ func move_on_slope(position: Vector2, input_vector : Vector2):
 	# RIGHT
 	elif tile_map.get_cell_atlas_coords(z_index - 1, enemy_tile_position) in tile_map.right_slopes:
 		# add a y-bias based on input direction
-		if input_vector.x < 0:
+		if input_vector.x > 0:
 			velocity.y += horizontal_bias
-		elif input_vector.x > 0:
+		elif input_vector.x < 0:
 			velocity.y -= horizontal_bias
 	
 	# DOWN RIGHT		
@@ -87,7 +85,7 @@ func move_on_slope(position: Vector2, input_vector : Vector2):
 		# add a y-bias based on input direction
 		if input_vector.x > 0:
 			velocity.y -= diagonal_bias
-		elif input_vector.x < 10:
+		elif input_vector.x < 0:
 			velocity.y += diagonal_bias
 
 	# DOWN LEFT	

@@ -1,7 +1,7 @@
 class_name Spawner
 extends Node2D
 
-@export var enemy_types: Array[String] = ["res://Scenes/Enemies/Enemy1.tscn"] # holds all the scene paths of the types of enemies that can spawn in this spawner
+@export var enemy_types: Array[String] = ["res://Scenes/Enemies/chicken.tscn"] # holds all the scene paths of the types of enemies that can spawn in this spawner
 @export var spawn_radius: float = 150
 @export var trigger_radius:float = 70
 @export var spawn_time: float = 1
@@ -45,7 +45,9 @@ func spawn_enemy() -> void:
 	# randomly set the spawn location somewhere around our spawner no more then spawn_radius away
 	# if the spawn location is invalid (off map), change the spawn location
 	var spawn_location: Vector2 = get_random_spawn_location()
-	while tile_map.get_cell_source_id(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == -1:
+	while (tile_map.get_cell_source_id(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == -1 &&
+			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) != tile_map.boundery &&
+			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) not in tile_map.wall_bounderies):
 		spawn_location = get_random_spawn_location()
 		
 	enemy_instance.global_position = spawn_location
