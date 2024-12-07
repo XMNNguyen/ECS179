@@ -852,6 +852,7 @@ radius = 5.0
 height = 10.0
 
 [node name="Chicken" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_74ind")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

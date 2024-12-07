@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=10 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnsb3nki2wygw" path="res://Scenes/Player.tscn" id="3_drjvw"]
 [ext_resource type="PackedScene" uid="uid://cya5icw57awh1" path="res://Scenes/spawner.tscn" id="4_cchqb"]
 [ext_resource type="PackedScene" uid="uid://c2ay5rxk3o4ts" path="res://Scenes/hearts.tscn" id="5_x1rp2"]
+[ext_resource type="PackedScene" uid="uid://dv5akecv6pqx" path="res://Scenes/Enemies/sprout.tscn" id="7_0n51j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1594,12 +1595,16 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(216, -7)
+position = Vector2(216, -41)
 
 [node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
 position = Vector2(388, -105)
+enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/sprout.tscn"])
 pack_spawn = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hearts" parent="CanvasLayer" instance=ExtResource("5_x1rp2")]
+
+[node name="Sprout" parent="." instance=ExtResource("7_0n51j")]
+position = Vector2(-49, 22)

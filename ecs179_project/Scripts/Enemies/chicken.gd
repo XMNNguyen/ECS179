@@ -27,7 +27,6 @@ var state_keys = [
 var _on_slope: bool = false
 var _pecking: bool = false
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# adjust base stats
