@@ -92,7 +92,7 @@ func start_peck_attack() -> void:
 func peck_attack() -> void:
 		if !_pecking:
 			var target_direction: Vector2 = (target.global_position - global_position).normalized()
-			velocity = target_direction * 220
+			velocity = target_direction * 230
 			_pecking = true
 			move_and_slide()
 		elif _pecking && abs(velocity) >= Vector2(10, 10):
