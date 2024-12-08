@@ -23,9 +23,10 @@ var state_keys = [
 	"Idle",
 	"Move"
 ]
-var bullet: String = "res://Scenes/Enemies/Attacks/sprout_bullet.tscn"
+var bullet = preload("res://Scenes/Enemies/Attacks/sprout_bullet.tscn")
+var projectile_speed: float = 120
+
 var _on_slope: bool = false
-var _fire_dir: Vector2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,13 +44,11 @@ func _process(delta: float) -> void:
 	adjust_z_index($Head.global_position)
 	# check if the sprout has aggro on it's target
 	if _aggro:
-		if cur_state == state.ATTACK && (wind_up_timer == null || wind_up_timer.is_stopped()):
-			fire(_fire_dir)
-		elif cur_state != state.ATTACK:
+		if cur_state != state.ATTACK:
 			follow_target()
 			# if we are in attack range, commence peck attack
 			if global_position.distance_to(target.global_position) <= attack_range:
-				_fire_dir = start_fire()
+				start_fire()
 	elif global_position.distance_to(target.global_position) <= aggro_range:
 		_aggro = true
 
@@ -74,23 +73,24 @@ func follow_target() -> void:
 	animationTree.set(blend_paths[cur_state], blend_position)
 
 
-func start_fire() -> Vector2:
+func start_fire() -> void:
+	# set up blend position and change state to attack
 	var target_direction: Vector2 = (target.global_position - global_position).normalized()
 	cur_state = state.ATTACK
 	velocity = Vector2(0, 0)
-	
-	wind_up_timer = Timer.new()
-	wind_up_timer.one_shot = true
-	add_child(wind_up_timer)
-	wind_up_timer.start(1)
 	
 	blend_position = Vector2(target_direction.x, -target_direction.y)
 	move_and_slide()
 	state_machine.travel(state_keys[cur_state])
 	animationTree.set(blend_paths[cur_state], blend_position)
-	
-	return target_direction
 
 
-func fire(fire_direction: Vector2) -> void:
+func fire() -> void:
+	# create bullet instance and base velocity on projectile speed and rotate the bullet towards player
+	var fire_direction: Vector2 = (target.global_position - global_position).normalized()
+	var new_bullet := bullet.instantiate() as SproutBullet
+	new_bullet.velocity = fire_direction * projectile_speed
+	new_bullet.rotation = fire_direction.angle()
+	add_child(new_bullet)
+
 	cur_state = state.MOVE

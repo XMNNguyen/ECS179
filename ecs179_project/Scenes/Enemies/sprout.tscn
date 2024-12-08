@@ -331,6 +331,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vxlke"]
 resource_name = "fire_down"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -355,9 +356,24 @@ tracks/1/keys = {
 "update": 0,
 "values": [&"attack"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_2ctcs"]
 resource_name = "fire_left"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -382,9 +398,24 @@ tracks/1/keys = {
 "update": 0,
 "values": [&"attack"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_vdums"]
 resource_name = "fire_right"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -409,9 +440,24 @@ tracks/1/keys = {
 "update": 0,
 "values": [&"attack"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_vpnbg"]
 resource_name = "fire_up"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -435,6 +481,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [&"attack"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_rwefw"]
@@ -814,6 +874,8 @@ radius = 2.0
 height = 10.0
 
 [node name="Sprout" type="CharacterBody2D"]
+light_mask = 2
+visibility_layer = 2
 y_sort_enabled = true
 script = ExtResource("1_woj2y")
 
