@@ -291,11 +291,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_w5vol")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="hitBox" type="Area2D" parent="."]
+[node name="hitBoxEnemy" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBoxEnemy"]
 light_mask = 2
 visibility_layer = 3
 shape = SubResource("CircleShape2D_kt4eo")
 
-[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="hitBoxEnemy" to="." method="_on_hit_box_area_entered"]
