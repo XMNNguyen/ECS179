@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	# if we have entered the Player's hurtbox, explode the bullet
 	if area.name == "hurtBox" && area.get_parent().is_in_group("Enemies"):
-		signals.take_damage.emit(damage)
+		area.get_parent()._on_take_damage(damage)
 		velocity = Vector2(0, 0)
 		cur_state = state.DEATH
 		state_machine.travel(state_keys[cur_state])
