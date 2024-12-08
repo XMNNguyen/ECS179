@@ -873,7 +873,7 @@ height = 26.0
 radius = 2.0
 height = 10.0
 
-[node name="Sprout" type="CharacterBody2D"]
+[node name="Sprout" type="CharacterBody2D" groups=["Enemies"]]
 light_mask = 2
 visibility_layer = 2
 y_sort_enabled = true

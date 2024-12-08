@@ -29,6 +29,9 @@ var _pecking: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("Enemies")
+	signals.take_damage.connect(_on_take_damage)
+	
 	# adjust base stats
 	base_speed = 40
 	aggro_range = 100

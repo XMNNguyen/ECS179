@@ -851,7 +851,7 @@ height = 16.0
 radius = 5.0
 height = 10.0
 
-[node name="Chicken" type="CharacterBody2D"]
+[node name="Chicken" type="CharacterBody2D" groups=["Enemies"]]
 y_sort_enabled = true
 script = ExtResource("1_74ind")
 

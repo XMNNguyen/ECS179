@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 # STATS
 var level: float = 1
-var max_health: float = 10
+var max_health: float = 2
 var defense: float = 10
 var base_damage: float = 1
 var base_speed: float = 10
@@ -18,15 +18,14 @@ var _aggro: bool = false
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
 
 
-# TODO: figure out how we will calculate our damage
-func calculate_damage() -> float:
-	return base_damage
+func _on_take_damage(damage: int) -> void:
+	_current_health -= damage
+	die()
 
 
 # function that tries to free our enemy instance once health is depleted
 func die() -> void:
 	if _current_health <= 0:
-		#print("DEAD")
 		queue_free()
 
 

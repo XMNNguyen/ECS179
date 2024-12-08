@@ -10,16 +10,25 @@ enum {IDLE, MOVE}
 var state = IDLE
 var on_slope: bool = false
 
+# STATS
 @export var maxHeart: float = 8
+@export var attack_speed: float = 0.5 # NOTE: attack speed should never be >1.99
+@export var attack_range: float = 150
+
+# WEAPON STATS
+# STANDARD WEAPON
+@export var standard_bullet_speed: float = 150
+@export var standard_bullet_damage: float = 1
+@export var standard_attack_cd: float = 1
+@export var num_standard_bullets: int = 1
+
+# OTHER
 @onready var health: float = maxHeart
-
-
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 @onready var tile_map: TileMapController = %TileMap
 
-
-
+var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
 	"parameters/idle/idle_blend/blend_position",
@@ -29,6 +38,17 @@ var state_keys = [
 	"idle",
 	"move"
 ]
+
+# WEAPON TIMERS
+var _standard_weapon_timer: Timer
+
+
+func _ready() -> void:
+	_standard_weapon_timer = Timer.new()
+	_standard_weapon_timer.one_shot = true
+	add_child(_standard_weapon_timer)
+	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
+
 
 func _physics_process(delta):
 	var input_vector = Input.get_vector("left", "right", "up", "down")
@@ -54,9 +74,52 @@ func _physics_process(delta):
 	move_and_slide()
 	state_machine.travel(state_keys[state])
 	animationTree.set(blend_paths[state], blend_position)
+	
+	fire()
 
+
+func get_closest_enemy_position() -> Vector2:
+	# get all enemies within our world scene
+	var enemies_in_scene: Array[Node] = get_tree().get_nodes_in_group("Enemies")
+	var closest_enemy_distance: float = 100000
+	var closest_enemy_position: Vector2 = Vector2(100000, 100000)
+
+	# iterate through every enemy comparing the distances to get the min distance from the player
+	for enemy in enemies_in_scene:
+		var enemy_distance: float = global_position.distance_to(enemy.global_position)
+		if enemy_distance < closest_enemy_distance:
+			closest_enemy_distance = enemy_distance
+			closest_enemy_position = enemy.global_position
+	
+	# return the enemy's position that was the closest to the player
+	return closest_enemy_position
+
+
+# NOTE: make sure to update this function if we add more weapon types
+# fires all of the player's weapons
+func fire() -> void:
+	var closest_enemy_position: Vector2 = get_closest_enemy_position()
+	var distance_to_enemy: float = global_position.distance_to(closest_enemy_position)
+	if distance_to_enemy <= attack_range:
+		# FIRE STANDARD WEAPON
+		if _standard_weapon_timer.is_stopped():
+			fire_standard(closest_enemy_position)
 	
 
+# fires the standard weapon from player
+func fire_standard(enemy_position: Vector2) -> void:
+	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	var new_bullet := standard_bullet.instantiate() as StandardBullet
+	new_bullet.velocity = fire_direction * standard_bullet_speed
+	new_bullet.rotation = fire_direction.angle()
+	new_bullet.position = global_position
+	new_bullet.damage = standard_bullet_damage
+	add_child(new_bullet)
+	
+	_standard_weapon_timer = Timer.new()
+	_standard_weapon_timer.one_shot = true
+	add_child(_standard_weapon_timer)
+	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
 
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
