@@ -37,6 +37,7 @@ func _ready() -> void:
 	base_speed = 40
 	aggro_range = 150
 	attack_range = 120
+	soul_amount = randi_range(7, 11)
 	target = $"/root/World/Player"
 	adjust_z_index($Head.global_position)
 

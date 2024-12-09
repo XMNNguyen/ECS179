@@ -537,6 +537,7 @@ position_smoothing_enabled = true
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_23ojp")
 animation = &"idle"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

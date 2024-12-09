@@ -1813,7 +1813,7 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="World" type="Node2D" groups=["Enemies"]]
+[node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_5dhhd")
 
@@ -1844,7 +1844,7 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(1136, -56)
+position = Vector2(197, -13)
 
 [node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
 position = Vector2(388, -105)

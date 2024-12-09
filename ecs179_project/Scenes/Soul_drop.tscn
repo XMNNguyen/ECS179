@@ -1,0 +1,213 @@
+[gd_scene load_steps=22 format=3 uid="uid://m8v5qvap1adn"]
+
+[ext_resource type="Script" path="res://Scripts/soul_drop.gd" id="1_rk2ru"]
+[ext_resource type="Texture2D" uid="uid://doho3yup27wgn" path="res://Assets/Effect and Bullet 16x16/Water Effect and Bullet 16x16.png" id="2_oxkgj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_labs5"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(272, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym0j7"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(480, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgqfj"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkh55"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(304, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ui2u0"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(304, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyt5h"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(320, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc4gy"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(336, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atqso"]
+atlas = ExtResource("2_oxkgj")
+region = Rect2(352, 176, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pjkvn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_labs5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym0j7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgqfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkh55")
+}],
+"loop": true,
+"name": &"create",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ui2u0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyt5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc4gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atqso")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_tw8sy"]
+resource_name = "create"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"create"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_lmr8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"create"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_d8bd8"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oa8kc"]
+_data = {
+"RESET": SubResource("Animation_lmr8c"),
+"create": SubResource("Animation_tw8sy"),
+"idle": SubResource("Animation_d8bd8")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t7g7e"]
+animation = &"create"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h43rv"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7ctdt"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xpdx6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j6upw"]
+states/create/node = SubResource("AnimationNodeAnimation_t7g7e")
+states/create/position = Vector2(328, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_h43rv")
+states/idle/position = Vector2(473, 100)
+transitions = ["Start", "create", SubResource("AnimationNodeStateMachineTransition_7ctdt"), "create", "idle", SubResource("AnimationNodeStateMachineTransition_xpdx6")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6acpr"]
+radius = 4.0
+
+[node name="SoulDrop" type="Node2D"]
+script = ExtResource("1_rk2ru")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_pjkvn")
+animation = &"create"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oa8kc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_j6upw")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1, 2)
+shape = SubResource("CircleShape2D_6acpr")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

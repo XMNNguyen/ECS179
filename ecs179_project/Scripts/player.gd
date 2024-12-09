@@ -14,6 +14,7 @@ var on_slope: bool = false
 @export var maxHeart: float = 8
 @export var attack_speed: float = 0.5 # NOTE: attack speed should never be >1.99
 @export var attack_range: float = 150
+@export var collect_range: float = 75
 
 # WEAPON STATS
 # STANDARD WEAPON
@@ -22,7 +23,7 @@ var on_slope: bool = false
 @export var standard_attack_cd: float = 1
 @export var num_standard_bullets: int = 1
 
-#AUDIO
+# AUDIO
 @onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
 
 # OTHER
@@ -48,6 +49,7 @@ var _standard_weapon_timer: Timer
 var ground_type = "Terrain"
 
 func _ready() -> void:
+	signals.collect_soul.connect(on_soul_collect)
 	_standard_weapon_timer = Timer.new()
 	_standard_weapon_timer.one_shot = true
 	add_child(_standard_weapon_timer)
@@ -81,6 +83,11 @@ func _physics_process(delta):
 	animationTree.set(blend_paths[state], blend_position)
 
 	fire()
+
+
+func on_soul_collect(amount: int) -> void:
+	souls_count.souls += amount
+
 
 func get_tile_type() -> int:
 	var tile_position: Vector2i = tile_map.local_to_map(self.position)

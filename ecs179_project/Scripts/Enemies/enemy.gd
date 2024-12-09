@@ -1,6 +1,9 @@
 class_name Enemy
 extends CharacterBody2D
 
+
+var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
+
 # STATS
 var level: float = 1
 var max_health: float = 2
@@ -11,6 +14,7 @@ var base_atk_speed: float = 10
 var target: Player
 var aggro_range: float = 30 
 var attack_range: float = 30
+var soul_amount: float = 1
 
 var _current_health: float = max_health
 var _aggro: bool = false
@@ -20,19 +24,23 @@ var _aggro: bool = false
 
 func _on_take_damage(damage: int, type: String) -> void:
 	_current_health -= damage
-	die(type)
+	die()
 
 
 # function that tries to free our enemy instance once health is depleted
-func die(type: String) -> void:
+func die() -> void:
 	if _current_health <= 0:
+		var soul_instance := soul_scene.instantiate() as SoulDrop
+		soul_instance.soul_amount = soul_amount
+		$"/root/World".add_child(soul_instance)
+		soul_instance.global_position = global_position
 		queue_free()
-		if type == "CHICKEN": # Calculates the amount of souls the enemy drops
-			souls_count.souls += 2
-			print(souls_count.souls)
-		if type == "SPROUT":
-			souls_count.souls += 10
-			print(souls_count.souls)
+		#if type == "CHICKEN": # Calculates the amount of souls the enemy drops
+			#souls_count.souls += 2
+			#print(souls_count.souls)
+		#if type == "SPROUT":
+			#souls_count.souls += 10
+			#print(souls_count.souls)
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index(position: Vector2) -> void:
