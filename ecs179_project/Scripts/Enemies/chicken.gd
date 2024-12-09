@@ -10,7 +10,6 @@ enum state {
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 
-var type = "CHICKEN"
 var cur_state: state = state.IDLE
 var wind_up_timer:Timer
 var blend_position : Vector2 = Vector2.ZERO

@@ -9,7 +9,7 @@ enum state {
 			}
 
 var damage: float = 1
-var type: String
+
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 
