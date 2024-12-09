@@ -18,16 +18,21 @@ var _aggro: bool = false
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
 
 
-func _on_take_damage(damage: int) -> void:
+func _on_take_damage(damage: int, type: String) -> void:
 	_current_health -= damage
-	die()
+	die(type)
 
 
 # function that tries to free our enemy instance once health is depleted
-func die() -> void:
+func die(type: String) -> void:
 	if _current_health <= 0:
 		queue_free()
-
+		if type == "CHICKEN": # Calculates the amount of souls the enemy drops
+			souls_count.souls += 2
+			print(souls_count.souls)
+		if type == "SPROUT":
+			souls_count.souls += 10
+			print(souls_count.souls)
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index(position: Vector2) -> void:

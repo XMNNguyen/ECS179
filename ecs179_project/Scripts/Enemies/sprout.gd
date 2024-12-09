@@ -28,6 +28,7 @@ var projectile_speed: float = 120
 
 var _on_slope: bool = false
 
+var type: String = "SPROUT"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
