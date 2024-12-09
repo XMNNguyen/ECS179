@@ -22,7 +22,7 @@ var _aggro: bool = false
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
 
 
-func _on_take_damage(damage: int, type: String) -> void:
+func _on_take_damage(damage: int) -> void:
 	_current_health -= damage
 	die()
 

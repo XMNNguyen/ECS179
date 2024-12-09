@@ -94,6 +94,7 @@ func fire() -> void:
 	var new_bullet := bullet.instantiate() as SproutBullet
 	new_bullet.velocity = fire_direction * projectile_speed
 	new_bullet.rotation = fire_direction.angle()
+	new_bullet.z_index = z_index
 	add_child(new_bullet)
 
 	cur_state = state.MOVE

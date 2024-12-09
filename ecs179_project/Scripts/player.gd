@@ -135,6 +135,7 @@ func fire_standard(enemy_position: Vector2) -> void:
 	new_bullet.rotation = fire_direction.angle()
 	new_bullet.position = global_position
 	new_bullet.damage = standard_bullet_damage
+	new_bullet.z_index = z_index
 	add_child(new_bullet)
 	
 	_standard_weapon_timer = Timer.new()
