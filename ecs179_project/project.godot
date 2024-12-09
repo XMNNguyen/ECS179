@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 signals="*res://Scripts/signals.gd"
 souls_count="*res://Scripts/souls_counter.gd"
+Audio="*res://Scenes/Audio.tscn"
 
 [global_group]
 

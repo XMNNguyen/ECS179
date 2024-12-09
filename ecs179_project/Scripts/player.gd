@@ -22,6 +22,9 @@ var on_slope: bool = false
 @export var standard_attack_cd: float = 1
 @export var num_standard_bullets: int = 1
 
+#AUDIO
+@onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
+
 # OTHER
 @onready var health: float = maxHeart
 @onready var animationTree:AnimationTree = $AnimationTree
@@ -74,7 +77,7 @@ func _physics_process(delta):
 	move_and_slide()
 	state_machine.travel(state_keys[state])
 	animationTree.set(blend_paths[state], blend_position)
-	
+
 	fire()
 
 
@@ -103,6 +106,7 @@ func fire() -> void:
 	if distance_to_enemy <= attack_range:
 		# FIRE STANDARD WEAPON
 		if _standard_weapon_timer.is_stopped():
+			Audio.player_projectile.play()
 			fire_standard(closest_enemy_position)
 	
 
