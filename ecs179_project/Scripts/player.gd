@@ -45,6 +45,7 @@ var state_keys = [
 # WEAPON TIMERS
 var _standard_weapon_timer: Timer
 
+var ground_type = "Terrain"
 
 func _ready() -> void:
 	_standard_weapon_timer = Timer.new()
@@ -54,6 +55,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 
 	if input_vector == Vector2.ZERO:
@@ -80,7 +82,15 @@ func _physics_process(delta):
 
 	fire()
 
-
+func get_tile_type() -> int:
+	var tile_position: Vector2i = tile_map.local_to_map(self.position)
+	var tile_type: TileData = tile_map.get_cell_tile_data(1, tile_position)
+	if tile_type:
+		var data = tile_type.get_custom_data(ground_type)
+		return data
+	else:
+		return 0
+		
 func get_closest_enemy_position() -> Vector2:
 	# get all enemies within our world scene
 	var enemies_in_scene: Array[Node] = get_tree().get_nodes_in_group("Enemies")
@@ -228,4 +238,21 @@ func _on_hurt_box_area_entered(area: Area2D) -> void: # When a damaging collisio
 		healthChange.emit(health)
 		if health == 0:
 			pass # Actions for player death here
+		
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if $AnimatedSprite2D.animation == "idle": 
+		return
+	if $AnimatedSprite2D.animation == "move":
+		if get_tile_type() == 1:
+			if Audio.walk_water.playing:
+				return
+			else:
+				Audio.walk_water.play()
+		else:
+			if Audio.walk_grass.playing:
+				return
+			else:
+				Audio.walk_grass.play()
 		

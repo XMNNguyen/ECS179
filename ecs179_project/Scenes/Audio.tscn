@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2dlkvgle04mm"]
+[gd_scene load_steps=5 format=3 uid="uid://b2dlkvgle04mm"]
 
 [ext_resource type="Script" path="res://Scripts/audio.gd" id="1_80uly"]
 [ext_resource type="AudioStream" uid="uid://f2xx5pxo85vu" path="res://Assets/Audio/Player_Projectile.mp3" id="2_efwy7"]
+[ext_resource type="AudioStream" uid="uid://bjlvd4ok2pjj0" path="res://Assets/Audio/Walk_Grass.mp3" id="3_cgibj"]
+[ext_resource type="AudioStream" uid="uid://hu6dita3odng" path="res://Assets/Audio/Walk_Water.mp3" id="4_owls2"]
 
 [node name="Audio" type="Node2D"]
 script = ExtResource("1_80uly")
@@ -9,3 +11,9 @@ script = ExtResource("1_80uly")
 [node name="PlayerProjectile" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_efwy7")
 volume_db = -16.838
+
+[node name="WalkGrass" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cgibj")
+
+[node name="WalkWater" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_owls2")

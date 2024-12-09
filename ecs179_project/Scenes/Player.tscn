@@ -537,7 +537,6 @@ position_smoothing_enabled = true
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_23ojp")
 animation = &"idle"
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -564,4 +563,5 @@ shape = SubResource("CapsuleShape2D_pboi1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
 shape = SubResource("CapsuleShape2D_e0wt5")
 
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
