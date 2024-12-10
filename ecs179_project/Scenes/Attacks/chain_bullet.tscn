@@ -1,0 +1,273 @@
+[gd_scene load_steps=26 format=3 uid="uid://byp17j0tlfrhl"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/chain_bullet.gd" id="1_r00vd"]
+[ext_resource type="Texture2D" uid="uid://b85y6bew7gqtm" path="res://Assets/Effect and Bullet 16x16/Purple Effect and Bullet 16x16.png" id="2_yej54"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4aawf"]
+atlas = ExtResource("2_yej54")
+region = Rect2(528, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qttx"]
+atlas = ExtResource("2_yej54")
+region = Rect2(512, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltmg5"]
+atlas = ExtResource("2_yej54")
+region = Rect2(224, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_756e5"]
+atlas = ExtResource("2_yej54")
+region = Rect2(240, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r1gp"]
+atlas = ExtResource("2_yej54")
+region = Rect2(256, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qlub"]
+atlas = ExtResource("2_yej54")
+region = Rect2(160, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vndyj"]
+atlas = ExtResource("2_yej54")
+region = Rect2(192, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fggf"]
+atlas = ExtResource("2_yej54")
+region = Rect2(160, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfc4j"]
+atlas = ExtResource("2_yej54")
+region = Rect2(176, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdj5v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4aawf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qttx")
+}],
+"loop": true,
+"name": &"boucing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltmg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_756e5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r1gp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qlub")
+}],
+"loop": true,
+"name": &"create",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vndyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fggf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfc4j")
+}],
+"loop": true,
+"name": &"traveling",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_na0gn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"traveling"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_68rr5"]
+resource_name = "bouncing"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"boucing"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_q8f7q"]
+resource_name = "create"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"create"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_mhvbi"]
+resource_name = "traveling"
+length = 0.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"traveling"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ye6le"]
+_data = {
+"RESET": SubResource("Animation_na0gn"),
+"bouncing": SubResource("Animation_68rr5"),
+"create": SubResource("Animation_q8f7q"),
+"traveling": SubResource("Animation_mhvbi")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kd540"]
+animation = &"bouncing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_heucy"]
+animation = &"create"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqt8p"]
+animation = &"traveling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8eu18"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ntntk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rmj8e"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fk2u8"]
+states/Start/position = Vector2(178, 100)
+states/bouncing/node = SubResource("AnimationNodeAnimation_kd540")
+states/bouncing/position = Vector2(708, 100)
+states/create/node = SubResource("AnimationNodeAnimation_heucy")
+states/create/position = Vector2(350, 100)
+states/traveling/node = SubResource("AnimationNodeAnimation_gqt8p")
+states/traveling/position = Vector2(534, 100)
+transitions = ["Start", "create", SubResource("AnimationNodeStateMachineTransition_8eu18"), "create", "traveling", SubResource("AnimationNodeStateMachineTransition_ntntk"), "traveling", "bouncing", SubResource("AnimationNodeStateMachineTransition_rmj8e")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3rago"]
+radius = 7.0
+
+[node name="ChainBullet" type="CharacterBody2D"]
+script = ExtResource("1_r00vd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xdj5v")
+animation = &"traveling"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ye6le")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_fk2u8")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_3rago")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+amount = 2000
+lifetime = 0.7
+explosiveness = 0.04
+emission_shape = 1
+emission_sphere_radius = 2.91
+gravity = Vector2(2, 2)
+color = Color(0.462745, 0.827451, 1, 1)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

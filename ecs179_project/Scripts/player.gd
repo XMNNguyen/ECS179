@@ -42,6 +42,12 @@ var on_slope: bool = false
 @export var scatter_attack_cd: float = 3
 @export var num_scatter_bullets: int = 20
 
+# CHAIN WEAPON
+@export var chain_bullet_speed: float = 100
+@export var chain_bullet_damage: float = 2
+@export var chain_attack_cd: float = 2
+@export var num_chain_bounces: int = 7
+
 # AUDIO
 @onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
 
@@ -55,6 +61,7 @@ var wave_bullet = preload("res://Scenes/Attacks/wave_bullet.tscn")
 var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
 var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
 var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
+var chain_bullet = preload("res://Scenes/Attacks/chain_bullet.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -71,6 +78,7 @@ var _standard_weapon_timer: Timer
 var _wave_weapon_timer: Timer
 var _shotgun_weapon_timer: Timer
 var _scatter_weapon_timer: Timer
+var _chain_weapon_timer
 
 var ground_type = "Terrain"
 
@@ -98,6 +106,11 @@ func _ready() -> void:
 	_scatter_weapon_timer.one_shot = true
 	add_child(_scatter_weapon_timer)
 	_scatter_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
+	
+	_chain_weapon_timer = Timer.new()
+	_chain_weapon_timer.one_shot = true
+	add_child(_chain_weapon_timer)
+	_chain_weapon_timer.start(chain_attack_cd * (2 - attack_speed))
 
 
 func _physics_process(delta):
@@ -174,13 +187,16 @@ func fire() -> void:
 			fire_shotgun(closest_enemy_position)
 		
 		# FIRE WAVE WEAPON
-		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 200:
+		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 250:
 			fire_wave(closest_enemy_position)
 		
 		# FIRE SCATTER WEAPON
-		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 300:
+		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 550:
 			fire_scatter(closest_enemy_position)
-	
+		
+		# FIRE CHAIN WEAPON
+		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 900:
+			fire_chain(closest_enemy_position)
 
 # fires the standard weapon from player
 func fire_standard(enemy_position: Vector2) -> void:
@@ -273,6 +289,24 @@ func fire_scatter(enemy_position: Vector2) -> void:
 	_scatter_weapon_timer.one_shot = true
 	add_child(_scatter_weapon_timer)
 	_scatter_weapon_timer.start(scatter_attack_cd * (2 - attack_speed))
+
+
+func fire_chain(enemy_position: Vector2) -> void:
+	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	var new_bullet := chain_bullet.instantiate() as ChainBullet
+	new_bullet.velocity = fire_direction * chain_bullet_speed
+	new_bullet.rotation = fire_direction.angle()
+	new_bullet.damage = chain_bullet_damage
+	new_bullet.num_bounces = num_chain_bounces
+	new_bullet.z_index = z_index
+	add_child(new_bullet)
+	new_bullet.global_position = global_position
+	
+	_chain_weapon_timer = Timer.new()
+	_chain_weapon_timer.one_shot = true
+	add_child(_chain_weapon_timer)
+	_chain_weapon_timer.start(chain_attack_cd * (2 - attack_speed))
+
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index() -> void:
