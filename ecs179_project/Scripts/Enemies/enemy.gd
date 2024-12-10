@@ -7,19 +7,39 @@ var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
 # STATS
 var level: float = 1
 var max_health: float = 2
-var defense: float = 10
-var base_damage: float = 1
+var base_damage: float = 0.5
 var base_speed: float = 10
-var base_atk_speed: float = 10
-var target: Player
 var aggro_range: float = 30 
 var attack_range: float = 30
 var soul_amount: float = 1
+
+var target: Player
 
 var _current_health: float = max_health
 var _aggro: bool = false
 
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
+
+
+# assign stat points based on level
+func assign_stats() -> void:
+	var stat_num: int
+	for i in range(level):
+		# get the stat to upgrade
+		stat_num = randi_range(0, 2)
+		
+		# upgrade the corresponding stat
+		match stat_num:
+			0:
+				max_health += 1
+				_current_health = max_health
+			1:
+				base_damage += 0.5
+			2: 
+				base_speed += 5
+	
+	# 1 extra soul dropped per level
+	soul_amount += level
 
 
 func _on_take_damage(damage: int) -> void:
@@ -41,6 +61,7 @@ func die() -> void:
 		#if type == "SPROUT":
 			#souls_count.souls += 10
 			#print(souls_count.souls)
+
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index(position: Vector2) -> void:

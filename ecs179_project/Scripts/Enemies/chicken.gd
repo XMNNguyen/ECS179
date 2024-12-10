@@ -111,4 +111,8 @@ func peck_attack() -> void:
 		else:
 			cur_state = state.MOVE
 			_pecking = false
-		
+
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	if area.name == "hurtBox" && area.get_parent().name == "Player":
+		signals.player_take_damage.emit(base_damage)

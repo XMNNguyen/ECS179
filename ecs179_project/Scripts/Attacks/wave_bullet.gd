@@ -29,5 +29,4 @@ func _process(delta: float) -> void:
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	# if we have entered the Player's hurtbox, explode the bullet
 	if area.name == "hurtBox" && area.get_parent().is_in_group("Enemies"):
-		print("HIT")
 		area.get_parent()._on_take_damage(damage)

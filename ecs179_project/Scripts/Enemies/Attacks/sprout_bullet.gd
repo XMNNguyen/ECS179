@@ -10,6 +10,7 @@ enum state {
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 
+var damage: float = 0.5
 var cur_state: state = state.CREATE
 var state_keys = [
 	"create",
@@ -42,3 +43,4 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		cur_state = state.DEATH
 		state_machine.travel(state_keys[cur_state])
 		state_machine.next()
+		signals.player_take_damage.emit(damage)

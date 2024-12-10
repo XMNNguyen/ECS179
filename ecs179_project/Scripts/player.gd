@@ -59,6 +59,7 @@ var ground_type = "Terrain"
 
 func _ready() -> void:
 	signals.collect_soul.connect(on_soul_collect)
+	signals.player_take_damage.connect(_on_take_damage)
 	
 	# set up timers
 	_standard_weapon_timer = Timer.new()
@@ -73,7 +74,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
-
 	var input_vector = Input.get_vector("left", "right", "up", "down")
 
 	if input_vector == Vector2.ZERO:
@@ -276,22 +276,28 @@ func move_on_slope(input_vector : Vector2):
 			velocity.y += diagonal_bias
 	
 
-func _on_hurt_box_area_entered(area: Area2D) -> void: # When a damaging collision hits the player
-	if area.name == "hitBox": # Change this to the name of the collision that will damage the player
-		health -= 0.5
-		if health < 0: # Making sure that health doesn't go negative
-			health = 0
-		healthChange.emit(health)
-		if health == 0:
-			pass # Actions for player death here
-	if area.name == "hitBox2": # This can be the hit box of a boss doing double damage
-		health -= 2
-		if health < 0: # Making sure that health doesn't go negative
-			health = 0
-		healthChange.emit(health)
-		if health == 0:
-			pass # Actions for player death here
-		
+#func _on_hurt_box_area_entered(area: Area2D) -> void: # When a damaging collision hits the player
+	#if area.name == "hitBox": # Change this to the name of the collision that will damage the player
+		#health -= 0.5
+		#if health < 0: # Making sure that health doesn't go negative
+			#health = 0
+		#healthChange.emit(health)
+		#if health == 0:
+			#pass # Actions for player death here
+	#if area.name == "hitBox2": # This can be the hit box of a boss doing double damage
+		#health -= 2
+		#if health < 0: # Making sure that health doesn't go negative
+			#health = 0
+		#healthChange.emit(health)
+		#if health == 0:
+			#pass # Actions for player death here
+
+
+func _on_take_damage(damage : float):
+	health -= damage
+	if health < 0: # Making sure that health doesn't go negative
+		health = 0
+	healthChange.emit(health)
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:
