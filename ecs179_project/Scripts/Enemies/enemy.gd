@@ -37,7 +37,7 @@ func assign_stats() -> void:
 				base_damage += 0.5
 			2: 
 				base_speed += 5
-	
+
 	# 1 extra soul dropped per level
 	soul_amount += level
 

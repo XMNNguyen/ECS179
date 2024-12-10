@@ -96,6 +96,7 @@ func start_peck_attack() -> void:
 	state_machine.travel(state_keys[cur_state])
 	animationTree.set(blend_paths[cur_state], blend_position)
 
+
 func peck_attack() -> void:
 		# if the wind up timer just ended, launch the chicken in direction of target
 		if !_pecking:

@@ -26,8 +26,15 @@ var on_slope: bool = false
 # WAVE WEAPON
 @export var wave_bullet_speed: float = 100
 @export var wave_bullet_damage: float = 2
-@export var wave_attack_cd: float = 3
+@export var wave_attack_cd: float = 4
 @export var num_wave_bullets: int = 1
+
+# SHOTGUN WEAPON
+@export var shotgun_bullet_speed: float = 150
+@export var shotgun_bullet_damage: float = 1
+@export var shotgun_attack_cd: float = 3
+@export var num_shotgun_bullets: int = 5
+@export_range(0, 360) var shotgun_angle: float = 70
 
 # AUDIO
 @onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
@@ -54,6 +61,7 @@ var state_keys = [
 # WEAPON TIMERS
 var _standard_weapon_timer: Timer
 var _wave_weapon_timer: Timer
+var _shotgun_weapon_timer: Timer
 
 var ground_type = "Terrain"
 
@@ -66,6 +74,11 @@ func _ready() -> void:
 	_standard_weapon_timer.one_shot = true
 	add_child(_standard_weapon_timer)
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
+	
+	_shotgun_weapon_timer = Timer.new()
+	_shotgun_weapon_timer.one_shot = true
+	add_child(_shotgun_weapon_timer)
+	_shotgun_weapon_timer.start(shotgun_attack_cd * (2 - attack_speed))
 	
 	_wave_weapon_timer = Timer.new()
 	_wave_weapon_timer.one_shot = true
@@ -142,6 +155,10 @@ func fire() -> void:
 			Audio.player_projectile.play()
 			fire_standard(closest_enemy_position)
 		
+		# FIRE SHOTGUN WEAPON
+		if _shotgun_weapon_timer.is_stopped():
+			fire_shotgun(closest_enemy_position)
+		
 		# FIRE WAVE WEAPON
 		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			fire_wave(closest_enemy_position)
@@ -163,6 +180,35 @@ func fire_standard(enemy_position: Vector2) -> void:
 	add_child(_standard_weapon_timer)
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
 
+
+func fire_shotgun(enemy_position: Vector2) -> void:
+	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	
+	for i in range(num_shotgun_bullets):
+		var new_bullet := standard_bullet.instantiate() as StandardBullet
+		
+		# calculate the rotation of this bullet
+		# convert the shotgun angle into radians
+		var angle_radians = deg_to_rad(shotgun_angle)
+		
+		# get the current segment of the angle we are currently on
+		var angle = angle_radians / num_shotgun_bullets
+		
+		# for this iteration take the base fire_direction and move the angle based on current segment
+		# rotate the angle about angle_radians/2 in order to have the center of our angle be towards the firing direction
+		var rotation: float = fire_direction.angle() + (angle * i) - (angle_radians/2)
+		new_bullet.velocity = Vector2.RIGHT.rotated(rotation) * shotgun_bullet_speed
+		new_bullet.rotation = rotation
+		
+		new_bullet.damage = shotgun_bullet_damage
+		new_bullet.z_index = z_index
+		add_child(new_bullet)
+		new_bullet.global_position = global_position
+	
+	_shotgun_weapon_timer = Timer.new()
+	_shotgun_weapon_timer.one_shot = true
+	add_child(_shotgun_weapon_timer)
+	_shotgun_weapon_timer.start(shotgun_attack_cd * (2 - attack_speed))
 
 # fires the wave bullet attack
 func fire_wave(enemy_position: Vector2) -> void:

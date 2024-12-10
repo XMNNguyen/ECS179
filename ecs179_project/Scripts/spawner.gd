@@ -7,6 +7,7 @@ extends Node2D
 @export var spawn_time: float = 1
 @export var pack_spawn: bool = true
 @export var pack_size: int = 3
+@export var level: int = 1
 
 var _spawn_timer: Timer
 
@@ -40,6 +41,8 @@ func spawn_enemy() -> void:
 	var enemy_type: int = randi_range(0, len(enemy_types) - 1)
 	var enemy: PackedScene = load(enemy_types[enemy_type])
 	var enemy_instance := enemy.instantiate() as Enemy
+	enemy_instance.level = level
+	enemy_instance.assign_stats()
 	add_child(enemy_instance)
 	
 	# randomly set the spawn location somewhere around our spawner no more then spawn_radius away
