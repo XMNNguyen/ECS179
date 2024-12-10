@@ -69,11 +69,10 @@ func adjust_z_index(position: Vector2) -> void:
 	var enemy_tile_position:Vector2i = tile_map.local_to_map(position - Vector2(0, 16))
 	var new_z_index:int = 0
 	
-	for i in range(tile_map.layers.keys().size()):
+	for i in range(tile_map.layers.keys().size(), 0, -1):
 		if (tile_map.get_cell_source_id(i, enemy_tile_position) != -1 &&
 			tile_map.get_cell_atlas_coords(i, enemy_tile_position) not in tile_map.other):
-			new_z_index += 1
-		else:
+			new_z_index = i + 1
 			break
 			
 	z_index = max(new_z_index, 1)

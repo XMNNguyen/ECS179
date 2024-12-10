@@ -29,14 +29,14 @@ var wall_bounderies:Dictionary = {
 							  } 
 
 # atlas coords of all the slopes in our tile set
-var up_right_slopes:Array[Vector2i] = [Vector2i(1, 3)]
-var right_slopes:Array[Vector2i] = [Vector2i(3, 3), Vector2i(3, 4)]
-var down_right_slopes:Array[Vector2i] = [Vector2i(6, 3)]
-var down_slopes:Array[Vector2i] = [Vector2i(8, 3), Vector2i(0, 4)]
-var down_left_slopes:Array[Vector2i] = [Vector2(7, 3)]
-var left_slopes:Array[Vector2i] = [Vector2i(5, 3), Vector2i(1, 4)]
-var up_left_slopes:Array[Vector2i] = [Vector2i(2, 3)]
-var up_slopes:Array[Vector2i] = [Vector2i(0, 3), Vector2i(2, 4)]
+var up_right_slopes:Array[Vector2i] = [Vector2i(1, 3), Vector2i(1, 5)]
+var right_slopes:Array[Vector2i] = [Vector2i(3, 3), Vector2i(3, 4), Vector2i(3, 5)]
+var down_right_slopes:Array[Vector2i] = [Vector2i(6, 3), Vector2i(7, 5)]
+var down_slopes:Array[Vector2i] = [Vector2i(8, 3), Vector2i(0, 4), Vector2i(9, 5)]
+var down_left_slopes:Array[Vector2i] = [Vector2(7, 3), Vector2i(8, 5)]
+var left_slopes:Array[Vector2i] = [Vector2i(5, 3), Vector2i(1, 4), Vector2i(6, 5)]
+var up_left_slopes:Array[Vector2i] = [Vector2i(2, 3), Vector2i(2, 5)]
+var up_slopes:Array[Vector2i] = [Vector2i(0, 3), Vector2i(2, 4), Vector2i(1, 5),  Vector2i(0, 5)]
 var slopes:Array[Vector2i] = (up_right_slopes + right_slopes + down_right_slopes + down_slopes +
 							 down_left_slopes + left_slopes + up_left_slopes + up_slopes)
 
@@ -46,13 +46,11 @@ var blocks:Array[Vector2i] = [
 							Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6),
 							Vector2i(5, 6), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7),
 							Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7),
-							Vector2i(8, 9), Vector2i(9, 9),
+							Vector2i(8, 7), Vector2i(9, 7), Vector2i(8, 9), Vector2i(9, 9),
 							]
 
 # atlas coords of other objects in tileset
 var other:Array[Vector2i] = [
-							Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5),
-							Vector2i(6, 5), Vector2i(7, 5), Vector2i(8, 5), Vector2i(9, 5),
 							Vector2i(6, 6), Vector2i(7, 6), Vector2i(8, 6), Vector2i(9, 6),
 							Vector2i(0, 7), Vector2i(0, 11), Vector2i(1, 11), Vector2i(2, 11),
 							Vector2i(3, 11), Vector2i(4, 11), Vector2i(5, 11), Vector2i(6, 11),

@@ -314,12 +314,12 @@ func adjust_z_index() -> void:
 	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
 	var new_z_index:int = 0
 	
-	for i in range(tile_map.layers.keys().size()):
+	for i in range(tile_map.layers.keys().size(), 0, -1):
 		if (tile_map.get_cell_source_id(i, player_tile_position) != -1 &&
 			tile_map.get_cell_atlas_coords(i, player_tile_position) not in tile_map.other):
-			new_z_index += 1
-		else:
+			new_z_index = i + 1
 			break
+	
 	if z_index != new_z_index:
 		signals.entered_new_layer.emit(max(new_z_index, 1), z_index)
 	z_index = max(new_z_index, 1)
