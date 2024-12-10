@@ -157,7 +157,7 @@ func fire() -> void:
 			fire_standard(closest_enemy_position)
 		
 		# FIRE SHOTGUN WEAPON
-		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
+		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 1:
 			fire_shotgun(closest_enemy_position)
 		
 		# FIRE WAVE WEAPON
@@ -189,7 +189,7 @@ func fire_shotgun(enemy_position: Vector2) -> void:
 	for i in range(num_shotgun_bullets):
 		var new_bullet := shotgun_bullet.instantiate() as ShotgunBullet
 		
-		# calculate the rotation of this bullet
+		# calculate the fire angle of this bullet
 		# convert the shotgun angle into radians
 		var angle_radians = deg_to_rad(shotgun_angle)
 		
@@ -199,7 +199,9 @@ func fire_shotgun(enemy_position: Vector2) -> void:
 		# for this iteration take the base fire_direction and move the angle based on current segment
 		# rotate the angle about angle_radians/2 in order to have the center of our angle be towards the firing direction
 		var rotation: float = fire_direction.angle() + (angle * i) - (angle_radians/2)
-		new_bullet.velocity = Vector2.RIGHT.rotated(rotation) * shotgun_bullet_speed
+		
+		# we want to right rotate or else the fire angle is 90 degrees off
+		new_bullet.velocity = Vector2.RIGHT.rotated(rotation) * shotgun_bullet_speed 
 		new_bullet.rotation = rotation
 		
 		new_bullet.damage = shotgun_bullet_damage

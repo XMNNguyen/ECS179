@@ -261,6 +261,7 @@ transitions = ["Start", "create", SubResource("AnimationNodeStateMachineTransiti
 radius = 5.0
 
 [node name="ShotgunBullet" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_oc04h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
