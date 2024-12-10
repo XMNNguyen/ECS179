@@ -1845,6 +1845,18 @@ script = ExtResource("2_fnfvh")
 unique_name_in_owner = true
 z_index = 1
 position = Vector2(197, -13)
+maxHeart = 8.0
+attack_speed = 0.5
+attack_range = 150.0
+collect_range = 75.0
+standard_bullet_speed = 150.0
+standard_bullet_damage = 1.0
+standard_attack_cd = 1.0
+num_standard_bullets = 1
+wave_bullet_speed = 100.0
+wave_bullet_damage = 2.0
+wave_attack_cd = 3.0
+num_wave_bullets = 1
 
 [node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
 position = Vector2(388, -105)

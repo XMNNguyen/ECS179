@@ -23,6 +23,12 @@ var on_slope: bool = false
 @export var standard_attack_cd: float = 1
 @export var num_standard_bullets: int = 1
 
+# WAVE WEAPON
+@export var wave_bullet_speed: float = 100
+@export var wave_bullet_damage: float = 2
+@export var wave_attack_cd: float = 3
+@export var num_wave_bullets: int = 1
+
 # AUDIO
 @onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
 
@@ -32,7 +38,9 @@ var on_slope: bool = false
 @onready var state_machine = animationTree["parameters/playback"]
 @onready var tile_map: TileMapController = %TileMap
 
+var wave_bullet = preload("res://Scenes/Attacks/wave_bullet.tscn")
 var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
+
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
 	"parameters/idle/idle_blend/blend_position",
@@ -45,14 +53,22 @@ var state_keys = [
 
 # WEAPON TIMERS
 var _standard_weapon_timer: Timer
+var _wave_weapon_timer: Timer
 
 var ground_type = "Terrain"
 
 func _ready() -> void:
 	signals.collect_soul.connect(on_soul_collect)
+	
+	# set up timers
 	_standard_weapon_timer = Timer.new()
 	_standard_weapon_timer.one_shot = true
 	add_child(_standard_weapon_timer)
+	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
+	
+	_wave_weapon_timer = Timer.new()
+	_wave_weapon_timer.one_shot = true
+	add_child(_wave_weapon_timer)
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
 
 
@@ -125,6 +141,10 @@ func fire() -> void:
 		if _standard_weapon_timer.is_stopped():
 			Audio.player_projectile.play()
 			fire_standard(closest_enemy_position)
+		
+		# FIRE WAVE WEAPON
+		if _wave_weapon_timer.is_stopped():
+			fire_wave(closest_enemy_position)
 	
 
 # fires the standard weapon from player
@@ -133,15 +153,39 @@ func fire_standard(enemy_position: Vector2) -> void:
 	var new_bullet := standard_bullet.instantiate() as StandardBullet
 	new_bullet.velocity = fire_direction * standard_bullet_speed
 	new_bullet.rotation = fire_direction.angle()
-	new_bullet.position = global_position
 	new_bullet.damage = standard_bullet_damage
 	new_bullet.z_index = z_index
 	add_child(new_bullet)
+	new_bullet.global_position = global_position
 	
 	_standard_weapon_timer = Timer.new()
 	_standard_weapon_timer.one_shot = true
 	add_child(_standard_weapon_timer)
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
+
+
+# fires the wave bullet attack
+func fire_wave(enemy_position: Vector2) -> void:
+	var fire_directions: Array[Vector2] = [
+											Vector2(0.75, 0.75),
+											Vector2(-0.75, 0.75),
+											Vector2(0.75, -0.75),
+											Vector2(-0.75, -0.75),
+										]
+										
+	for fire_direction in fire_directions:
+		var new_bullet := wave_bullet.instantiate() as WaveBullet
+		new_bullet.velocity = fire_direction * wave_bullet_speed
+		new_bullet.rotation = fire_direction.angle()
+		new_bullet.damage = wave_bullet_damage
+		new_bullet.z_index = z_index
+		add_child(new_bullet)
+		new_bullet.global_position = global_position
+	 
+	_wave_weapon_timer = Timer.new()
+	_wave_weapon_timer.one_shot = true
+	add_child(_wave_weapon_timer)
+	_wave_weapon_timer.start(wave_attack_cd * (2 - attack_speed))
 
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
