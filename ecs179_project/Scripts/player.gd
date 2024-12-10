@@ -157,7 +157,7 @@ func fire() -> void:
 			fire_standard(closest_enemy_position)
 		
 		# FIRE SHOTGUN WEAPON
-		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 1:
+		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			fire_shotgun(closest_enemy_position)
 		
 		# FIRE WAVE WEAPON
