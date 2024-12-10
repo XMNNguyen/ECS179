@@ -15,6 +15,7 @@ var damage: float = 1
 var bullet_speed: float = 100
 var num_projectiles: int = 5
 var angle: float = 360
+var time_to_live: float = 2
 var will_scatter: bool = true
 
 var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
@@ -35,7 +36,7 @@ func _ready() -> void:
 	_timer = Timer.new()
 	_timer.one_shot = true
 	add_child(_timer)
-	_timer.start(2)
+	_timer.start(time_to_live)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,16 +60,18 @@ func scatter() -> void:
 		var angle = angle_radians / num_projectiles
 		
 		# for this iteration take the base fire_direction and move the angle based on current segment
-		var rotation: float = velocity.normalized().angle() + (angle * i)
+		# rotate the angle about angle_radians/2 in order to have the center of our angle be towards the firing direction
+		var rotation: float = velocity.normalized().angle() + (angle * i) - (angle_radians/2)
 		
 		# we want to right rotate or else the fire angle is 90 degrees off
 		new_bullet.velocity = Vector2.RIGHT.rotated(rotation) * bullet_speed 
 		new_bullet.rotation = rotation
 		new_bullet.will_scatter = false
 		new_bullet.damage = damage
+		new_bullet.time_to_live = 1
 		new_bullet.z_index = z_index
-		add_child(new_bullet)
-		new_bullet.global_position = global_position
+		get_tree().root.add_child(new_bullet)
+		new_bullet.global_position = global_position + (Vector2.RIGHT.rotated(rotation) * 20)
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
@@ -76,8 +79,8 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	if area.name == "hurtBox" && area.get_parent().is_in_group("Enemies"):
 		area.get_parent()._on_take_damage(damage)
 		velocity = Vector2(0, 0)
+		if will_scatter:
+			scatter()
 		cur_state = state.DEATH
 		state_machine.travel(state_keys[cur_state])
 		state_machine.next()
-		if will_scatter:
-			scatter()

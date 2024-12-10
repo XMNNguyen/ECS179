@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://byp17j0tlfrhl"]
+
+[node name="ArcBullet" type="CharacterBody2D"]

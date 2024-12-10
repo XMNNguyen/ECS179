@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://r4i8r4fllpj0"]
+[gd_scene load_steps=30 format=3 uid="uid://r4i8r4fllpj0"]
 
 [ext_resource type="Texture2D" uid="uid://b85y6bew7gqtm" path="res://Assets/Effect and Bullet 16x16/Purple Effect and Bullet 16x16.png" id="1_tllkw"]
+[ext_resource type="Script" path="res://Scripts/Attacks/scatter_bullet.gd" id="1_vnyev"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kxhh7"]
 atlas = ExtResource("1_tllkw")
@@ -260,6 +261,8 @@ transitions = ["Start", "create", SubResource("AnimationNodeStateMachineTransiti
 radius = 6.0
 
 [node name="ScatterBullet" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_vnyev")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_suj58")
@@ -278,3 +281,5 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 shape = SubResource("CircleShape2D_fvp0i")
+
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]

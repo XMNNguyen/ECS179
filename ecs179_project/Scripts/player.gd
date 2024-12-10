@@ -36,6 +36,12 @@ var on_slope: bool = false
 @export var num_shotgun_bullets: int = 5
 @export_range(0, 360) var shotgun_angle: float = 70
 
+# SCATTER WEAPON
+@export var scatter_bullet_speed: float = 150
+@export var scatter_bullet_damage: float = 2
+@export var scatter_attack_cd: float = 3
+@export var num_scatter_bullets: int = 20
+
 # AUDIO
 @onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
 
@@ -48,6 +54,7 @@ var on_slope: bool = false
 var wave_bullet = preload("res://Scenes/Attacks/wave_bullet.tscn")
 var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
 var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
+var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -63,6 +70,7 @@ var state_keys = [
 var _standard_weapon_timer: Timer
 var _wave_weapon_timer: Timer
 var _shotgun_weapon_timer: Timer
+var _scatter_weapon_timer: Timer
 
 var ground_type = "Terrain"
 
@@ -85,6 +93,11 @@ func _ready() -> void:
 	_wave_weapon_timer.one_shot = true
 	add_child(_wave_weapon_timer)
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
+	
+	_scatter_weapon_timer = Timer.new()
+	_scatter_weapon_timer.one_shot = true
+	add_child(_scatter_weapon_timer)
+	_scatter_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
 
 
 func _physics_process(delta):
@@ -163,6 +176,10 @@ func fire() -> void:
 		# FIRE WAVE WEAPON
 		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 200:
 			fire_wave(closest_enemy_position)
+		
+		# FIRE SCATTER WEAPON
+		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 300:
+			fire_scatter(closest_enemy_position)
 	
 
 # fires the standard weapon from player
@@ -239,6 +256,23 @@ func fire_wave(enemy_position: Vector2) -> void:
 	add_child(_wave_weapon_timer)
 	_wave_weapon_timer.start(wave_attack_cd * (2 - attack_speed))
 
+
+func fire_scatter(enemy_position: Vector2) -> void:
+	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	var new_bullet := scatter_bullet.instantiate() as ScatterBullet
+	new_bullet.velocity = fire_direction * scatter_bullet_speed
+	new_bullet.rotation = fire_direction.angle()
+	new_bullet.damage = scatter_bullet_damage
+	new_bullet.bullet_speed = scatter_bullet_speed
+	new_bullet.num_projectiles = num_scatter_bullets
+	new_bullet.z_index = z_index
+	add_child(new_bullet)
+	new_bullet.global_position = global_position
+	
+	_scatter_weapon_timer = Timer.new()
+	_scatter_weapon_timer.one_shot = true
+	add_child(_scatter_weapon_timer)
+	_scatter_weapon_timer.start(scatter_attack_cd * (2 - attack_speed))
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index() -> void:
