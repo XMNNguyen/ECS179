@@ -47,6 +47,7 @@ var on_slope: bool = false
 
 var wave_bullet = preload("res://Scenes/Attacks/wave_bullet.tscn")
 var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
+var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -185,7 +186,7 @@ func fire_shotgun(enemy_position: Vector2) -> void:
 	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
 	
 	for i in range(num_shotgun_bullets):
-		var new_bullet := standard_bullet.instantiate() as StandardBullet
+		var new_bullet := shotgun_bullet.instantiate() as ShotgunBullet
 		
 		# calculate the rotation of this bullet
 		# convert the shotgun angle into radians

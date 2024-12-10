@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://b7eqh18p55018"]
+[gd_scene load_steps=30 format=3 uid="uid://b7eqh18p55018"]
 
 [ext_resource type="Texture2D" uid="uid://b85y6bew7gqtm" path="res://Assets/Effect and Bullet 16x16/Purple Effect and Bullet 16x16.png" id="1_18jwo"]
+[ext_resource type="Script" path="res://Scripts/Attacks/shotgun_bullet.gd" id="1_oc04h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_neieh"]
 atlas = ExtResource("1_18jwo")
@@ -163,7 +164,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_5w20g"]
 resource_name = "create"
-length = 0.3
+length = 0.22
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -224,10 +225,44 @@ _data = {
 "traveling": SubResource("Animation_8mpku")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4qm2q"]
+animation = &"create"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uupws"]
+animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b2ud0"]
+animation = &"traveling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h258o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yrii7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_46qwu"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uahqs"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iyqg3"]
+states/create/node = SubResource("AnimationNodeAnimation_4qm2q")
+states/create/position = Vector2(332, 100)
+states/death/node = SubResource("AnimationNodeAnimation_uupws")
+states/death/position = Vector2(635, 100)
+states/traveling/node = SubResource("AnimationNodeAnimation_b2ud0")
+states/traveling/position = Vector2(490, 100)
+transitions = ["Start", "create", SubResource("AnimationNodeStateMachineTransition_h258o"), "create", "traveling", SubResource("AnimationNodeStateMachineTransition_yrii7"), "traveling", "death", SubResource("AnimationNodeStateMachineTransition_46qwu"), "death", "End", SubResource("AnimationNodeStateMachineTransition_uahqs")]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ittq"]
 radius = 5.0
 
 [node name="ShotgunBullet" type="CharacterBody2D"]
+script = ExtResource("1_oc04h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_keq4e")
@@ -239,9 +274,13 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_iyqg3")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="hitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 position = Vector2(2, 0)
 shape = SubResource("CircleShape2D_1ittq")
+
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]
