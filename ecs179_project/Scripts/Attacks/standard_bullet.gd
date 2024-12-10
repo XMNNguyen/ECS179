@@ -34,6 +34,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	move_and_slide()
+	state_machine.travel(state_keys[cur_state])
 	# once death timer is expired or bullet explodes, remove the bullet instance
 	if _timer.time_left == 0 || state_machine.get_current_node() == "End":
 		queue_free()

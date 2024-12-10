@@ -157,11 +157,11 @@ func fire() -> void:
 			fire_standard(closest_enemy_position)
 		
 		# FIRE SHOTGUN WEAPON
-		if _shotgun_weapon_timer.is_stopped():
+		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			fire_shotgun(closest_enemy_position)
 		
 		# FIRE WAVE WEAPON
-		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 100:
+		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 200:
 			fire_wave(closest_enemy_position)
 	
 
@@ -182,6 +182,7 @@ func fire_standard(enemy_position: Vector2) -> void:
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
 
 
+# fires the shotgun weapon from player
 func fire_shotgun(enemy_position: Vector2) -> void:
 	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
 	
@@ -210,6 +211,7 @@ func fire_shotgun(enemy_position: Vector2) -> void:
 	_shotgun_weapon_timer.one_shot = true
 	add_child(_shotgun_weapon_timer)
 	_shotgun_weapon_timer.start(shotgun_attack_cd * (2 - attack_speed))
+
 
 # fires the wave bullet attack
 func fire_wave(enemy_position: Vector2) -> void:
