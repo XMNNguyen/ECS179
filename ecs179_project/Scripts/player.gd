@@ -143,7 +143,7 @@ func fire() -> void:
 			fire_standard(closest_enemy_position)
 		
 		# FIRE WAVE WEAPON
-		if _wave_weapon_timer.is_stopped():
+		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			fire_wave(closest_enemy_position)
 	
 
@@ -166,13 +166,14 @@ func fire_standard(enemy_position: Vector2) -> void:
 
 # fires the wave bullet attack
 func fire_wave(enemy_position: Vector2) -> void:
+	# directions to fire the wave in
 	var fire_directions: Array[Vector2] = [
 											Vector2(0.75, 0.75),
 											Vector2(-0.75, 0.75),
 											Vector2(0.75, -0.75),
 											Vector2(-0.75, -0.75),
 										]
-										
+	# fire 1 wave bullet in each of the specified directions
 	for fire_direction in fire_directions:
 		var new_bullet := wave_bullet.instantiate() as WaveBullet
 		new_bullet.velocity = fire_direction * wave_bullet_speed
