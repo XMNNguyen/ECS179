@@ -1,5 +1,5 @@
-class_name Boss
-extends Enemy
+class_name Boss1
+extends Boss
 
 enum state {
 	ATTACK,
@@ -22,7 +22,7 @@ var state_keys = [
 ]
 
 
-@export var attack_cooldown: float = 2.0  
+@export var attack_cooldown: float = 0.8  
 @export var projectile_scene: PackedScene = preload("res://Scenes/Enemies/Attacks/boss_attack.tscn")
 
 
@@ -31,10 +31,10 @@ func _ready() -> void:
 	signals.take_damage.connect(_on_take_damage)
 
 	# base stats
-	base_speed = 30
-	aggro_range = 200
+	base_speed = 50
+	aggro_range = 250
 	attack_range = 150
-	soul_amount = randi_range(20, 40)
+	soul_amount = randi_range(100, 150)
 	
 	# target player
 	target = get_node_or_null("/root/World/Player")
