@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://cslfni2wx3pme"]
+
+[ext_resource type="Script" path="res://Scripts/boss1.gd" id="1_455ov"]
+[ext_resource type="Texture2D" uid="uid://b2hvbevba58q0" path="res://Assets/boss.png" id="2_gwjqt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70n5x"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(0, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtona"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(50, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu2wi"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(0, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btftm"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(50, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yf02"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(100, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krpdw"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(150, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4foss"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(200, 0, 50, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs41g"]
+atlas = ExtResource("2_gwjqt")
+region = Rect2(0, 41, 50, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aymwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70n5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtona")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu2wi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btftm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yf02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krpdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4foss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs41g")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ng0fl"]
+resource_name = "move"
+length = 0.5
+loop_mode = 2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2acxf"]
+_data = {
+"move": SubResource("Animation_ng0fl")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlgao"]
+size = Vector2(36, 42)
+
+[node name="Boss" type="CharacterBody2D"]
+script = ExtResource("1_455ov")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, -4)
+scale = Vector2(1.2561, 1.2561)
+sprite_frames = SubResource("SpriteFrames_aymwc")
+animation = &"move"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2acxf")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-3, -2)
+shape = SubResource("RectangleShape2D_mlgao")
