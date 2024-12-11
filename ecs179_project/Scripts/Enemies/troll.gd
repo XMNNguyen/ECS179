@@ -54,12 +54,14 @@ func _process(delta: float) -> void:
 	adjust_z_index($Head.global_position)
 	# check if the chicken has aggro on it's target
 	if _aggro:
+		# if we are grabbing the player, keep the troll still
 		if _grabbing && !stun_timer.is_stopped():
 			$hitBox/CollisionShape2D.disabled = true
 			velocity = Vector2(0, 0)
-		# check if we are pecking and if the windup timer is stopped, execute a small dash
+		# check if we are attacking and if the windup timer is stopped, execute a small dash
 		elif cur_state == state.ATTACK && (wind_up_timer == null || wind_up_timer.is_stopped()):
 			grab_attack()
+		# if we are not attacking, start movement
 		elif cur_state != state.ATTACK:
 			$hitBox/CollisionShape2D.disabled = true
 			follow_target()
@@ -103,6 +105,7 @@ func start_charge_attack() -> void:
 	velocity = Vector2(0, 0)
 	wind_up_timer.start(0.56)
 	
+	# start cooldown timer
 	cooldown_timer = Timer.new()
 	cooldown_timer.one_shot = true
 	add_child(cooldown_timer)
@@ -134,11 +137,14 @@ func grab_attack() -> void:
 
 
 func stun() -> void:
+	# create a new timer for stun time and emit the stun signal for player
 	_grabbing = true
 	stun_timer = Timer.new()
 	stun_timer.one_shot = true
-	add_child(stun_timer)
 	signals.player_stunned.emit(stun_timer, stun_time)
+	
+	# add timer as child since we use it to keep troll still as well
+	add_child(stun_timer)
 	stun_timer.start(stun_time)
 
 

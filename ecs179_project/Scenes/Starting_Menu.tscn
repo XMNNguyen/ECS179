@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bw8dp04js1qxe"]
 
 [ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_he16k"]
-[ext_resource type="Texture2D" uid="uid://bho50vdrqaihy" path="res://Assets/Starting_Background.jpg" id="2_6dnkl"]
+[ext_resource type="Texture2D" uid="uid://clfqriehbaiob" path="res://Assets/Starting_Background.png" id="2_8by2p"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3e6w5"]
-texture = ExtResource("2_6dnkl")
+texture = ExtResource("2_8by2p")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mevup"]
 
@@ -17,7 +17,7 @@ corner_radius_bottom_left = 18
 shadow_size = 9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn7nk"]
-bg_color = Color(0.499072, 0.125549, 0.142781, 1)
+bg_color = Color(0.44523, 0.107625, 0.123315, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -25,7 +25,7 @@ corner_radius_bottom_left = 18
 shadow_size = 9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k64ge"]
-bg_color = Color(0.460037, 0.239014, 0.257279, 1)
+bg_color = Color(0.728068, 0.211223, 0.23184, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -77,9 +77,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -104.0
-offset_top = -47.0
+offset_top = -83.5
 offset_right = 104.0
-offset_bottom = 217.0
+offset_bottom = 83.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 27
