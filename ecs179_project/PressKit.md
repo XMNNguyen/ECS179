@@ -7,15 +7,18 @@
 Trailer 
 
 ------
-*Necromancer's Burden* is a roguelike action game where the player controls a Necromancer who's dog Lucky has just died of old age. The Necromancer has the dark intention of collecting the souls of the innocent in the hope of becoming powerful enough to collect the components required to bring Lucky back. 
 
-Defeat various enemies to collect their souls and become more powerful. Unlock new abilities to aid when exploring the world and confronting challenging bosses. Embark on a dangerous and certainly not justified murder rampage so Lucky can bark once again! 
+Release Date : *In Development*
+
+Price : Free 
 
 ------
 
 ## About Necromancer's Burden
 
+*Necromancer's Burden* is a roguelike action game where the player controls a Necromancer who's dog Lucky has just died of old age. The Necromancer has the dark intention of collecting the souls of the innocent in the hope of becoming powerful enough to collect the components required to bring Lucky back. 
 
+Defeat various enemies to collect their souls and become more powerful. Unlock new abilities to aid when exploring the world and confronting challenging bosses. Embark on a dangerous and certainly not justified murder rampage so Lucky can bark once again! 
 
 ## Downloads
 
