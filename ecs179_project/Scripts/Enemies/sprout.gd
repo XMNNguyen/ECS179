@@ -82,6 +82,7 @@ func start_fire() -> void:
 	cur_state = state.ATTACK
 	velocity = Vector2(0, 0)
 	
+	Audio.sprout_attack.play()
 	blend_position = Vector2(target_direction.x, -target_direction.y)
 	move_and_slide()
 	state_machine.travel(state_keys[cur_state])

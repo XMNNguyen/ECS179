@@ -104,6 +104,7 @@ func peck_attack() -> void:
 			velocity = target_direction * 230
 			_pecking = true
 			move_and_slide()
+			Audio.chicken_attack.play()
 		# start slowing down the chicken
 		elif _pecking && abs(velocity) >= Vector2(10, 10):
 			velocity *= 0.95

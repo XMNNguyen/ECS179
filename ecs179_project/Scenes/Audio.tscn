@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2dlkvgle04mm"]
+[gd_scene load_steps=8 format=3 uid="uid://b2dlkvgle04mm"]
 
 [ext_resource type="Script" path="res://Scripts/audio.gd" id="1_80uly"]
 [ext_resource type="AudioStream" uid="uid://f2xx5pxo85vu" path="res://Assets/Audio/Player_Projectile.mp3" id="2_efwy7"]
 [ext_resource type="AudioStream" uid="uid://bjlvd4ok2pjj0" path="res://Assets/Audio/Walk_Grass.mp3" id="3_cgibj"]
 [ext_resource type="AudioStream" uid="uid://hu6dita3odng" path="res://Assets/Audio/Walk_Water.mp3" id="4_owls2"]
+[ext_resource type="AudioStream" uid="uid://doub5pc6a58y" path="res://Assets/Audio/Chicken_Attack.mp3" id="5_3mue4"]
+[ext_resource type="AudioStream" uid="uid://cdg6vm3l3oxqx" path="res://Assets/Audio/Sprout_Attack.mp3" id="6_bnmo8"]
+[ext_resource type="AudioStream" uid="uid://cl8o4el1axcr3" path="res://Assets/Audio/Chicken_Death.mp3" id="7_d5snu"]
 
 [node name="Audio" type="Node2D"]
 script = ExtResource("1_80uly")
@@ -17,3 +20,16 @@ stream = ExtResource("3_cgibj")
 
 [node name="WalkWater" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_owls2")
+
+[node name="ChickenAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3mue4")
+volume_db = -21.79
+max_polyphony = 40
+
+[node name="SproutAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_bnmo8")
+volume_db = -20.625
+max_polyphony = 40
+
+[node name="ChickenDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_d5snu")
