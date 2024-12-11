@@ -104,7 +104,7 @@ func _ready() -> void:
 	_wave_weapon_timer.one_shot = true
 	add_child(_wave_weapon_timer)
 	_standard_weapon_timer.start(standard_attack_cd * (2 - attack_speed))
-	
+
 	_scatter_weapon_timer = Timer.new()
 	_scatter_weapon_timer.one_shot = true
 	add_child(_scatter_weapon_timer)
@@ -185,22 +185,30 @@ func fire() -> void:
 		if _standard_weapon_timer.is_stopped():
 			Audio.player_projectile.play()
 			fire_standard(closest_enemy_position)
-		
+			Input.action_press("spell_1")
+			Input.action_release("spell_1")
+
 		# FIRE SHOTGUN WEAPON
 		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			fire_shotgun(closest_enemy_position)
-		
+			Input.action_press("spell_2")
+			Input.action_release("spell_2")
+			
 		# FIRE WAVE WEAPON
 		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 250:
 			fire_wave(closest_enemy_position)
-		
+			Input.action_press("spell_3")
+			Input.action_release("spell_3")
+			
 		# FIRE SCATTER WEAPON
 		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 550:
 			fire_scatter(closest_enemy_position)
-		
+
 		# FIRE CHAIN WEAPON
 		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 900:
 			fire_chain(closest_enemy_position)
+			Input.action_press("spell_4")
+			Input.action_release("spell_4")
 
 
 # fires the standard weapon from player
