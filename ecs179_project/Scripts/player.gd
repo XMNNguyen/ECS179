@@ -424,6 +424,7 @@ func _on_take_damage(damage : float):
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0
+		get_tree().change_scene_to_file("res://Scenes/Death_Page.tscn")
 	healthChange.emit(health)
 
 

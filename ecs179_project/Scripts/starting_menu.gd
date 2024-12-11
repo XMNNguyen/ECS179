@@ -25,3 +25,11 @@ func _on_button_pressed_quit() -> void:
 
 func _on_button_pressed_back() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Starting_Menu.tscn")
+
+
+func _on_start_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Starting_Menu.tscn")
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()

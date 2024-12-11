@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://wmey7neijqbq"]
+
+[ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_u1gtr"]
+[ext_resource type="Texture2D" uid="uid://iuwkekpoxpr1" path="res://Assets/Death_Screen.jpg" id="2_4a7ir"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwpet"]
+texture = ExtResource("2_4a7ir")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuckv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tpv8"]
+bg_color = Color(0.571397, 0.150307, 0.169373, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2j10"]
+bg_color = Color(0.499072, 0.125549, 0.142781, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ctup"]
+bg_color = Color(0.460037, 0.239014, 0.257279, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3kv8y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ps66x"]
+bg_color = Color(0.571397, 0.150307, 0.169373, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iogpd"]
+bg_color = Color(0.44523, 0.107625, 0.123315, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u1gtr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -42.0
+offset_right = 1162.0
+offset_bottom = 698.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_mwpet")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -121.0
+offset_right = 104.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 111
+
+[node name="Start_Menu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nuckv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7tpv8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o2j10")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ctup")
+text = "Start Menu"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3kv8y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ps66x")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iogpd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ctup")
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Start_Menu" to="." method="_on_start_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
