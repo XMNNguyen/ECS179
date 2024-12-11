@@ -62,6 +62,7 @@ var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
 var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
 var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
 var chain_bullet = preload("res://Scenes/Attacks/chain_bullet.tscn")
+var blood_particles = preload("res://Scenes/blood_particles.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -438,6 +439,8 @@ func change_time_scale(time_scale: float, duration: float) -> void:
 	
 
 func _on_take_damage(damage : float) -> void:
+	var blood := blood_particles.instantiate() as BloodParticles
+	add_child(blood)
 	signals.shake_camera.emit()
 	change_time_scale(0.03, 0.75)
 	health -= damage
