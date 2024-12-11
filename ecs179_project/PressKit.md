@@ -2,7 +2,7 @@
 
 ![Cover Image](https://github.com/user-attachments/assets/8fb5dbb0-767a-4541-877e-d9e2b179635d)
 
-Link to Full Press Kit...
+[Link to full Press Kit](https://braxai.itch.io/necromancers-burden)
 
 Trailer 
 
