@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/label.gd" id="8_by5el"]
 [ext_resource type="PackedScene" uid="uid://cslfni2wx3pme" path="res://Scenes/Enemies/Boss.tscn" id="9_ewm30"]
 [ext_resource type="Script" path="res://Scripts/skill_bar.gd" id="9_ht573"]
-[ext_resource type="PackedScene" path="res://Scenes/Skills.tscn" id="9_rtbl1"]
+[ext_resource type="PackedScene" uid="uid://cb82yjeaadl2x" path="res://Scenes/Skills.tscn" id="9_rtbl1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1859,7 +1859,7 @@ position = Vector2(197, -13)
 
 [node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
 position = Vector2(388, -105)
-enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/sprout.tscn"])
+enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/sprout.tscn", "res://Scenes/Enemies/troll.tscn"])
 pack_spawn = false
 level = 3
 

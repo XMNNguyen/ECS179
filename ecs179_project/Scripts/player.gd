@@ -78,13 +78,16 @@ var _standard_weapon_timer: Timer
 var _wave_weapon_timer: Timer
 var _shotgun_weapon_timer: Timer
 var _scatter_weapon_timer: Timer
-var _chain_weapon_timer
+var _chain_weapon_timer: Timer
+
+var _cc_timer: Timer
 
 var ground_type = "Terrain"
 
 func _ready() -> void:
 	signals.collect_soul.connect(on_soul_collect)
 	signals.player_take_damage.connect(_on_take_damage)
+	signals.player_stunned.connect(_on_player_stun)
 	
 	# set up timers
 	_standard_weapon_timer = Timer.new()
@@ -119,7 +122,7 @@ func _physics_process(delta):
 	if input_vector == Vector2.ZERO:
 		state = IDLE
 		velocity = Vector2.ZERO
-	else:
+	elif _cc_timer == null || _cc_timer.is_stopped():
 		state = MOVE
 		velocity = input_vector.normalized() * MAX_SPEED
 		
@@ -128,7 +131,7 @@ func _physics_process(delta):
 			on_slope = true
 			adjust_z_index()
 			move_on_slope(input_vector.normalized())
-		elif on_slope:
+		else:
 			on_slope = false
 			adjust_z_index()
 		
@@ -176,7 +179,7 @@ func get_closest_enemy_position() -> Vector2:
 func fire() -> void:
 	var closest_enemy_position: Vector2 = get_closest_enemy_position()
 	var distance_to_enemy: float = global_position.distance_to(closest_enemy_position)
-	if distance_to_enemy <= attack_range:
+	if distance_to_enemy <= attack_range && (_cc_timer == null || _cc_timer.is_stopped()):
 		# FIRE STANDARD WEAPON
 		if _standard_weapon_timer.is_stopped():
 			Audio.player_projectile.play()
@@ -205,6 +208,7 @@ func fire() -> void:
 			fire_chain(closest_enemy_position)
 			Input.action_press("spell_4")
 			Input.action_release("spell_4")
+
 
 # fires the standard weapon from player
 func fire_standard(enemy_position: Vector2) -> void:
@@ -343,7 +347,7 @@ func is_on_slope() -> bool:
 			
 
 # add movement bias based on direction the player is moving in
-func move_on_slope(input_vector : Vector2):
+func move_on_slope(input_vector : Vector2) -> void:
 	var slow_scaling: float = 0.80
 	var horizontal_bias:float = 40
 	var diagonal_bias:float = 25
@@ -420,12 +424,19 @@ func move_on_slope(input_vector : Vector2):
 			#pass # Actions for player death here
 
 
-func _on_take_damage(damage : float):
+func _on_take_damage(damage : float) -> void:
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0
 		get_tree().change_scene_to_file("res://Scenes/Death_Page.tscn")
 	healthChange.emit(health)
+
+
+func _on_player_stun(cc_timer: Timer, time: float) -> void:
+	velocity = Vector2(0, 0)
+	_cc_timer = cc_timer
+	add_child(_cc_timer)
+	_cc_timer.start(time)
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:
