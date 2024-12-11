@@ -20,11 +20,11 @@
 
 # Main Roles #
 
-* Producer + Press Kit and Trailer : Ian O'Connell
-* Game Logic + Game Feel : Martin Nguyen 
-* Animation and Visuals + Narrative Design : Charlie Edwards 
-* User Interface and Input + Audio : Jason Gao 
-* Movement/Physics + Gameplay Testing : Cyrus Azad 
+* Producer : Ian O'Connell
+* Game Logic : Martin Nguyen 
+* Animation and Visuals : Charlie Edwards 
+* User Interface and Input : Jason Gao 
+* Movement/Physics : Cyrus Azad 
 
 Your goal is to relate the work of your role and sub-role in terms of the content of the course. Please look at the role sections below for specific instructions for each role.
 
@@ -63,6 +63,12 @@ You should replay any **bold text** with your relevant information. Liberally us
 **Document the game states and game data you managed and the design patterns you used to complete your task.**
 
 # Sub-Roles
+
+* Press Kit and Trailer : Ian O'Connell
+* Game Feel and Polish : Martin Nguyen 
+* Narrative Design : Charlie Edwards 
+* Audio : Jason Gao 
+* Gameplay Testing : Cyrus Azad 
 
 ## Audio ( Jason Gao ) 
 
