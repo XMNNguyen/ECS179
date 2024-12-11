@@ -78,13 +78,16 @@ var _standard_weapon_timer: Timer
 var _wave_weapon_timer: Timer
 var _shotgun_weapon_timer: Timer
 var _scatter_weapon_timer: Timer
-var _chain_weapon_timer
+var _chain_weapon_timer: Timer
+
+var _cc_timer: Timer
 
 var ground_type = "Terrain"
 
 func _ready() -> void:
 	signals.collect_soul.connect(on_soul_collect)
 	signals.player_take_damage.connect(_on_take_damage)
+	signals.player_stunned.connect(_on_player_stun)
 	
 	# set up timers
 	_standard_weapon_timer = Timer.new()
@@ -119,7 +122,7 @@ func _physics_process(delta):
 	if input_vector == Vector2.ZERO:
 		state = IDLE
 		velocity = Vector2.ZERO
-	else:
+	elif _cc_timer == null || _cc_timer.is_stopped():
 		state = MOVE
 		velocity = input_vector.normalized() * MAX_SPEED
 		
@@ -138,7 +141,7 @@ func _physics_process(delta):
 	state_machine.travel(state_keys[state])
 	animationTree.set(blend_paths[state], blend_position)
 
-	fire()
+	#fire()
 
 
 func on_soul_collect(amount: int) -> void:
@@ -153,7 +156,8 @@ func get_tile_type() -> int:
 		return data
 	else:
 		return 0
-		
+
+
 func get_closest_enemy_position() -> Vector2:
 	# get all enemies within our world scene
 	var enemies_in_scene: Array[Node] = get_tree().get_nodes_in_group("Enemies")
@@ -176,7 +180,7 @@ func get_closest_enemy_position() -> Vector2:
 func fire() -> void:
 	var closest_enemy_position: Vector2 = get_closest_enemy_position()
 	var distance_to_enemy: float = global_position.distance_to(closest_enemy_position)
-	if distance_to_enemy <= attack_range:
+	if distance_to_enemy <= attack_range && (_cc_timer == null || _cc_timer.is_stopped()):
 		# FIRE STANDARD WEAPON
 		if _standard_weapon_timer.is_stopped():
 			Audio.player_projectile.play()
@@ -197,6 +201,7 @@ func fire() -> void:
 		# FIRE CHAIN WEAPON
 		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 900:
 			fire_chain(closest_enemy_position)
+
 
 # fires the standard weapon from player
 func fire_standard(enemy_position: Vector2) -> void:
@@ -332,7 +337,7 @@ func is_on_slope() -> bool:
 	
 	return (tile_map.get_cell_atlas_coords(z_index, player_tile_position) in tile_map.slopes ||
 			tile_map.get_cell_atlas_coords(z_index - 1, player_tile_position) in tile_map.slopes)
-			
+
 
 # add movement bias based on direction the player is moving in
 func move_on_slope(input_vector : Vector2):
@@ -412,11 +417,18 @@ func move_on_slope(input_vector : Vector2):
 			#pass # Actions for player death here
 
 
-func _on_take_damage(damage : float):
+func _on_take_damage(damage : float) -> void:
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0
 	healthChange.emit(health)
+
+
+func _on_player_stun(cc_timer: Timer, time: float) -> void:
+	velocity = Vector2(0, 0)
+	_cc_timer = cc_timer
+	add_child(_cc_timer)
+	_cc_timer.start(time)
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:
