@@ -81,6 +81,7 @@ var _scatter_weapon_timer: Timer
 var _chain_weapon_timer: Timer
 
 var _cc_timer: Timer
+var _pause_timer: Timer
 
 var ground_type = "Terrain"
 
@@ -424,7 +425,21 @@ func move_on_slope(input_vector : Vector2) -> void:
 			#pass # Actions for player death here
 
 
+# function that changes time scale for game
+func change_time_scale(time_scale: float, duration: float) -> void:
+	# set the time scale
+	Engine.time_scale = time_scale
+	
+	# create the pause timer and wait for timer to expire, igoring the time scale
+	await get_tree().create_timer(duration, true, false, true).timeout
+	
+	# set the time back to normal
+	Engine.time_scale = 1
+	
+
 func _on_take_damage(damage : float) -> void:
+	signals.shake_camera.emit()
+	change_time_scale(0.03, 0.75)
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0

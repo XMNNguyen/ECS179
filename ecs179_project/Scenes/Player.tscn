@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=3 uid="uid://dnsb3nki2wygw"]
+[gd_scene load_steps=56 format=3 uid="uid://dnsb3nki2wygw"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_k8kdr"]
+[ext_resource type="Script" path="res://Scripts/player_camera.gd" id="2_d6rrt"]
 [ext_resource type="Texture2D" uid="uid://b7dqs305882cr" path="res://Assets/Necromancer.png" id="2_hlf2m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_22f7m"]
@@ -531,6 +532,9 @@ shape = SubResource("CapsuleShape2D_22f7m")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.21, 2.21)
 position_smoothing_enabled = true
+script = ExtResource("2_d6rrt")
+shake_strength = 3.0
+fade = 7.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
