@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=30 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c2ay5rxk3o4ts" path="res://Scenes/hearts.tscn" id="5_x1rp2"]
 [ext_resource type="Texture2D" uid="uid://bsk3oslaom7lv" path="res://Assets/Spirits_Icon.png" id="7_dpq7b"]
 [ext_resource type="Script" path="res://Scripts/label.gd" id="8_by5el"]
+[ext_resource type="Script" path="res://Scripts/skill_bar.gd" id="9_ht573"]
+[ext_resource type="PackedScene" uid="uid://cb82yjeaadl2x" path="res://Scenes/Skills.tscn" id="9_rtbl1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1881,3 +1883,32 @@ theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_by5el")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Skills" type="HBoxContainer" parent="CanvasLayer2"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -66.0
+offset_right = 90.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 21
+script = ExtResource("9_ht573")
+
+[node name="TextureButton" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+layout_mode = 2
+
+[node name="TextureButton2" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+layout_mode = 2
+
+[node name="TextureButton3" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+layout_mode = 2
+
+[node name="TextureButton4" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+layout_mode = 2

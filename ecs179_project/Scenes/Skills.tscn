@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb82yjeaadl2x"]
+
+[ext_resource type="Texture2D" uid="uid://bf6pi2g4ln5bb" path="res://Assets/61457.png" id="1_gys0t"]
+[ext_resource type="Script" path="res://Scripts/spell_icon.gd" id="2_2l2tf"]
+[ext_resource type="Texture2D" uid="uid://cr30p7u4x1kbn" path="res://Assets/Square-white.svg.png" id="3_yyik0"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ig5x5"]
+
+[sub_resource type="Shortcut" id="Shortcut_6yiyu"]
+events = [SubResource("InputEventKey_ig5x5")]
+
+[node name="TextureButton" type="TextureButton"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+shortcut = SubResource("Shortcut_6yiyu")
+texture_normal = ExtResource("1_gys0t")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_2l2tf")
+
+[node name="CD" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 2100.0
+offset_bottom = 2100.0
+scale = Vector2(0.048, 0.048)
+step = 0.01
+value = 50.0
+fill_mode = 5
+texture_progress = ExtResource("3_yyik0")
+tint_under = Color(0.288518, 0.288518, 0.288518, 1)
+tint_progress = Color(0.154876, 0.154876, 0.154876, 0.403922)
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -21.0
+offset_right = 15.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 0
+text = "0.0"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Key" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
