@@ -65,6 +65,7 @@ var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
 var chain_bullet = preload("res://Scenes/Attacks/chain_bullet.tscn")
 var blood_particles = preload("res://Scenes/blood_particles.tscn")
 var smoke_particles = preload("res://Scenes/smoke_particles.tscn")
+var energy_particles = preload("res://Scenes/energy_particles.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -159,9 +160,7 @@ func _physics_process(delta):
 			_dialogue = true
 			actionables[0].action()
 			return
-	#else:
-		#print("dialogue must be true")
-		#print(_dialogue)
+
 
 func on_soul_collect(amount: int) -> void:
 	souls_count.souls += amount
@@ -454,6 +453,10 @@ func start_boss_fight() -> void:
 func create_smoke() -> void:
 	var smoke := smoke_particles.instantiate() as SmokeParticles
 	add_child(smoke)
+	
+func create_energy() -> void:
+	var energy := energy_particles.instantiate() as EnergyParticles
+	add_child(energy)
 
 
 func on_dialogue_end() -> void:
