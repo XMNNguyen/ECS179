@@ -14,7 +14,7 @@ var wind_up_timer:Timer
 var stun_timer:Timer
 var cooldown_timer:Timer
 
-var stun_time: float = 1
+var stun_time: float = 0.5
 var cooldown: float = 2.75
 
 var cur_state: state = state.IDLE

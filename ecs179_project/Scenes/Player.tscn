@@ -1,12 +1,49 @@
-[gd_scene load_steps=57 format=3 uid="uid://dnsb3nki2wygw"]
+[gd_scene load_steps=63 format=3 uid="uid://dnsb3nki2wygw"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_k8kdr"]
 [ext_resource type="Script" path="res://Scripts/player_camera.gd" id="2_d6rrt"]
 [ext_resource type="Texture2D" uid="uid://b7dqs305882cr" path="res://Assets/Necromancer.png" id="2_hlf2m"]
+[ext_resource type="Texture2D" uid="uid://b63rhl80m12rk" path="res://Assets/Effect and Bullet 16x16/Green Effect and Bullet 16x16.png" id="3_kdiv0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_22f7m"]
 radius = 2.5
 height = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73xnv"]
+atlas = ExtResource("3_kdiv0")
+region = Rect2(256, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i01ws"]
+atlas = ExtResource("3_kdiv0")
+region = Rect2(240, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr0v5"]
+atlas = ExtResource("3_kdiv0")
+region = Rect2(224, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6afv"]
+atlas = ExtResource("3_kdiv0")
+region = Rect2(416, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bnw6a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73xnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i01ws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr0v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6afv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou1h4"]
 atlas = ExtResource("2_hlf2m")
@@ -538,6 +575,13 @@ position_smoothing_enabled = true
 script = ExtResource("2_d6rrt")
 shake_strength = 2.0
 fade = 7.0
+
+[node name="Stun_Particles" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -30)
+sprite_frames = SubResource("SpriteFrames_bnw6a")
+animation = &"idle"
+frame_progress = 0.157849
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true

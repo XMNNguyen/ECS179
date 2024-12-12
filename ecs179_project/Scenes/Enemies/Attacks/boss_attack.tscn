@@ -284,6 +284,7 @@ position = Vector2(0.5, -0.375)
 scale = Vector2(0.6875, 0.513889)
 sprite_frames = SubResource("SpriteFrames_eg0ox")
 animation = &"create"
+frame = 1
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../AnimatedSprite2D")

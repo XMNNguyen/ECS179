@@ -94,6 +94,7 @@ func _ready() -> void:
 	signals.collect_soul.connect(on_soul_collect)
 	signals.player_take_damage.connect(_on_take_damage)
 	signals.player_stunned.connect(_on_player_stun)
+	$Stun_Particles.play("idle")
 	
 	# set up timers
 	_standard_weapon_timer = Timer.new()
@@ -142,7 +143,10 @@ func _physics_process(delta):
 			adjust_z_index()
 		
 		blend_position = input_vector
-
+	
+	if _cc_timer == null || _cc_timer.is_stopped():
+		$Stun_Particles.visible = false
+	
 	move_and_slide()
 	state_machine.travel(state_keys[state])
 	animationTree.set(blend_paths[state], blend_position)
@@ -498,6 +502,7 @@ func _on_take_damage(damage : float) -> void:
 
 func _on_player_stun(cc_timer: Timer, time: float) -> void:
 	velocity = Vector2(0, 0)
+	$Stun_Particles.visible = true
 	_cc_timer = cc_timer
 	add_child(_cc_timer)
 	_cc_timer.start(time)
