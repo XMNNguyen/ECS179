@@ -203,7 +203,7 @@ func fire() -> void:
 			Input.action_release("spell_1")
 
 		# FIRE SHOTGUN WEAPON
-		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 50:
+		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			Audio.player_projectile.play()
 			fire_shotgun(closest_enemy_position)
 			Input.action_press("spell_2")

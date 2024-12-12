@@ -30,10 +30,10 @@ func _process(delta):
 		slots[2].cd.max_value = 6
 		slots[2].texture_normal = preload("res://Assets/Projectile_Icon/Wave.jpg")
 		
-	if souls_count.souls >= 550:
+	if souls_count.souls >= 650:
 		slots[0].texture_normal = preload("res://Assets/Projectile_Icon/Scatter.jpg")
 		
-	if souls_count.souls >= 900:
+	if souls_count.souls >= 1000:
 		slots[3].change_key = str(4)
 		slots[3].timer.wait_time = 3
 		slots[3].cd.max_value = 3

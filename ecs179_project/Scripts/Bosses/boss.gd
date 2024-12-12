@@ -6,7 +6,7 @@ var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
 # STATS
 var level: float = 5 
 var max_health: float = 15
-var base_damage: float = 5.0 
+var base_damage: float = 2 
 var base_speed: float = 8 
 var aggro_range: float = 50 
 var attack_range: float = 40 

@@ -4,7 +4,7 @@ extends CharacterBody2D
 enum state {
 	CREATE,
 	TRAVELING, 
-	DEATH,
+	ON_HIT,
 }
 
 @onready var animationTree: AnimationTree = $AnimationTree
@@ -14,7 +14,7 @@ var cur_state: state = state.CREATE
 var state_keys = [
 	"create",
 	"traveling",
-	"death"
+	"on_hit"
 ]
 var _timer: Timer
 
@@ -41,20 +41,22 @@ func initialize(target_pos: Vector2, damage_value: int) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if cur_state == state.TRAVELING:
+	print(velocity)
+	if state_machine.get_current_node() == "traveling":
 		# Move towards the target position
 		var direction = (target_position - global_position).normalized()
 		velocity = direction * 200  # Adjust speed as needed
 		move_and_slide()
 
 	# Once death timer is expired or bullet explodes, remove the bullet instance
-	if _timer.time_left == 0 or state_machine.get_current_node() == "End":
+	if _timer.is_stopped() or state_machine.get_current_node() == "End":
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	# If we have entered the Player's hurtbox, explode the bullet
 	if area.name == "hurtBox" and area.get_parent().name == "Player":
 		velocity = Vector2(0, 0)
-		cur_state = state.DEATH
+		cur_state = state.ON_HIT
 		state_machine.travel(state_keys[cur_state])
 		state_machine.next()
+		signals.player_take_damage.emit(damage)
