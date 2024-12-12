@@ -14,21 +14,26 @@ script = ExtResource("1_80uly")
 [node name="PlayerProjectile" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_efwy7")
 volume_db = -16.838
+max_distance = 1e+10
 
 [node name="WalkGrass" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_cgibj")
+max_distance = 1e+10
 
 [node name="WalkWater" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_owls2")
+max_distance = 1e+10
 
 [node name="ChickenAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_3mue4")
 volume_db = -21.79
+max_distance = 1e+10
 max_polyphony = 40
 
 [node name="SproutAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_bnmo8")
 volume_db = -20.625
+max_distance = 1e+10
 max_polyphony = 40
 
 [node name="ChickenDeath" type="AudioStreamPlayer2D" parent="."]

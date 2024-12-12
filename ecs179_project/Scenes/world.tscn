@@ -1871,7 +1871,7 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(1293, -753)
+position = Vector2(-925, -610)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
