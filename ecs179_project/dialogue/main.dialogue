@@ -5,12 +5,18 @@ Lucky: Woof!!
 Necromancer: I could spend all day hanging out with you!
 Necromancer: I hope nothing horrible happens, like someone randomly appearing and taking you away from me.
 do cutsceneBoss.become_visible()
+do cutsceneBoss.create_smoke()
 Boss: Mwahahaha!!
 Boss: Your adorable dog friend will be coming with me!
 Lucky: Woof!
-do player.on_dialogue_end()
-do player.end_intro()
+do cutsceneBoss.create_smoke()
+do lucky.create_smoke()
+do wait(1)
+do cutsceneBoss.become_invisible()
+do lucky.become_invisible()
 Necromancer: Noooo!! I will find you Lucky!!
+do player.end_intro()
+do player.on_dialogue_end()
 
 => END
 
@@ -23,5 +29,16 @@ do player.on_dialogue_end()
 ~ sign2
 Sign: Travelers, turn back before it's too late
 Necromancer: Nothing will stop me from getting to my Lucky!
+do player.create_smoke()
+do wait(0.5)
+do player.start_boss_fight()
+do player.create_smoke()
+Necromancer: Huh? Who's there!?
+Boss: Mwahahaha! Prepare to die!
+do player.on_dialogue_end()
+=> END
+
+~ boss_dead
+Necromancer: I did it!
 do player.on_dialogue_end()
 => END

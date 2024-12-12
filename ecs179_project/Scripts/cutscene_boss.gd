@@ -1,10 +1,14 @@
-extends Sprite2D
+extends Node2D
 
-@onready var animation_player = $AnimationPlayer
 
+var smoke_particles = preload("res://Scenes/smoke_particles.tscn")
 
 func become_visible() -> void:
-	print("Visible")
 	self.visible = true
-	#animation_player.play("appear")
 	
+func become_invisible() -> void:
+	self.visible = false
+	
+func create_smoke() -> void:
+	var smoke := smoke_particles.instantiate() as SmokeParticles
+	add_child(smoke)

@@ -1,51 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuonf8v8ka5pw"]
+[gd_scene load_steps=3 format=3 uid="uid://cuonf8v8ka5pw"]
 
 [ext_resource type="Texture2D" uid="uid://lh0go2hn4k1" path="res://dialogue/boss.png" id="1_1fmk4"]
 [ext_resource type="Script" path="res://Scripts/cutscene_boss.gd" id="2_rv3uw"]
 
-[sub_resource type="Animation" id="Animation_256vc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_b32tv"]
-resource_name = "appear"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.93333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vri0c"]
-_data = {
-"RESET": SubResource("Animation_256vc"),
-"appear": SubResource("Animation_b32tv")
-}
-
-[node name="Sprite2D" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0)
+[node name="CutsceneBoss" type="Sprite2D"]
 texture = ExtResource("1_1fmk4")
 script = ExtResource("2_rv3uw")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vri0c")
-}

@@ -1821,12 +1821,12 @@ animations = [{
 "speed": 16.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7hq"]
-size = Vector2(77.5, 20)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xccrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0pqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7hq"]
+size = Vector2(77.5, 20)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -1867,7 +1867,7 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(-948, -610)
+position = Vector2(-954, -607)
 
 [node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
 position = Vector2(388, -105)
@@ -1939,13 +1939,6 @@ visibility_layer = 16
 z_index = 1
 position = Vector2(-1012, -605)
 
-[node name="Actionable" parent="Lucky" instance=ExtResource("13_sqmvh")]
-dialogue_resource = ExtResource("16_5nbep")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lucky/Actionable"]
-position = Vector2(20, 0)
-shape = SubResource("RectangleShape2D_kq7hq")
-
 [node name="Sign1" type="Sprite2D" parent="."]
 position = Vector2(266, -31)
 scale = Vector2(1.5, 1.5)
@@ -1973,10 +1966,22 @@ region_rect = Rect2(0, 0, 16, 16)
 [node name="Actionable" parent="Sign2" instance=ExtResource("13_sqmvh")]
 z_index = 1
 dialogue_resource = ExtResource("16_5nbep")
-dialogue_start = "sign1"
+dialogue_start = "sign2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sign2/Actionable"]
 shape = SubResource("RectangleShape2D_f0pqj")
 
 [node name="CutsceneBoss" parent="." instance=ExtResource("16_yky5b")]
+unique_name_in_owner = true
+visible = false
+z_index = 1
 position = Vector2(-1074, -609)
+
+[node name="ActionableStartIntro" parent="." instance=ExtResource("13_sqmvh")]
+position = Vector2(-1012, -605)
+dialogue_resource = ExtResource("16_5nbep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableStartIntro"]
+z_index = 1
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_kq7hq")

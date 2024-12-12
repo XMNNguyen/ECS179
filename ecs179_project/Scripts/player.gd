@@ -64,6 +64,7 @@ var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
 var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
 var chain_bullet = preload("res://Scenes/Attacks/chain_bullet.tscn")
 var blood_particles = preload("res://Scenes/blood_particles.tscn")
+var smoke_particles = preload("res://Scenes/smoke_particles.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -442,12 +443,24 @@ func move_on_slope(input_vector : Vector2) -> void:
 			#pass # Actions for player death here
 
 
+func start_boss_fight() -> void:
+	position.x = 1000
+	position.y = -950
+
+func create_smoke() -> void:
+	var smoke := smoke_particles.instantiate() as SmokeParticles
+	add_child(smoke)
+
+
 func on_dialogue_end() -> void:
 	_dialogue = false
+
 
 func end_intro() -> void:
 	self.position.x = 0
 	self.position.y = 0
+	
+	
 # function that changes time scale for game
 func change_time_scale(time_scale: float, duration: float) -> void:
 	# set the time scale

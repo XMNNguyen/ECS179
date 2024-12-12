@@ -28,13 +28,13 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 general/custom_test_scene_path="res://Scenes/test_dialogue.tscn"
 general/balloon_path="res://dialogue/balloon.tscn"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
-
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [global_group]
 
