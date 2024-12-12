@@ -1,11 +1,20 @@
-extends Node
+class_name EnemyShake
+extends AnimatedSprite2D
 
+@export var shake_strength:float = 5
+@export var fade: float = 7
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var _cur_shake_strength = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if _cur_shake_strength > 0:
+		_cur_shake_strength = lerpf(_cur_shake_strength, 0, fade * delta)
+		
+		offset = Vector2(randf_range(-_cur_shake_strength, _cur_shake_strength),
+						 randf_range(_cur_shake_strength, _cur_shake_strength))
+
+
+func shake() -> void:
+	_cur_shake_strength = shake_strength

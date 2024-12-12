@@ -46,6 +46,7 @@ func assign_stats() -> void:
 
 func _on_take_damage(damage: int) -> void:
 	_current_health -= damage
+	$AnimatedSprite2D.shake()
 	Audio.enemy_hit.play()
 	die()
 
