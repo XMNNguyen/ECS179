@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=41 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
@@ -1829,6 +1829,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7hq"]
 size = Vector2(77.5, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qede5"]
+size = Vector2(55, 819.134)
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_5dhhd")
@@ -1868,7 +1871,7 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(-954, -607)
+position = Vector2(1293, -753)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -2017,3 +2020,14 @@ trigger_radius = 600.0
 spawn_time = 6.0
 pack_size = 5
 level = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-0.00012207, 6.10352e-05)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Boss_Area_Barrier" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 1
+position = Vector2(1224, -795.057)
+rotation = 1.13446
+shape = SubResource("RectangleShape2D_qede5")
