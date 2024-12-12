@@ -191,22 +191,26 @@ func fire() -> void:
 
 		# FIRE SHOTGUN WEAPON
 		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
+			Audio.player_projectile.play()
 			fire_shotgun(closest_enemy_position)
 			Input.action_press("spell_2")
 			Input.action_release("spell_2")
 			
 		# FIRE WAVE WEAPON
 		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 250:
+			Audio.player_projectile.play()
 			fire_wave(closest_enemy_position)
 			Input.action_press("spell_3")
 			Input.action_release("spell_3")
 			
 		# FIRE SCATTER WEAPON
 		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 550:
+			Audio.player_projectile.play()
 			fire_scatter(closest_enemy_position)
 
 		# FIRE CHAIN WEAPON
 		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 900:
+			Audio.player_projectile.play()
 			fire_chain(closest_enemy_position)
 			Input.action_press("spell_4")
 			Input.action_release("spell_4")
@@ -439,12 +443,14 @@ func change_time_scale(time_scale: float, duration: float) -> void:
 	
 
 func _on_take_damage(damage : float) -> void:
-	# generate hit effects
-	$hurtBox/CollisionShape2D.disabled = true # this is to prevent player from being hit during hit stun
-	var blood := blood_particles.instantiate() as BloodParticles
-	add_child(blood)
-	signals.shake_camera.emit()
-	change_time_scale(0.03, 0.75)
+	# only generate effects if we are not getting healed
+	if damage >= 0:
+		# generate hit effects
+		$hurtBox/CollisionShape2D.disabled = true # this is to prevent player from being hit during hit stun
+		var blood := blood_particles.instantiate() as BloodParticles
+		add_child(blood)
+		signals.shake_camera.emit()
+		change_time_scale(0.03, 0.75)
 	
 	# take away health
 	health -= damage
