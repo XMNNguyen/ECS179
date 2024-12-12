@@ -346,17 +346,20 @@ func fire_chain(enemy_position: Vector2) -> void:
 func adjust_z_index() -> void:
 	# get coordianates of the tile player is standing on then get the tile data
 	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
-	var new_z_index:int = 0
+	var new_z_index:int = -1
 	
-	for i in range(tile_map.layers.keys().size(), 0, -1):
+	for i in range(tile_map.layers.keys().size(), -1, -1):
 		if (tile_map.get_cell_source_id(i, player_tile_position) != -1 &&
-			tile_map.get_cell_atlas_coords(i, player_tile_position) not in tile_map.other):
+			tile_map.get_cell_atlas_coords(i, player_tile_position) not in tile_map.other &&
+			tile_map.get_cell_atlas_coords(i, player_tile_position) != tile_map.boundery &&
+			tile_map.get_cell_atlas_coords(i, player_tile_position) not in tile_map.wall_bounderies):
 			new_z_index = i + 1
 			break
-	
-	if z_index != new_z_index:
+	if z_index != new_z_index && new_z_index > -1:
 		signals.entered_new_layer.emit(max(new_z_index, 1), z_index)
-	z_index = max(new_z_index, 1)
+	
+	if new_z_index > -1:
+		z_index = max(new_z_index, 1)
 
 
 # helper function to check if player is on a slope
