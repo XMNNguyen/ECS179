@@ -44,6 +44,7 @@ func _ready() -> void:
 	attack_timer.one_shot = true
 	attack_timer.wait_time = attack_cooldown
 	add_child(attack_timer)
+	
 
 # Called every frame
 func _process(delta: float) -> void:
@@ -103,3 +104,4 @@ func start_attack() -> void:
 
 func reset_state() -> void:
 	cur_state = state.IDLE
+	

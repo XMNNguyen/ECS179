@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var heartContainer = $CanvasLayer/Hearts
 @onready var player = %Player
+@onready var lucky = %Lucky
+@onready var cutsceneBoss = %CutsceneBoss
 
 func _ready() -> void:
 	heartContainer.setMaxHearts(player.maxHeart)

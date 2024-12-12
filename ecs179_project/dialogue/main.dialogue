@@ -1,0 +1,27 @@
+~ start
+Lucky: Woof woof!
+Necromancer: I just love you Lucky!
+Lucky: Woof!!
+Necromancer: I could spend all day hanging out with you!
+Necromancer: I hope nothing horrible happens, like someone randomly appearing and taking you away from me.
+do cutsceneBoss.become_visible()
+Boss: Mwahahaha!!
+Boss: Your adorable dog friend will be coming with me!
+Lucky: Woof!
+do player.on_dialogue_end()
+do player.end_intro()
+Necromancer: Noooo!! I will find you Lucky!!
+
+=> END
+
+~ sign1
+Sign: Beware of foes ahead
+Necromancer: Foes ahead? They should be scared of ME!
+do player.on_dialogue_end()
+=> END
+
+~ sign2
+Sign: Travelers, turn back before it's too late
+Necromancer: Nothing will stop me from getting to my Lucky!
+do player.on_dialogue_end()
+=> END

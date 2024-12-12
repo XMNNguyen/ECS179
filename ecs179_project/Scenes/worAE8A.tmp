@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=38 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
@@ -13,9 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cb82yjeaadl2x" path="res://Scenes/Skills.tscn" id="9_rtbl1"]
 [ext_resource type="Texture2D" uid="uid://c57xfuyv6akvx" path="res://Assets/objects.png" id="12_lin14"]
 [ext_resource type="PackedScene" uid="uid://d2qfe44cf3apn" path="res://Scenes/actionable.tscn" id="13_sqmvh"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="14_5mbjs"]
 [ext_resource type="PackedScene" uid="uid://7agomlmlup3u" path="res://Scenes/lucky.tscn" id="15_gfatx"]
-[ext_resource type="Resource" uid="uid://kolmc4v74dqp" path="res://dialogue/main.dialogue" id="16_5nbep"]
-[ext_resource type="PackedScene" uid="uid://cuonf8v8ka5pw" path="res://Scenes/Cutscene_Boss.tscn" id="16_yky5b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1821,12 +1820,160 @@ animations = [{
 "speed": 16.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7hq"]
-size = Vector2(77.5, 20)
+[sub_resource type="Resource" id="Resource_7faeg"]
+script = ExtResource("14_5mbjs")
+using_states = PackedStringArray()
+titles = {
+"start": "2"
+}
+character_names = PackedStringArray("Lucky", "Necromancer")
+first_title = "2"
+lines = {
+"1": {
+"id": "1",
+"next_id": "2",
+"text": "start",
+"type": &"title"
+},
+"18": {
+"id": "18",
+"is_snippet": false,
+"next_id": "end",
+"type": &"goto"
+},
+"2": {
+"character": "Lucky",
+"character_replacements": Array[Dictionary]([]),
+"id": "2",
+"next_id": "3",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Woof woof!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Woof woof!",
+"type": &"dialogue"
+},
+"3": {
+"character": "Necromancer",
+"character_replacements": Array[Dictionary]([]),
+"id": "3",
+"next_id": "4",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "I just love you Lucky!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I just love you Lucky!",
+"type": &"dialogue"
+},
+"4": {
+"character": "Lucky",
+"character_replacements": Array[Dictionary]([]),
+"id": "4",
+"next_id": "5",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Woof!!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Woof!!",
+"type": &"dialogue"
+},
+"5": {
+"character": "Necromancer",
+"character_replacements": Array[Dictionary]([]),
+"id": "5",
+"next_id": "6",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "I could spend all day hanging out with you!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I could spend all day hanging out with you!",
+"type": &"dialogue"
+},
+"6": {
+"character": "Necromancer",
+"character_replacements": Array[Dictionary]([]),
+"id": "6",
+"next_id": "7",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "I hope nothing horrible happens, like someone taking you away from me.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I hope nothing horrible happens, like someone taking you away from me.",
+"type": &"dialogue"
+},
+"7": {
+"id": "7",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "lucky"
+}, {
+"type": "dot"
+}, {
+"function": "test",
+"type": &"function",
+"value": Array[Array]([])
+}]),
+"is_blocking": true
+},
+"next_id": "8",
+"type": &"mutation"
+},
+"8": {
+"character": "Lucky",
+"character_replacements": Array[Dictionary]([]),
+"id": "8",
+"next_id": "9",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Woof!",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Woof!",
+"type": &"dialogue"
+},
+"9": {
+"id": "9",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "player"
+}, {
+"type": "dot"
+}, {
+"function": "on_dialogue_end",
+"type": &"function",
+"value": Array[Array]([])
+}]),
+"is_blocking": true
+},
+"next_id": "18",
+"type": &"mutation"
+}
+}
+raw_text = "~ start
+Lucky: Woof woof!
+Necromancer: I just love you Lucky!
+Lucky: Woof!!
+Necromancer: I could spend all day hanging out with you!
+Necromancer: I hope nothing horrible happens, like someone taking you away from me.
+do lucky.test()
+Lucky: Woof!
+do player.on_dialogue_end()
+
+#- First one
+#	Nathan: You picked the first one.
+#- Second one
+#	Nathan: You picked the second one.
+#- Start again => start
+#- End the conversation => END
+#Nathan: For more information see the online documentation.
+=> END"
+metadata/dialogue_manager_version = "2.44.0"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xccrm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0pqj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7hq"]
+size = Vector2(77.5, 20)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -1932,20 +2079,6 @@ z_index = 1
 position = Vector2(726, -1113)
 floor_snap_length = 2.9
 
-[node name="Lucky" parent="." instance=ExtResource("15_gfatx")]
-unique_name_in_owner = true
-light_mask = 0
-visibility_layer = 16
-z_index = 1
-position = Vector2(-1012, -605)
-
-[node name="Actionable" parent="Lucky" instance=ExtResource("13_sqmvh")]
-dialogue_resource = ExtResource("16_5nbep")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lucky/Actionable"]
-position = Vector2(20, 0)
-shape = SubResource("RectangleShape2D_kq7hq")
-
 [node name="Sign1" type="Sprite2D" parent="."]
 position = Vector2(266, -31)
 scale = Vector2(1.5, 1.5)
@@ -1954,29 +2087,21 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Actionable" parent="Sign1" instance=ExtResource("13_sqmvh")]
-dialogue_resource = ExtResource("16_5nbep")
-dialogue_start = "sign1"
+dialogue_resource = SubResource("Resource_7faeg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sign1/Actionable"]
-z_index = 1
-position = Vector2(0, -0.666667)
 shape = SubResource("RectangleShape2D_xccrm")
 
-[node name="Sign2" type="Sprite2D" parent="."]
+[node name="Lucky" parent="." instance=ExtResource("15_gfatx")]
+unique_name_in_owner = true
+light_mask = 0
+visibility_layer = 16
 z_index = 1
-position = Vector2(1349, -775)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("12_lin14")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
+position = Vector2(-1012, -605)
 
-[node name="Actionable" parent="Sign2" instance=ExtResource("13_sqmvh")]
-z_index = 1
-dialogue_resource = ExtResource("16_5nbep")
-dialogue_start = "sign1"
+[node name="Actionable" parent="Lucky" instance=ExtResource("13_sqmvh")]
+dialogue_resource = SubResource("Resource_7faeg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign2/Actionable"]
-shape = SubResource("RectangleShape2D_f0pqj")
-
-[node name="CutsceneBoss" parent="." instance=ExtResource("16_yky5b")]
-position = Vector2(-1074, -609)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lucky/Actionable"]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_kq7hq")

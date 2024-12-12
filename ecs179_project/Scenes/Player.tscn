@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dnsb3nki2wygw"]
+[gd_scene load_steps=56 format=3 uid="uid://dnsb3nki2wygw"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_k8kdr"]
 [ext_resource type="Texture2D" uid="uid://b7dqs305882cr" path="res://Assets/Necromancer.png" id="2_hlf2m"]
@@ -517,6 +517,9 @@ height = 12.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e0wt5"]
 radius = 8.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khcxy"]
+size = Vector2(27, 49)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -563,6 +566,14 @@ shape = SubResource("CapsuleShape2D_pboi1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
 position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_e0wt5")
+
+[node name="ActionableFinder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_khcxy")
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=36 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
@@ -13,9 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cb82yjeaadl2x" path="res://Scenes/Skills.tscn" id="9_rtbl1"]
 [ext_resource type="Texture2D" uid="uid://c57xfuyv6akvx" path="res://Assets/objects.png" id="12_lin14"]
 [ext_resource type="PackedScene" uid="uid://d2qfe44cf3apn" path="res://Scenes/actionable.tscn" id="13_sqmvh"]
+[ext_resource type="Resource" uid="uid://kolmc4v74dqp" path="res://dialogue/main.dialogue" id="14_wrh7o"]
 [ext_resource type="PackedScene" uid="uid://7agomlmlup3u" path="res://Scenes/lucky.tscn" id="15_gfatx"]
-[ext_resource type="Resource" uid="uid://kolmc4v74dqp" path="res://dialogue/main.dialogue" id="16_5nbep"]
-[ext_resource type="PackedScene" uid="uid://cuonf8v8ka5pw" path="res://Scenes/Cutscene_Boss.tscn" id="16_yky5b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1821,12 +1820,7 @@ animations = [{
 "speed": 16.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7hq"]
-size = Vector2(77.5, 20)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xccrm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0pqj"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -1927,24 +1921,8 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Boss" parent="." instance=ExtResource("9_ewm30")]
-light_mask = 0
-z_index = 1
-position = Vector2(726, -1113)
+position = Vector2(718, -1127)
 floor_snap_length = 2.9
-
-[node name="Lucky" parent="." instance=ExtResource("15_gfatx")]
-unique_name_in_owner = true
-light_mask = 0
-visibility_layer = 16
-z_index = 1
-position = Vector2(-1012, -605)
-
-[node name="Actionable" parent="Lucky" instance=ExtResource("13_sqmvh")]
-dialogue_resource = ExtResource("16_5nbep")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lucky/Actionable"]
-position = Vector2(20, 0)
-shape = SubResource("RectangleShape2D_kq7hq")
 
 [node name="Sign1" type="Sprite2D" parent="."]
 position = Vector2(266, -31)
@@ -1954,29 +1932,14 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Actionable" parent="Sign1" instance=ExtResource("13_sqmvh")]
-dialogue_resource = ExtResource("16_5nbep")
-dialogue_start = "sign1"
+dialogue_resource = ExtResource("14_wrh7o")
+dialogue_start = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sign1/Actionable"]
-z_index = 1
-position = Vector2(0, -0.666667)
 shape = SubResource("RectangleShape2D_xccrm")
 
-[node name="Sign2" type="Sprite2D" parent="."]
+[node name="Lucky" parent="." instance=ExtResource("15_gfatx")]
+light_mask = 0
+visibility_layer = 16
 z_index = 1
-position = Vector2(1349, -775)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("12_lin14")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
-
-[node name="Actionable" parent="Sign2" instance=ExtResource("13_sqmvh")]
-z_index = 1
-dialogue_resource = ExtResource("16_5nbep")
-dialogue_start = "sign1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign2/Actionable"]
-shape = SubResource("RectangleShape2D_f0pqj")
-
-[node name="CutsceneBoss" parent="." instance=ExtResource("16_yky5b")]
-position = Vector2(-1074, -609)
+position = Vector2(-1012, -605)

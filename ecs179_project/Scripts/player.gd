@@ -56,6 +56,7 @@ var on_slope: bool = false
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 @onready var tile_map: TileMapController = %TileMap
+@onready var actionable_finder: Area2D = $ActionableFinder
 
 var wave_bullet = preload("res://Scenes/Attacks/wave_bullet.tscn")
 var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
@@ -81,6 +82,8 @@ var _scatter_weapon_timer: Timer
 var _chain_weapon_timer: Timer
 
 var _cc_timer: Timer
+
+var _dialogue = false
 
 var ground_type = "Terrain"
 
@@ -142,7 +145,16 @@ func _physics_process(delta):
 	animationTree.set(blend_paths[state], blend_position)
 
 	fire()
-
+	
+	if Input.is_action_just_pressed("ui_accept") and _dialogue == false:
+		var actionables = actionable_finder.get_overlapping_areas()
+		if actionables.size() > 0:
+			_dialogue = true
+			actionables[0].action()
+			return
+	#else:
+		#print("dialogue must be true")
+		#print(_dialogue)
 
 func on_soul_collect(amount: int) -> void:
 	souls_count.souls += amount
@@ -424,6 +436,13 @@ func move_on_slope(input_vector : Vector2) -> void:
 			#pass # Actions for player death here
 
 
+func on_dialogue_end() -> void:
+	_dialogue = false
+
+func end_intro() -> void:
+	self.position.x = 0
+	self.position.y = 0
+
 func _on_take_damage(damage : float) -> void:
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
@@ -453,4 +472,6 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 				return
 			else:
 				Audio.walk_grass.play()
-		
+				
+				
+	

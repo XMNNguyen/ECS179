@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://7agomlmlup3u"]
+
+[ext_resource type="Script" path="res://Scripts/lucky.gd" id="1_m8m2n"]
+[ext_resource type="Texture2D" uid="uid://s6tiebodol4m" path="res://Assets/dog_shiba_Sevarihk.png" id="2_35khs"]
+
+[sub_resource type="Animation" id="Animation_way1o"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_ivqmn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_3hfsw"]
+resource_name = "Run"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 16, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_coepr"]
+_data = {
+"Idle": SubResource("Animation_way1o"),
+"RESET": SubResource("Animation_ivqmn"),
+"Run": SubResource("Animation_3hfsw")
+}
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yqcss"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_vk2vv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hbvdi"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ca325"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5deg"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fu2lg"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_yqcss")
+states/Idle/position = Vector2(416, 171)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_vk2vv")
+states/Run/position = Vector2(565, 171)
+states/Start/position = Vector2(228, 171)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_hbvdi"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ca325"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_o5deg")]
+
+[node name="Lucky" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_m8m2n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_35khs")
+hframes = 8
+vframes = 4
+frame = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_coepr")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_fu2lg")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/is_moving = false
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Run/blend_position = Vector2(0, 0)
