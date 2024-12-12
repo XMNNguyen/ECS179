@@ -12,6 +12,8 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed_start() -> void:
+	souls_count.souls = 0
+	Engine.time_scale = 1
 	get_tree().change_scene_to_file("res://Scenes/world.tscn")
 
 

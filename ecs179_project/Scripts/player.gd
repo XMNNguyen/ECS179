@@ -63,6 +63,7 @@ var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
 var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
 var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
 var chain_bullet = preload("res://Scenes/Attacks/chain_bullet.tscn")
+var blood_particles = preload("res://Scenes/blood_particles.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -82,6 +83,7 @@ var _scatter_weapon_timer: Timer
 var _chain_weapon_timer: Timer
 
 var _cc_timer: Timer
+var _pause_timer: Timer
 
 var _dialogue = false
 
@@ -201,22 +203,26 @@ func fire() -> void:
 
 		# FIRE SHOTGUN WEAPON
 		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
+			Audio.player_projectile.play()
 			fire_shotgun(closest_enemy_position)
 			Input.action_press("spell_2")
 			Input.action_release("spell_2")
 			
 		# FIRE WAVE WEAPON
 		if _wave_weapon_timer.is_stopped() && souls_count.souls >= 250:
+			Audio.player_projectile.play()
 			fire_wave(closest_enemy_position)
 			Input.action_press("spell_3")
 			Input.action_release("spell_3")
 			
 		# FIRE SCATTER WEAPON
 		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 550:
+			Audio.player_projectile.play()
 			fire_scatter(closest_enemy_position)
 
 		# FIRE CHAIN WEAPON
 		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 900:
+			Audio.player_projectile.play()
 			fire_chain(closest_enemy_position)
 			Input.action_press("spell_4")
 			Input.action_release("spell_4")
@@ -442,13 +448,38 @@ func on_dialogue_end() -> void:
 func end_intro() -> void:
 	self.position.x = 0
 	self.position.y = 0
+# function that changes time scale for game
+func change_time_scale(time_scale: float, duration: float) -> void:
+	# set the time scale
+	Engine.time_scale = time_scale
+	
+	# create the pause timer and wait for timer to expire, igoring the time scale
+	await get_tree().create_timer(duration, true, false, true).timeout
+	
+	# set the time back to normal
+	Engine.time_scale = 1
+	
 
 func _on_take_damage(damage : float) -> void:
+	# only generate effects if we are not getting healed
+	if damage >= 0:
+		# generate hit effects
+		$hurtBox/CollisionShape2D.disabled = true # this is to prevent player from being hit during hit stun
+		var blood := blood_particles.instantiate() as BloodParticles
+		add_child(blood)
+		signals.shake_camera.emit()
+		change_time_scale(0.03, 0.75)
+	
+	# take away health
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0
 		get_tree().change_scene_to_file("res://Scenes/Death_Page.tscn")
+	elif health > maxHeart:
+		health = maxHeart
+		
 	healthChange.emit(health)
+	$hurtBox/CollisionShape2D.disabled = false
 
 
 func _on_player_stun(cc_timer: Timer, time: float) -> void:

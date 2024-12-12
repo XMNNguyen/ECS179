@@ -20,6 +20,12 @@
 
 # Main Roles #
 
+* Producer : Ian O'Connell
+* Game Logic : Martin Nguyen 
+* Animation and Visuals : Charlie Edwards 
+* User Interface and Input : Jason Gao 
+* Movement/Physics : Cyrus Azad 
+
 Your goal is to relate the work of your role and sub-role in terms of the content of the course. Please look at the role sections below for specific instructions for each role.
 
 Below is a template for you to highlight items of your work. These provide the evidence needed for your work to be evaluated. Try to have at least four such descriptions. They will be assessed on the quality of the underlying system and how they are linked to course content. 
@@ -31,34 +37,40 @@ Here is an example:
 
 You should replay any **bold text** with your relevant information. Liberally use the template when necessary and appropriate.
 
-## Producer
+## Producer ( Ian O'Connell ) 
 
 **Describe the steps you took in your role as producer. Typical items include group scheduling mechanisms, links to meeting notes, descriptions of team logistics problems with their resolution, project organization tools (e.g., timelines, dependency/task tracking, Gantt charts, etc.), and repository management methodology.**
 
-## User Interface and Input
+## User Interface and Input ( Jason Gao ) 
 
 **Describe your user interface and how it relates to gameplay. This can be done via the template.**
 **Describe the default input configuration.**
 
 **Add an entry for each platform or input style your project supports.**
 
-## Movement/Physics
+## Movement/Physics ( Cyrus Azad ) 
 
 **Describe the basics of movement and physics in your game. Is it the standard physics model? What did you change or modify? Did you make your movement scripts that do not use the physics system?**
 
-## Animation and Visuals
+## Animation and Visuals ( Charlie Edwards ) 
 
 **List your assets, including their sources and licenses.**
 
 **Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
 
-## Game Logic
+## Game Logic ( Martin Nguyen ) 
 
 **Document the game states and game data you managed and the design patterns you used to complete your task.**
 
 # Sub-Roles
 
-## Audio
+* Press Kit and Trailer : Ian O'Connell
+* Game Feel and Polish : Martin Nguyen 
+* Narrative Design : Charlie Edwards 
+* Audio : Jason Gao 
+* Gameplay Testing : Cyrus Azad 
+
+## Audio ( Jason Gao ) 
 
 **List your assets, including their sources and licenses.**
 
@@ -66,22 +78,22 @@ You should replay any **bold text** with your relevant information. Liberally us
 
 **Document the sound style.** 
 
-## Gameplay Testing
+## Gameplay Testing ( Cyrus Azad ) 
 
 **Add a link to the full results of your gameplay tests.**
 
 **Summarize the key findings from your gameplay tests.**
 
-## Narrative Design
+## Narrative Design ( Charlie Edwards ) 
 
 **Document how the narrative is present in the game via assets, gameplay systems, and gameplay.** 
 
-## Press Kit and Trailer
+## Press Kit and Trailer ( Ian O'Connell ) 
 
 **Include links to your presskit materials and trailer.**
 
 **Describe how you showcased your work. How did you choose what to show in the trailer? Why did you choose your screenshots?**
 
-## Game Feel and Polish
+## Game Feel and Polish ( Martin Nguyen ) 
 
 **Document what you added to and how you tweaked your game to improve its game feel.**
