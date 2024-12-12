@@ -13,6 +13,7 @@ config_version=5
 config/name="ECS179_project"
 run/main_scene="res://Scenes/Starting_Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -20,6 +21,10 @@ config/icon="res://icon.svg"
 signals="*res://Scripts/signals.gd"
 souls_count="*res://Assets/souls_counter.gd"
 Audio="*res://Scenes/Audio.tscn"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [global_group]
 
