@@ -13,7 +13,7 @@ enum state {
 
 var damage: float = 1
 var bounce_speed: float = 600
-var bounce_distance: float = 150
+var bounce_distance: float = 200
 var num_bounces: int = 5
 
 var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func get_closest_enemy_position(enemy_hit: Enemy) -> Vector2:
+func get_closest_enemy_position(enemy_hit) -> Vector2:
 	# get all enemies within our world scene
 	var enemies_in_scene: Array[Node] = get_tree().get_nodes_in_group("Enemies")
 	var closest_enemy_distance: float = 100000
@@ -64,7 +64,7 @@ func get_closest_enemy_position(enemy_hit: Enemy) -> Vector2:
 	return closest_enemy_position
 
 
-func bounce(enemy_hit: Enemy) -> void:
+func bounce(enemy_hit) -> void:
 	# refresh the timer each bounce
 	_timer = Timer.new()
 	_timer.one_shot = true

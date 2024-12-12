@@ -91,6 +91,7 @@ func start_attack() -> void:
 	projectile.global_position = global_position
 	projectile.target_position = target.global_position
 	projectile.damage = base_damage
+	projectile.z_index = z_index
 	$"/root/World".add_child(projectile)
 
 	# cooldown

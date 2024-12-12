@@ -1871,7 +1871,7 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(-915, -612)
+position = Vector2(-901, -615)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1924,7 +1924,7 @@ layout_mode = 2
 [node name="TextureButton4" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
 layout_mode = 2
 
-[node name="Boss" parent="." instance=ExtResource("9_ewm30")]
+[node name="Boss" parent="." groups=["Enemies"] instance=ExtResource("9_ewm30")]
 light_mask = 0
 z_index = 1
 position = Vector2(726, -1113)
@@ -2042,15 +2042,16 @@ level = 5
 [node name="Spawner5" parent="." instance=ExtResource("4_cchqb")]
 position = Vector2(587, -997)
 enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/troll.tscn", "res://Scenes/Enemies/sprout.tscn"])
-trigger_radius = 500.0
+trigger_radius = 700.0
 spawn_time = 2.0
 pack_size = 5
 level = 10
 
 [node name="Spawner6" parent="." instance=ExtResource("4_cchqb")]
-position = Vector2(1113, -1213)
+position = Vector2(1056, -1153)
 enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/troll.tscn", "res://Scenes/Enemies/sprout.tscn"])
-trigger_radius = 500.0
+spawn_radius = 250.0
+trigger_radius = 700.0
 spawn_time = 2.0
 pack_size = 5
 level = 10

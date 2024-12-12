@@ -5,7 +5,7 @@ var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
 
 # STATS
 var level: float = 5 
-var max_health: float = 15
+var max_health: float = 150
 var base_damage: float = 2 
 var base_speed: float = 8 
 var aggro_range: float = 50 
@@ -40,6 +40,7 @@ func assign_stats() -> void:
 
 func _on_take_damage(damage: int) -> void:
 	_current_health -= damage
+	print(_current_health)
 	die()
 
 

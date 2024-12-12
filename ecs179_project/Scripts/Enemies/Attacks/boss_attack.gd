@@ -41,7 +41,6 @@ func initialize(target_pos: Vector2, damage_value: int) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(velocity)
 	if state_machine.get_current_node() == "traveling":
 		# Move towards the target position
 		var direction = (target_position - global_position).normalized()

@@ -46,7 +46,7 @@ var on_slope: bool = false
 @export var chain_bullet_speed: float = 100
 @export var chain_bullet_damage: float = 2
 @export var chain_attack_cd: float = 2
-@export var num_chain_bounces: int = 7
+@export var num_chain_bounces: int = 10
 
 # AUDIO
 @onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
