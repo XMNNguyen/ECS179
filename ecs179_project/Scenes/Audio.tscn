@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2dlkvgle04mm"]
+[gd_scene load_steps=9 format=3 uid="uid://b2dlkvgle04mm"]
 
 [ext_resource type="Script" path="res://Scripts/audio.gd" id="1_80uly"]
 [ext_resource type="AudioStream" uid="uid://f2xx5pxo85vu" path="res://Assets/Audio/Player_Projectile.mp3" id="2_efwy7"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://doub5pc6a58y" path="res://Assets/Audio/Chicken_Attack.mp3" id="5_3mue4"]
 [ext_resource type="AudioStream" uid="uid://cdg6vm3l3oxqx" path="res://Assets/Audio/Sprout_Attack.mp3" id="6_bnmo8"]
 [ext_resource type="AudioStream" uid="uid://cl8o4el1axcr3" path="res://Assets/Audio/Chicken_Death.mp3" id="7_d5snu"]
+[ext_resource type="AudioStream" uid="uid://dm1k8q3nnipat" path="res://Assets/Audio/Death.mp3" id="8_b40mg"]
 
 [node name="Audio" type="Node2D"]
 script = ExtResource("1_80uly")
@@ -38,3 +39,6 @@ max_polyphony = 40
 
 [node name="ChickenDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_d5snu")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_b40mg")

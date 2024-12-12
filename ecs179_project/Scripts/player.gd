@@ -487,6 +487,7 @@ func _on_take_damage(damage : float) -> void:
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0
+		Audio.death.play()
 		get_tree().change_scene_to_file("res://Scenes/Death_Page.tscn")
 	elif health > maxHeart:
 		health = maxHeart
