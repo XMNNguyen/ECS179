@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cusr3f70fll4u"]
+[gd_scene load_steps=40 format=3 uid="uid://cusr3f70fll4u"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_5dhhd"]
 [ext_resource type="Texture2D" uid="uid://b1v7hjwwatweq" path="res://Assets/iso-64x64-outside.png" id="1_lsk4u"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://7agomlmlup3u" path="res://Scenes/lucky.tscn" id="15_gfatx"]
 [ext_resource type="Resource" uid="uid://kolmc4v74dqp" path="res://dialogue/main.dialogue" id="16_5nbep"]
 [ext_resource type="PackedScene" uid="uid://cuonf8v8ka5pw" path="res://Scenes/Cutscene_Boss.tscn" id="16_yky5b"]
+[ext_resource type="PackedScene" uid="uid://ciu4wphr5ctmd" path="res://Scenes/Enemies/chicken.tscn" id="17_054f5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugaeo"]
 resource_name = "Grass"
@@ -1869,12 +1870,6 @@ unique_name_in_owner = true
 z_index = 1
 position = Vector2(-954, -607)
 
-[node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
-position = Vector2(388, -105)
-enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/sprout.tscn", "res://Scenes/Enemies/troll.tscn"])
-pack_spawn = false
-level = 3
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hearts" parent="CanvasLayer" instance=ExtResource("5_x1rp2")]
@@ -1985,3 +1980,40 @@ dialogue_resource = ExtResource("16_5nbep")
 z_index = 1
 position = Vector2(20, 0)
 shape = SubResource("RectangleShape2D_kq7hq")
+
+[node name="Chicken" parent="." instance=ExtResource("17_054f5")]
+position = Vector2(544, -149)
+
+[node name="Chicken2" parent="." instance=ExtResource("17_054f5")]
+position = Vector2(497, -59)
+
+[node name="Chicken3" parent="." instance=ExtResource("17_054f5")]
+position = Vector2(654, -132)
+
+[node name="Spawner" parent="." instance=ExtResource("4_cchqb")]
+position = Vector2(823, -204)
+trigger_radius = 300.0
+spawn_time = 5.0
+
+[node name="Spawner2" parent="." instance=ExtResource("4_cchqb")]
+position = Vector2(1142, 5)
+trigger_radius = 300.0
+spawn_time = 5.0
+
+[node name="Spawner3" parent="." instance=ExtResource("4_cchqb")]
+position = Vector2(1339, 595)
+enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/sprout.tscn"])
+spawn_radius = 500.0
+trigger_radius = 700.0
+spawn_time = 7.0
+pack_size = 6
+level = 3
+
+[node name="Spawner4" parent="." instance=ExtResource("4_cchqb")]
+position = Vector2(2684, -253)
+enemy_types = Array[String](["res://Scenes/Enemies/chicken.tscn", "res://Scenes/Enemies/troll.tscn"])
+spawn_radius = 400.0
+trigger_radius = 600.0
+spawn_time = 6.0
+pack_size = 5
+level = 5

@@ -50,7 +50,8 @@ func spawn_enemy() -> void:
 	var spawn_location: Vector2 = get_random_spawn_location()
 	while (tile_map.get_cell_source_id(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == -1 ||
 			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) == tile_map.boundery ||
-			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) in tile_map.wall_bounderies.values()):
+			tile_map.get_cell_atlas_coords(enemy_instance.z_index - 1, tile_map.local_to_map(spawn_location)) in tile_map.wall_bounderies.values() ||
+			spawn_location.distance_to(player.global_position) <= 50):
 		spawn_location = get_random_spawn_location()
 		
 	enemy_instance.global_position = spawn_location
