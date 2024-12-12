@@ -203,7 +203,7 @@ func fire() -> void:
 			Input.action_release("spell_1")
 
 		# FIRE SHOTGUN WEAPON
-		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
+		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 50:
 			Audio.player_projectile.play()
 			fire_shotgun(closest_enemy_position)
 			Input.action_press("spell_2")
@@ -217,12 +217,12 @@ func fire() -> void:
 			Input.action_release("spell_3")
 			
 		# FIRE SCATTER WEAPON
-		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 550:
+		if _scatter_weapon_timer.is_stopped() && souls_count.souls >= 650:
 			Audio.player_projectile.play()
 			fire_scatter(closest_enemy_position)
 
 		# FIRE CHAIN WEAPON
-		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 900:
+		if _chain_weapon_timer.is_stopped() && souls_count.souls >= 1000:
 			Audio.player_projectile.play()
 			fire_chain(closest_enemy_position)
 			Input.action_press("spell_4")

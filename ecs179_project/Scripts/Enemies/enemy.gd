@@ -13,7 +13,7 @@ var base_speed: float = 10
 var aggro_range: float = 30 
 var attack_range: float = 30
 var soul_amount: float = 1
-var health_drop_chance: int = 40
+var health_drop_chance: int = 55
 
 var target: Player
 

@@ -34,7 +34,7 @@ func _ready() -> void:
 	
 	# adjust base stats
 	base_speed = 40
-	aggro_range = 100
+	aggro_range = 300
 	attack_range = 60
 	soul_amount = randi_range(5, 10)
 	target = $"/root/World/Player"

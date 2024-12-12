@@ -38,3 +38,4 @@ max_polyphony = 40
 
 [node name="ChickenDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_d5snu")
+max_distance = 1e+10
