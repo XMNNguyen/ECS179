@@ -481,6 +481,7 @@ func _on_take_damage(damage : float) -> void:
 	# only generate effects if we are not getting healed
 	if damage >= 0:
 		# generate hit effects
+		Audio.player_hit.play()
 		$hurtBox/CollisionShape2D.disabled = true # this is to prevent player from being hit during hit stun
 		var blood := blood_particles.instantiate() as BloodParticles
 		add_child(blood)

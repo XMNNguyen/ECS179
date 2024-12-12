@@ -26,6 +26,7 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	# if we have entered the Player's hurtbox, signal that the player has collected the soul
 	if area.name == "hurtBox" && area.get_parent().name == "Player":
 		signals.collect_soul.emit(soul_amount)
+		Audio.pop.play()
 		queue_free()
 
 

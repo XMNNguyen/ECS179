@@ -581,7 +581,7 @@ visible = false
 position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_bnw6a")
 animation = &"idle"
-frame_progress = 0.157849
+frame_progress = 0.413947
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true

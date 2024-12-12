@@ -40,7 +40,7 @@ func assign_stats() -> void:
 
 func _on_take_damage(damage: int) -> void:
 	_current_health -= damage
-	print(_current_health)
+	Audio.enemy_hit.play()
 	die()
 
 
