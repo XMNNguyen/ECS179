@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 
 var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
+var health_drop_scene: PackedScene = preload("res://Scenes/Health_Drop.tscn")
 
 # STATS
 var level: float = 1
@@ -12,6 +13,7 @@ var base_speed: float = 10
 var aggro_range: float = 30 
 var attack_range: float = 30
 var soul_amount: float = 1
+var health_drop_chance: int = 40
 
 var target: Player
 
@@ -50,17 +52,19 @@ func _on_take_damage(damage: int) -> void:
 # function that tries to free our enemy instance once health is depleted
 func die() -> void:
 	if _current_health <= 0:
+		# drop a soul
 		var soul_instance := soul_scene.instantiate() as SoulDrop
 		soul_instance.soul_amount = soul_amount
 		$"/root/World".add_child(soul_instance)
 		soul_instance.global_position = global_position
+		
+		# drop a health pickup based on random chance
+		if randi_range(0, 100) > 100 - health_drop_chance:
+			var health_drop := health_drop_scene.instantiate() as HealthDrop
+			$"/root/World".add_child(health_drop)
+			health_drop.global_position = global_position
+			
 		queue_free()
-		#if type == "CHICKEN": # Calculates the amount of souls the enemy drops
-			#souls_count.souls += 2
-			#print(souls_count.souls)
-		#if type == "SPROUT":
-			#souls_count.souls += 10
-			#print(souls_count.souls)
 
 
 # helper function to adjust the z_index depending on what layer the player is supposed to be on
