@@ -4,7 +4,7 @@
 
 [Link to full Press Kit](https://braxai.itch.io/necromancers-burden)
 
-Trailer 
+[Trailer](https://www.youtube.com/watch?v=0UQKqACdcuU)
 
 ------
 
