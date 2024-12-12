@@ -1,7 +1,8 @@
-[gd_scene load_steps=77 format=3 uid="uid://ciu4wphr5ctmd"]
+[gd_scene load_steps=78 format=3 uid="uid://ciu4wphr5ctmd"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/chicken.gd" id="1_74ind"]
 [ext_resource type="Texture2D" uid="uid://cmjbt3c6m7amd" path="res://Assets/chicken.png" id="1_x0flm"]
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy_shake.gd" id="3_fyane"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wt7bh"]
 atlas = ExtResource("1_x0flm")
@@ -858,6 +859,7 @@ script = ExtResource("1_74ind")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v8778")
 animation = &"idle"
+script = ExtResource("3_fyane")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

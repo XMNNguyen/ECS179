@@ -1,8 +1,9 @@
-[gd_scene load_steps=89 format=3 uid="uid://dv5akecv6pqx"]
+[gd_scene load_steps=90 format=3 uid="uid://dv5akecv6pqx"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/sprout.gd" id="1_woj2y"]
 [ext_resource type="Texture2D" uid="uid://b0rffji2utaxu" path="res://Assets/wonwon.png" id="2_76lbn"]
 [ext_resource type="Texture2D" uid="uid://dyiihwr8i0vft" path="res://Assets/wonwon_flipped.png" id="3_dmaue"]
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy_shake.gd" id="4_v1hm8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qbnu"]
 atlas = ExtResource("2_76lbn")
@@ -882,6 +883,7 @@ script = ExtResource("1_woj2y")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jt07y")
 animation = &"move"
+script = ExtResource("4_v1hm8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
