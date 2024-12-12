@@ -2,6 +2,7 @@ class_name Boss
 extends CharacterBody2D
 
 var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
+var blood_scene: PackedScene = preload("res://Scenes/Enemies/Blood_Particles.tscn")
 
 # STATS
 var level: float = 5 
@@ -42,6 +43,8 @@ func _on_take_damage(damage: int) -> void:
 	_current_health -= damage
 	Audio.enemy_hit.play()
 	$AnimatedSprite2D.shake()
+	var blood := blood_scene.instantiate() as BloodParticles
+	add_child(blood)
 	die()
 
 
