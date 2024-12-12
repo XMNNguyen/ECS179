@@ -6,3 +6,4 @@ extends Node
 @onready var chicken_attack: AudioStreamPlayer2D = $ChickenAttack
 @onready var sprout_attack: AudioStreamPlayer2D = $SproutAttack
 @onready var chicken_death: AudioStreamPlayer2D = $ChickenDeath
+@onready var death: AudioStreamPlayer2D = $Death
