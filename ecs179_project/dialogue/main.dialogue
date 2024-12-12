@@ -3,19 +3,32 @@ Lucky: Woof woof!
 Necromancer: I just love you Lucky!
 Lucky: Woof!!
 Necromancer: I could spend all day hanging out with you!
-Necromancer: I hope nothing horrible happens, like someone randomly appearing and taking you away from me.
+Necromancer: I hope nothing horrible happens, like someone randomly appearing and harming you.
 do cutsceneBoss.become_visible()
 do cutsceneBoss.create_smoke()
 Boss: Mwahahaha!!
-Boss: Your adorable dog friend will be coming with me!
-Lucky: Woof!
-do cutsceneBoss.create_smoke()
+Boss: Your adorable dog friend will perish!!
+Lucky: Woof!?
 do lucky.create_smoke()
 do wait(1)
-do cutsceneBoss.become_invisible()
 do lucky.become_invisible()
-Necromancer: Noooo!! I will find you Lucky!!
+Necromancer: Noooo!! I my Lucky!
+Boss: Mwahahaha!!
+do cutsceneBoss.create_smoke()
+do wait(1)
+do cutsceneBoss.become_invisible()
+Necromancer: Lucky... my faithful companion. You deserved better... more time... more life.
+Necromancer: * He clenches his fist, eyes glowing faintly *
+Necromancer: They say death is inevitable... a final rest... but they lie. Rest is for the weak.
+Necromancer: * He gazes toward the distant village, his voice hardening *
+Necromancer: The living's souls will burn brighter than any ritual flame... their lives traded for yours.
+Necromancer: * Pauses, almost remorseful *
+Necromancer: Forgive me... but the world can’t miss what it doesn’t value. You... you are worth the cost.
+Necromancer: * With a flourish of his staff, dark energy crackles around him *
+do player.create_energy()
+Necromancer: I will defy the Reaper himself... and bring you home.
 do player.end_intro()
+do wait(1)
 do player.on_dialogue_end()
 
 => END
