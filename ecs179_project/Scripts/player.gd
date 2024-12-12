@@ -439,15 +439,20 @@ func change_time_scale(time_scale: float, duration: float) -> void:
 	
 
 func _on_take_damage(damage : float) -> void:
+	# generate hit effects
+	$hurtBox/CollisionShape2D.disabled = true # this is to prevent player from being hit during hit stun
 	var blood := blood_particles.instantiate() as BloodParticles
 	add_child(blood)
 	signals.shake_camera.emit()
 	change_time_scale(0.03, 0.75)
+	
+	# take away health
 	health -= damage
 	if health < 0: # Making sure that health doesn't go negative
 		health = 0
 		get_tree().change_scene_to_file("res://Scenes/Death_Page.tscn")
 	healthChange.emit(health)
+	$hurtBox/CollisionShape2D.disabled = false
 
 
 func _on_player_stun(cc_timer: Timer, time: float) -> void:
