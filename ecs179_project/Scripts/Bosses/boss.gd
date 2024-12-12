@@ -53,10 +53,11 @@ func die() -> void:
 		soul_instance.global_position = global_position
 		queue_free()
 
-		#trigger_boss_death_effect()
+		trigger_boss_death_effect()
 
 # Unique boss death effect
-#func trigger_boss_death_effect() -> void:
+func trigger_boss_death_effect() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Victory.tscn")
 	# add death cry/explosion/effect for each boss
 
 # helper function to adjust the z_index depending on what layer the boss is supposed to be on

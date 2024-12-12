@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://gba1ka8530mr"]
+
+[ext_resource type="Texture2D" uid="uid://vm6w7f7oro4r" path="res://Assets/Remove background project (2).png" id="1_jfa8y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j0dyh"]
+texture = ExtResource("1_jfa8y")
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_j0dyh")

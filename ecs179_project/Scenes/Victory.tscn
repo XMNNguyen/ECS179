@@ -1,0 +1,112 @@
+[gd_scene load_steps=13 format=3 uid="uid://byrq25o0j2bh2"]
+
+[ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_g45kg"]
+[ext_resource type="Theme" uid="uid://gba1ka8530mr" path="res://Assets/new_theme.tres" id="2_h417o"]
+
+[sub_resource type="SystemFont" id="SystemFont_qq77n"]
+font_italic = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_qlbkf"]
+font = SubResource("SystemFont_qq77n")
+font_size = 129
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qfxsj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_673xu"]
+bg_color = Color(0.571397, 0.150307, 0.169373, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56pt3"]
+bg_color = Color(0.499072, 0.125549, 0.142781, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s81n8"]
+bg_color = Color(0.460037, 0.239014, 0.257279, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_668dy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwph6"]
+bg_color = Color(0.571397, 0.150307, 0.169373, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1qm1"]
+bg_color = Color(0.44523, 0.107625, 0.123315, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7edeh"]
+bg_color = Color(0.460037, 0.239014, 0.257279, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_g45kg")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -26.0
+offset_right = 1171.0
+offset_bottom = 731.0
+theme = ExtResource("2_h417o")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 52.0
+offset_right = 991.0
+offset_bottom = 249.0
+text = "Victory!"
+label_settings = SubResource("LabelSettings_qlbkf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 433.0
+offset_right = 734.0
+offset_bottom = 636.0
+
+[node name="Start_Menu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qfxsj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_673xu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_56pt3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_s81n8")
+text = "Start Menu"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_668dy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pwph6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i1qm1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7edeh")
+text = "Quit"
