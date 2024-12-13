@@ -25,8 +25,8 @@ var on_slope: bool = false
 
 # WAVE WEAPON
 @export var wave_bullet_speed: float = 100
-@export var wave_bullet_damage: float = 2
-@export var wave_attack_cd: float = 4
+@export var wave_bullet_damage: float = 4
+@export var wave_attack_cd: float = 3
 @export var num_wave_bullets: int = 1
 
 # SHOTGUN WEAPON

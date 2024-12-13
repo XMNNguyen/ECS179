@@ -6,7 +6,7 @@ var blood_scene: PackedScene = preload("res://Scenes/Enemies/Blood_Particles.tsc
 
 # STATS
 var level: float = 5
-var max_health: float = 150
+var max_health: float = 110
 var base_damage: float = 2 
 var base_speed: float = 8 
 var aggro_range: float = 50 
