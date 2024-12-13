@@ -34,6 +34,8 @@
 
 ## Press Kit and Trailer - Ian O'Connell
 
+I originally had a lot of apprehension with this role as I don't have much experience with the tools that are involved in developing a press kit and trailer. However, after going through the process of developing the game and creatively deciding how to best represent the decisions we made throughout that process I found this to be an enjoyable experience.
+
 ### Press Kit
 - [Press Kit](https://braxai.itch.io/necromancers-burden)
 - I used itch.io to implement the press kit. I wanted the press kit to be as simple as possible and with us having implemented only the first major region of the game there isn't too much need for an extensive set of screenshots to represent the gameplay as is. I included an image of the home screen showing off some of the nice user interface work done by my teammates. Images of the Necromancer played by the character and Lucky the dog who serves as the motivation for the character's decision making are included. Finally a couple screenshots show what the gameplay can look like. A short summary gives the quick baseline of what the game is all about. Some simple information about the game and necessary methods to download and play the game are included as well. 
