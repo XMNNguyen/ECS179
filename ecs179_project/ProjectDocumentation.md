@@ -17,10 +17,20 @@
 ## Producer - Ian O'Connell
 
 Much of the scheduling responsibilities were a coordinated effort involving all members of the group. Everyone attended and contributed to all the group meetings. We had our initial plan meeting which involved mostly brainstorming and setting some basic goals for what we wanted to accomplish. In hindsight these goals were a bit ambitious but it's better to aim high than low. We had another group meeting to create the progress report where we assessed where we were at and set some new more realistic and attainable goals. The goals we set in the progress report were accomplished over the following week or two. Throughout this process we utilized discord as our priamry form of communication where we frequently communicated about what we were working on, what kinds of decisions we were making, and what we needed to do next. 
+- Initial Plan : https://docs.google.com/document/d/1_s2GGPkNTNx4cO-fwIupkpcOfQshuwqgIplpRGbJLsY/edit?tab=t.0#heading=h.i3tv2mxf7h7z
+- Progess Report : https://docs.google.com/document/d/1ZRy6burzjUGodFLAHPQz7YvewXVO0cf8pVjVP6rCbFw/edit?tab=t.0#heading=h.aafu4y4mcm30
+
+The communication in discord can be seen in these examples : 
+![image](https://github.com/user-attachments/assets/37185533-14eb-48c3-9caa-c59c72289443)
+![image](https://github.com/user-attachments/assets/cc71b1ee-6fe3-4d64-8f0b-4a07e38ea5b2)
+![image](https://github.com/user-attachments/assets/a993651b-46a1-424a-a5ac-5d5616037ff7)
+![image](https://github.com/user-attachments/assets/8534a9d0-5ba4-4635-8ca9-2315ca2f76ed)
+
 
 We used a clickup list to clearly display the goals set at the progress report meeting (Martin's idea). Contributions to the repository were done methodically and one at a time to ensure there were no conflicts between the work done by different group members. We also divided the work in ways that made collisions less likely. We never had to deal with any issues within the repository. 
+- ClickUp : https://app.clickup.com/9011732114/v/l/li/901107402691
 
-I managed uploading the web playable version of the game on itch.io which can be found at https://braxai.itch.io/necromancers-burden. 
+I managed uploading the web playable version of the game on itch.io which can be found at https://braxai.itch.io/necromancers-burden. I worked on the map. Building the level the playe would navigate and discussing ideas behind what enemies would be present, where they would be, and how the boss fit into the level. I helped collect asset packs and develop the visual direction the game was going. This included finding the terrain packs, the dog pack, the packs used for the boss and the packs for some of the enemies. 
 
 ## Game Logic - Martin Nguyen
 
