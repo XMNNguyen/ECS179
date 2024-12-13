@@ -61,10 +61,12 @@ func die() -> void:
 		queue_free()
 		Audio.death.play()
 
+
 # Unique boss death effect
 func trigger_boss_death_effect() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Victory.tscn")
 	# add death cry/explosion/effect for each boss
+
 
 # helper function to adjust the z_index depending on what layer the boss is supposed to be on
 func adjust_z_index(position: Vector2) -> void:

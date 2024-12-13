@@ -55,5 +55,5 @@ do player.on_dialogue_end()
 Necromancer: It has been done. I can finally bring Lucky back.
 do wait(1.5)
 do player.on_dialogue_end()
-do boss.trigger_boss_death_effect()
+do get_tree().change_scene_to_file("res://Scenes/Victory.tscn")
 => END

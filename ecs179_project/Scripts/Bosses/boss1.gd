@@ -31,6 +31,7 @@ func _ready() -> void:
 	signals.take_damage.connect(_on_take_damage)
 
 	# base stats
+	_current_health = 1
 	base_speed = 50
 	aggro_range = 250
 	attack_range = 150
@@ -66,7 +67,6 @@ func _process(delta: float) -> void:
 		_aggro = true
 
 
-
 func follow_target() -> void:
 	if not target:
 		return
@@ -78,6 +78,7 @@ func follow_target() -> void:
 	move_and_slide()
 
 	blend_position = Vector2(target_direction.x, -target_direction.y)
+
 
 func start_attack() -> void:
 	if not target:
@@ -102,6 +103,7 @@ func start_attack() -> void:
 
 	# reset
 	call_deferred("reset_state")
+
 
 func reset_state() -> void:
 	cur_state = state.IDLE
