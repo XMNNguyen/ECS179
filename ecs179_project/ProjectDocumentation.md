@@ -16,6 +16,12 @@
 
 ## Producer - Ian O'Connell
 
+Much of the scheduling responsibilities were a coordinated effort involving all members of the group. Everyone attended and contributed to all the group meetings. We had our initial plan meeting which involved mostly brainstorming and setting some basic goals for what we wanted to accomplish. In hindsight these goals were a bit ambitious but it's better to aim high than low. We had another group meeting to create the progress report where we assessed where we were at and set some new more realistic and attainable goals. The goals we set in the progress report were accomplished over the following week or two. Throughout this process we utilized discord as our priamry form of communication where we frequently communicated about what we were working on, what kinds of decisions we were making, and what we needed to do next. 
+
+We used a clickup list to clearly display the goals set at the progress report meeting (Martin's idea). Contributions to the repository were done methodically and one at a time to ensure there were no conflicts between the work done by different group members. We also divided the work in ways that made collisions less likely. We never had to deal with any issues within the repository. 
+
+I managed uploading the web playable version of the game on itch.io which can be found at https://braxai.itch.io/necromancers-burden. 
+
 ## Game Logic - Martin Nguyen
 
 Note: Even though this was my main role, there were some aspects of game logic that everyone worked on together.
