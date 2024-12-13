@@ -4,6 +4,8 @@
 
 [Link to full Press Kit](https://braxai.itch.io/necromancers-burden-presskit)
 
+- downloadable and web playable versions of the game can be found through the full press kit
+
 [Trailer](https://www.youtube.com/watch?v=0UQKqACdcuU)
 
 ------
@@ -19,9 +21,6 @@ Price : Free
 *Necromancer's Burden* is a roguelike action game where the player controls a Necromancer who's dog Lucky has just died of old age. The Necromancer has the dark intention of collecting the souls of the innocent in the hope of becoming powerful enough to collect the components required to bring Lucky back. 
 
 Defeat various enemies to collect their souls and become more powerful. Unlock new abilities to aid when exploring the world and confronting challenging bosses. Embark on a dangerous and certainly not justified murder rampage so Lucky can bark once again! 
-
-## Downloads
-
 
 ## Screenshots
 
