@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var potion_scene: PackedScene = preload("res://Scenes/potion.tscn")
 var blood_scene: PackedScene = preload("res://Scenes/Enemies/Blood_Particles.tscn")
+var smoke_scene: PackedScene = preload("res://Scenes/smoke_particles.tscn")
 
 # STATS
 var level: float = 5
@@ -52,14 +53,19 @@ func _on_take_damage(damage: int) -> void:
 
 # function that tries to free our boss instance once health is depleted
 func die() -> void:
-	
 	if _current_health <= 0:
 		signals.boss_died.emit()
+		
 		var potion_instance := potion_scene.instantiate() as PotionDrop
 		$"/root/World".add_child(potion_instance)
 		potion_instance.global_position = global_position
+		
+		var smoke_instance := smoke_scene.instantiate() as SmokeParticles
+		$"/root/World".add_child(smoke_instance)
+		smoke_instance.global_position = global_position
+
 		queue_free()
-		Audio.death.play()
+		Audio.boss_death.play()
 
 
 # Unique boss death effect

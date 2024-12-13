@@ -95,6 +95,7 @@ func _ready() -> void:
 	signals.collect_soul.connect(on_soul_collect)
 	signals.player_take_damage.connect(_on_take_damage)
 	signals.player_stunned.connect(_on_player_stun)
+	signals.boss_died.connect(_on_boss_death)
 	$Stun_Particles.play("idle")
 	
 	# set up timers
@@ -204,7 +205,7 @@ func fire() -> void:
 			fire_standard(closest_enemy_position)
 			Input.action_press("spell_1")
 			Input.action_release("spell_1")
-
+			
 		# FIRE SHOTGUN WEAPON
 		if _shotgun_weapon_timer.is_stopped() && souls_count.souls >= 100:
 			Audio.player_projectile.play()
@@ -229,8 +230,6 @@ func fire() -> void:
 			Audio.player_projectile.play()
 			fire_chain(closest_enemy_position)
 			Input.action_press("spell_4")
-			Input.action_release("spell_4")
-
 
 # fires the standard weapon from player
 func fire_standard(enemy_position: Vector2) -> void:
@@ -513,6 +512,11 @@ func _on_player_stun(cc_timer: Timer, time: float) -> void:
 	_cc_timer = cc_timer
 	add_child(_cc_timer)
 	_cc_timer.start(time)
+
+
+func _on_boss_death() -> void:
+	signals.shake_camera.emit()
+	change_time_scale(0.05, 2)
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:

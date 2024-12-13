@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2dlkvgle04mm"]
+[gd_scene load_steps=13 format=3 uid="uid://b2dlkvgle04mm"]
 
 [ext_resource type="Script" path="res://Scripts/audio.gd" id="1_80uly"]
 [ext_resource type="AudioStream" uid="uid://f2xx5pxo85vu" path="res://Assets/Audio/Player_Projectile.mp3" id="2_efwy7"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c7cyjefllgixg" path="res://Assets/Audio/retro-explode-1.mp3" id="9_gayde"]
 [ext_resource type="AudioStream" uid="uid://w24c28nfg1oi" path="res://Assets/Audio/pop.mp3" id="10_65yxd"]
 [ext_resource type="AudioStream" uid="uid://oqn22waq7ej4" path="res://Assets/Audio/Enemy_Hit.mp3" id="11_prkaw"]
+[ext_resource type="AudioStream" uid="uid://ctpjurtiofv42" path="res://Assets/Audio/8-bit-explosion-low-resonant.mp3" id="12_n38ww"]
 
 [node name="Audio" type="Node2D"]
 script = ExtResource("1_80uly")
@@ -62,4 +63,8 @@ max_distance = 1e+07
 [node name="EnemyHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_prkaw")
 pitch_scale = 0.72
+max_distance = 1e+07
+
+[node name="BossDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_n38ww")
 max_distance = 1e+07

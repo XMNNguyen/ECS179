@@ -5,6 +5,7 @@ extends CharacterBody2D
 var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
 var health_drop_scene: PackedScene = preload("res://Scenes/Health_Drop.tscn")
 var blood_scene: PackedScene = preload("res://Scenes/Enemies/Blood_Particles.tscn")
+var smoke_scene: PackedScene = preload("res://Scenes/smoke_particles.tscn")
 
 # STATS
 var level: float = 1

@@ -104,5 +104,11 @@ func fire() -> void:
 
 
 func _on_boss_died() -> void:
+	# kill of enemy and replace with smoke particles
 	self._current_health = 0
+	var smoke_instance := smoke_scene.instantiate() as SmokeParticles
+	$"/root/World".add_child(smoke_instance)
+	smoke_instance.emitting = true
+	smoke_instance.z_index = z_index
+	smoke_instance.global_position = global_position
 	self.die()

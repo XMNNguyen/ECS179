@@ -10,3 +10,4 @@ extends Node
 @onready var player_hit: AudioStreamPlayer2D = $PlayerHit
 @onready var pop: AudioStreamPlayer2D = $Pop
 @onready var enemy_hit: AudioStreamPlayer2D = $EnemyHit
+@onready var boss_death: AudioStreamPlayer2D = $BossDeath
