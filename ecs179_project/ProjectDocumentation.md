@@ -34,7 +34,7 @@
 
 ## Press Kit and Trailer - Ian O'Connell
 
-I originally had a lot of apprehension with this role as I don't have much experience with the tools that are involved in developing a press kit and trailer. However, after going through the process of developing the game and creatively deciding how to best represent the decisions we made throughout that process I found this to be an enjoyable experience.
+I originally had a lot of apprehension with this role as I don't have much experience with the tools that are involved in developing a press kit and trailer. However, after going through the process of developing the game and creatively deciding how to best represent the decisions we made throughout that process I found this to be an enjoyable experience and am satisfied with the result.
 
 ### Press Kit
 - [Press Kit](https://braxai.itch.io/necromancers-burden)
