@@ -56,7 +56,33 @@ You should replay any **bold text** with your relevant information. Liberally us
 
 **List your assets, including their sources and licenses.**
 
+Necromancer - [Source](https://thestoryteller01.wordpress.com/2015/01/02/skeleton-sprites-6-for-rpg-maker-xp/), Creative Commons Attribution 4.0 International License (CC BY 4.0) with credit to Enterbrain, Ice-Ax and Sebastien Bini
+
+Dog (Lucky) - [Source, Modern Interior Pack](https://aurora-sprites.wixsite.com/main/sets?lang=en), CC BY-NC 4.0
+
+Trolls - [Source](https://opengameart.org/node/78138), Creative Commons Attribution (CC BY) version 3.0
+
+Chickens - [Source](https://opengameart.org/node/11629), Attributed to Daniel Eddeland
+
+Sprout - [Source](https://chiecola.itch.io/won-won-drone), Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+
+Boss - [Source](https://opengameart.org/content/bosses-and-monsters-spritesheets-ars-notoria), Creative Commons Attribution (CC BY) version 3.0 with credit to Stephen Challener (Redshrike)
+
+Projectiles - [Source](https://bdragon1727.itch.io/free-effect-and-bullet-16x16), Free to use on non-commercial games
+
+Tileset - [Source](https://opengameart.org/content/isometric-64x64-outside-tileset), Creative Commons Attribution 4.0 International License (CC BY 4.0) with credit to Yar
+
+Hearts - [Source](https://pixel-boy.itch.io/ninja-adventure-asset-pack), Creative Commons Zero (CC0) 
+
+Potions - [Source](https://opengameart.org/content/potion-bottles), Creative Commons Zero (CC0)
+
+Sign - [Source](https://game-endeavor.itch.io/mystic-woods), Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+
 **Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
+
+To establish a cohesive game feel, I carefully selected pixel art assets from free resources that harmonize stylistically, maintaining a consistent isometric perspective and level of detail. In order to keep the game feeling fair, it was important to choose enemies and projectiles that could be quickly and clearly seen. Dense foliage outlining the path creates an immersive environment that also works toward leading the player in the right direction. 
+I also utilied Godot's particle system to create smoke and energy effects to give the Boss magical powers to futher establish the setting of the game.
 
 ## Game Logic ( Martin Nguyen ) 
 
@@ -87,6 +113,18 @@ You should replay any **bold text** with your relevant information. Liberally us
 ## Narrative Design ( Charlie Edwards ) 
 
 **Document how the narrative is present in the game via assets, gameplay systems, and gameplay.** 
+
+I utlized the Godot plugin Dialogue Manager to assist with creating dialogue and to have the option for branching dialogue trees. [Source](https://github.com/nathanhoad/godot_dialogue_manager/tree/main), [License](https://github.com/nathanhoad/godot_dialogue_manager/blob/main/LICENSE)
+
+Dialogue Manager lets me manage all of the game's dialogue in a single text file, where I can sequentially call dialogue and functions. Since we do not have any voice acting, I used pictures in the dialogue box to show who is talking. The player is allowed to move during dialogue because some signs, containing dialogue, are placed where enemies may be present; so we decided it was best to always let the player move during dialogue. 
+
+The introduction cutscene gives the context of the game and makes it clear early on that this is a light-hearted game, not meant to be taken too seriously. The death of the dog, Lucky, establishes the motivation of the Necromancer's rampage, gives a reason for the player to try to beat the game and reunite the Necromancer and Lucky, and shows how despicably evil the boss is.
+
+I also chose to put an interactable sign right after the first cutscene, at the start of the gameplay, to build ituition in the player to interact with any futures signs they see. Interacting with a sign is necessary in order to start the boss fight later.
+
+This first sign just has a simple beware of enemies message that serves to warn the player of future enemies, but mainly is there to make the player want to interact with signs.
+
+The second sign is found right before the boss fight and starts the fight. 
 
 ## Press Kit and Trailer ( Ian O'Connell ) 
 
