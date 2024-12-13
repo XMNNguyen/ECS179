@@ -77,10 +77,10 @@ theme = ExtResource("2_h417o")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 163.0
-offset_top = 52.0
-offset_right = 991.0
-offset_bottom = 249.0
+offset_left = 155.0
+offset_top = 71.0
+offset_right = 983.0
+offset_bottom = 268.0
 text = "Victory!"
 label_settings = SubResource("LabelSettings_qlbkf")
 horizontal_alignment = 1
@@ -110,3 +110,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_pwph6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_i1qm1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_7edeh")
 text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Start_Menu" to="." method="_on_start_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

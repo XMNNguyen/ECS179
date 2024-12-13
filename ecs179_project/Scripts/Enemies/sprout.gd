@@ -32,6 +32,7 @@ var _on_slope: bool = false
 func _ready() -> void:
 	add_to_group("Enemies")
 	signals.take_damage.connect(_on_take_damage)
+	signals.boss_died.connect(_on_boss_died)
 	
 	# adjust base stats
 	base_speed = 40
@@ -100,3 +101,8 @@ func fire() -> void:
 	add_child(new_bullet)
 
 	cur_state = state.MOVE
+
+
+func _on_boss_died() -> void:
+	self._current_health = 0
+	self.die()

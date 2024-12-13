@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmayndif21kxi"
-path="res://.godot/imported/Remove background project (1).png-3cfec039d4bdf5e7af5764b6a68af7c5.ctex"
+uid="uid://vm6w7f7oro4r"
+path="res://.godot/imported/victory.png-28ef69fb6a7f6d3b1525d85ede238706.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Remove background project (1).png"
-dest_files=["res://.godot/imported/Remove background project (1).png-3cfec039d4bdf5e7af5764b6a68af7c5.ctex"]
+source_file="res://Assets/victory.png"
+dest_files=["res://.godot/imported/victory.png-28ef69fb6a7f6d3b1525d85ede238706.ctex"]
 
 [params]
 

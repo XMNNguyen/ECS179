@@ -14,25 +14,29 @@ var _spawn_timer: Timer
 @onready var player: Player = %Player
 @onready var tile_map: TileMap = %TileMap
 
+var boss_dead = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	refresh_spawn_timer()
+	signals.boss_died.connect(_on_boss_died)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# if the player is within radius of the spawner and spawn timer is stopped, spawn an enemy and refresh the timer
-	if (player.global_position.distance_to(global_position) <= spawn_radius && 
-	   (_spawn_timer == null || _spawn_timer.is_stopped())):
+	if (!boss_dead):
+		if (player.global_position.distance_to(global_position) <= spawn_radius && 
+			(_spawn_timer == null || _spawn_timer.is_stopped())):
 		
-		if !pack_spawn:
-			spawn_enemy()
-		else:
-			spawn_enemy_pack()
+			if !pack_spawn:
+				spawn_enemy()
+			else:
+				spawn_enemy_pack()
 		
-		# refresh the timer
-		refresh_spawn_timer()
+			# refresh the timer
+			refresh_spawn_timer()
 
 
 # helper function to spawn a random instance of a enemy
@@ -75,3 +79,6 @@ func get_random_spawn_location() -> Vector2:
 			Vector2(randf_range(-spawn_radius, spawn_radius),
 					randf_range(-spawn_radius, spawn_radius))
 		   )
+
+func _on_boss_died() -> void:
+	boss_dead = true

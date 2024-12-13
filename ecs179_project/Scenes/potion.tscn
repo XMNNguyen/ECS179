@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://oqsj60momcni"]
+
+[ext_resource type="Script" path="res://Scripts/potion_drop.gd" id="1_yq5bu"]
+[ext_resource type="Texture2D" uid="uid://cgie36ypqy84a" path="res://Assets/potions.png" id="2_fdsqi"]
+[ext_resource type="Script" path="res://Scripts/actionable.gd" id="3_crmqu"]
+[ext_resource type="Resource" uid="uid://kolmc4v74dqp" path="res://dialogue/main.dialogue" id="4_busvw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k278r"]
+radius = 1.55172
+height = 9.57143
+
+[node name="Potion" type="Sprite2D"]
+position = Vector2(2.9375, -0.69904)
+scale = Vector2(0.161, 0.141185)
+texture = ExtResource("2_fdsqi")
+hframes = 2
+vframes = 2
+frame = 2
+script = ExtResource("1_yq5bu")
+
+[node name="Actionable" type="Area2D" parent="."]
+position = Vector2(12, 39)
+scale = Vector2(29, -14)
+script = ExtResource("3_crmqu")
+dialogue_resource = ExtResource("4_busvw")
+dialogue_start = "boss_dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+position = Vector2(-0.413793, 2.78571)
+rotation = -6.28319
+shape = SubResource("CapsuleShape2D_k278r")

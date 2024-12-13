@@ -1874,7 +1874,7 @@ script = ExtResource("2_fnfvh")
 [node name="Player" parent="." instance=ExtResource("3_drjvw")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(-901, -615)
+position = Vector2(-931, -610)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -2010,7 +2010,7 @@ rotation = 1.13446
 shape = SubResource("RectangleShape2D_qede5")
 
 [node name="Chicken" parent="." instance=ExtResource("17_054f5")]
-position = Vector2(544, -149)
+position = Vector2(532, -152)
 
 [node name="Chicken2" parent="." instance=ExtResource("17_054f5")]
 position = Vector2(604, -183)

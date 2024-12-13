@@ -38,6 +38,7 @@ var _grabbing: bool = false
 func _ready() -> void:
 	add_to_group("Enemies")
 	signals.take_damage.connect(_on_take_damage)
+	signals.boss_died.connect(_on_boss_died)
 	
 	# adjust base stats
 	base_damage = 1
@@ -152,3 +153,8 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	if area.name == "hurtBox" && area.get_parent().name == "Player":
 		stun()
 		signals.player_take_damage.emit(base_damage)
+
+
+func _on_boss_died() -> void:
+	self._current_health = 0
+	self.die()

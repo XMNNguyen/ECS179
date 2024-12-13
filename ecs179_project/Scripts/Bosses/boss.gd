@@ -1,11 +1,11 @@
 class_name Boss
 extends CharacterBody2D
 
-var soul_scene: PackedScene = preload("res://Scenes/Soul_drop.tscn")
+var potion_scene: PackedScene = preload("res://Scenes/potion.tscn")
 var blood_scene: PackedScene = preload("res://Scenes/Enemies/Blood_Particles.tscn")
 
 # STATS
-var level: float = 5 
+var level: float = 5
 var max_health: float = 150
 var base_damage: float = 2 
 var base_speed: float = 8 
@@ -17,8 +17,10 @@ var target: Player
 
 var _current_health: float = max_health
 var _aggro: bool = false
+var _dialogue = false
 
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
+@onready var actionable_finder: Area2D = $ActionableFinder
 
 func assign_stats() -> void:
 	var stat_num: int
@@ -50,14 +52,14 @@ func _on_take_damage(damage: int) -> void:
 
 # function that tries to free our boss instance once health is depleted
 func die() -> void:
+	
 	if _current_health <= 0:
-		var soul_instance := soul_scene.instantiate() as SoulDrop
-		soul_instance.soul_amount = soul_amount
-		$"/root/World".add_child(soul_instance)
-		soul_instance.global_position = global_position
+		signals.boss_died.emit()
+		var potion_instance := potion_scene.instantiate() as PotionDrop
+		$"/root/World".add_child(potion_instance)
+		potion_instance.global_position = global_position
 		queue_free()
-
-		trigger_boss_death_effect()
+		Audio.death.play()
 
 # Unique boss death effect
 func trigger_boss_death_effect() -> void:

@@ -43,7 +43,7 @@ do player.on_dialogue_end()
 Sign: Travelers, turn back before it's too late
 Necromancer: Nothing will stop me from getting to my Lucky!
 do player.create_smoke()
-do wait(0.5)
+do wait(1)
 do player.start_boss_fight()
 do player.create_smoke()
 Necromancer: Huh? Who's there!?
@@ -52,6 +52,8 @@ do player.on_dialogue_end()
 => END
 
 ~ boss_dead
-Necromancer: I did it!
+Necromancer: It has been done. I can finally bring Lucky back.
+do wait(1.5)
 do player.on_dialogue_end()
+do boss.trigger_boss_death_effect()
 => END
