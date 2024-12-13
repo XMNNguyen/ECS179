@@ -17,8 +17,8 @@
 ## Producer - Ian O'Connell
 
 Much of the scheduling responsibilities were a coordinated effort involving all members of the group. Everyone attended and contributed to all the group meetings. We had our initial plan meeting which involved mostly brainstorming and setting some basic goals for what we wanted to accomplish. In hindsight these goals were a bit ambitious but it's better to aim high than low. We had another group meeting to create the progress report where we assessed where we were at and set some new more realistic and attainable goals. The goals we set in the progress report were accomplished over the following week or two. Throughout this process we utilized discord as our priamry form of communication where we frequently communicated about what we were working on, what kinds of decisions we were making, and what we needed to do next. 
-- **Initial Plan** : https://docs.google.com/document/d/1_s2GGPkNTNx4cO-fwIupkpcOfQshuwqgIplpRGbJLsY/edit?tab=t.0#heading=h.i3tv2mxf7h7z
-- **Progress Report** : https://docs.google.com/document/d/1ZRy6burzjUGodFLAHPQz7YvewXVO0cf8pVjVP6rCbFw/edit?tab=t.0#heading=h.aafu4y4mcm30
+- **Initial Plan** : https://docs.google.com/document/d/1QqzLDletkXFg4AImwJFmtnuPc1e0cuPF3647ZCGJzTY/edit?tab=t.0#heading=h.i3tv2mxf7h7z
+- **Progress Report** : https://docs.google.com/document/d/1Y2GFw5OVA8qR6Pvmf4Iat8glOY2byfNlwOCEWyuxpnI/edit?tab=t.0#heading=h.aafu4y4mcm30
 
 The communication in discord can be seen in these examples : 
 ![image](https://github.com/user-attachments/assets/37185533-14eb-48c3-9caa-c59c72289443)
