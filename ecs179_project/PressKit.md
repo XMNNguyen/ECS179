@@ -8,7 +8,7 @@
 
 ------
 
-Release Date : *In Development*
+Release Date : 12/13/2024
 
 Price : Free 
 
