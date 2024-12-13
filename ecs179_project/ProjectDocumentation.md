@@ -23,9 +23,7 @@ Much of the scheduling responsibilities were a coordinated effort involving all 
 The communication in discord can be seen in these examples : 
 ![image](https://github.com/user-attachments/assets/37185533-14eb-48c3-9caa-c59c72289443)
 ![image](https://github.com/user-attachments/assets/cc71b1ee-6fe3-4d64-8f0b-4a07e38ea5b2)
-![image](https://github.com/user-attachments/assets/a993651b-46a1-424a-a5ac-5d5616037ff7)
 ![image](https://github.com/user-attachments/assets/8534a9d0-5ba4-4635-8ca9-2315ca2f76ed)
-
 
 We used a clickup list to clearly display the goals set at the progress report meeting (Martin's idea). Contributions to the repository were done methodically and one at a time to ensure there were no conflicts between the work done by different group members. We also divided the work in ways that made collisions less likely. We never had to deal with any issues within the repository. 
 - ClickUp : https://app.clickup.com/9011732114/v/l/li/901107402691
