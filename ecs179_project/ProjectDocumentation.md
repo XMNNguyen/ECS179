@@ -18,6 +18,17 @@
 
 ## Game Logic - Martin Nguyen
 
+Note: Even though this was my main role, there were some aspects of game logic that everyone worked on together.
+
+### Enemy Logic
+
+### Weapon Logic
+
+### Isometric Tile Logic
+
+### Leveling Logic
+
+
 ## Animation and Visuals - Charlie Edwards
 
 ## User Interface and Input - Jason Gao
@@ -45,6 +56,12 @@ I originally had a lot of apprehension with this role as I don't have much exper
 - I wanted the trailer to have a somewhat ominous feel to match the idea that the Necromancer isn't necessarily a good guy. He is on a quest to bring Lucky back to life by any means necessary, including harvesting souls of the innovent. I found some spooky dark music to play in the background. It starts slow with the audio lower and builds up throughout the trailer. I tried to capture the idea that the Necromancer is an imposing character, collecting souls to become more powerful. The largest unbroken chunk of the trailer is the gameplay footage showing off what the enemies look like, how the attacks function, and what someone can expect when playing Necromancer's Burden. Then it fades out utilizing empty black screens and emphasizing the goal of bringing Lucky back. The audio volumne increases and syncs with the music to reveal the game title Necromacner's Burden at the end. The trailer is simple but gets across the main feelings intended to be included in the game.
 
 ## Game Feel - Martin Nguyen
+
+### Hit Satisfaction
+
+### Game Balance
+
+### Visual Clutter Balance
 
 ## Narrative Design - Charlie Edwards
 
