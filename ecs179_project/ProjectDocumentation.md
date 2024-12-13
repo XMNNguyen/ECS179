@@ -26,9 +26,11 @@ Original Plan :
 ![image](https://github.com/user-attachments/assets/058798a5-80a5-4c66-acb1-c8de86df6051)
 
 Adjusted goals during progress report meeting : 
+
 ![image](https://github.com/user-attachments/assets/c3aafc94-6f3c-4e1a-9085-d954935fef09)
 
 The communication in discord can be seen in these examples : 
+
 ![image](https://github.com/user-attachments/assets/37185533-14eb-48c3-9caa-c59c72289443)
 ![image](https://github.com/user-attachments/assets/cc71b1ee-6fe3-4d64-8f0b-4a07e38ea5b2)
 ![image](https://github.com/user-attachments/assets/8534a9d0-5ba4-4635-8ca9-2315ca2f76ed)
