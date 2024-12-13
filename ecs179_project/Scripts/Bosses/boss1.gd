@@ -31,7 +31,6 @@ func _ready() -> void:
 	signals.take_damage.connect(_on_take_damage)
 
 	# base stats
-	_current_health = 1
 	base_speed = 50
 	aggro_range = 250
 	attack_range = 150
