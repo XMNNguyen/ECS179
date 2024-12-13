@@ -20,6 +20,13 @@ Much of the scheduling responsibilities were a coordinated effort involving all 
 - **Initial Plan** : https://docs.google.com/document/d/1QqzLDletkXFg4AImwJFmtnuPc1e0cuPF3647ZCGJzTY/edit?tab=t.0#heading=h.i3tv2mxf7h7z
 - **Progress Report** : https://docs.google.com/document/d/1Y2GFw5OVA8qR6Pvmf4Iat8glOY2byfNlwOCEWyuxpnI/edit?tab=t.0#heading=h.aafu4y4mcm30
 
+Original Plan : 
+![image](https://github.com/user-attachments/assets/05c1cd66-75e7-4a1b-b6a1-0a64f56f9e41)
+![image](https://github.com/user-attachments/assets/058798a5-80a5-4c66-acb1-c8de86df6051)
+
+Adjusted goals during progress report meeting : 
+![image](https://github.com/user-attachments/assets/c3aafc94-6f3c-4e1a-9085-d954935fef09)
+
 The communication in discord can be seen in these examples : 
 ![image](https://github.com/user-attachments/assets/37185533-14eb-48c3-9caa-c59c72289443)
 ![image](https://github.com/user-attachments/assets/cc71b1ee-6fe3-4d64-8f0b-4a07e38ea5b2)
