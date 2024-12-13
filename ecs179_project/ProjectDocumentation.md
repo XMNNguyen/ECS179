@@ -28,7 +28,9 @@ The communication in discord can be seen in these examples :
 We used a clickup list to clearly display the goals set at the progress report meeting (Martin's idea). Contributions to the repository were done methodically and one at a time to ensure there were no conflicts between the work done by different group members. We also divided the work in ways that made collisions less likely. We never had to deal with any issues within the repository. 
 - **ClickUp** : https://app.clickup.com/9011732114/v/l/li/901107402691
 
-I managed uploading the web playable version of the game on itch.io which can be found at https://braxai.itch.io/necromancers-burden. I worked on the map. Building the level the player would navigate and discussing ideas behind what enemies would be present, where they would be, and how the boss fit into the level. I helped collect asset packs and develop the visual direction the game was going. This included finding the terrain packs, the dog pack, the packs used for the boss and the packs for some of the enemies. 
+I managed uploading the web playable version of the game on itch.io which can be found at https://braxai.itch.io/necromancers-burden. 
+
+I worked on the map. Building the level the player would navigate and discussing ideas behind what enemies would be present, where they would be, and how the boss fit into the level. I helped collect asset packs and develop the visual direction the game was going. This included finding the terrain packs, the dog pack, the packs used for the boss and the packs for some of the enemies. 
 
 ## Game Logic - Martin Nguyen
 
