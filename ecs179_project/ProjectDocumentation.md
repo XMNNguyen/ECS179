@@ -46,13 +46,29 @@ I worked on the map. Building the level the player would navigate and discussing
 
 Note: Even though this was my main role, there were some aspects of game logic that everyone worked on together.
 
+## Game Logic - Martin Nguyen
+
+Note: Even though this was my main role, there were some aspects of game logic that everyone worked on together.
+
 ### Enemy Logic
+|Chicken |Sprout |Troll |
+| :------------: |:------------: |:------------: |
+|![chicken](https://github.com/user-attachments/assets/61ed009e-23bf-4eff-a5c4-31103b173a42) | ![sprout](https://github.com/user-attachments/assets/2d62c025-7d75-483f-beaf-e85b4605751a) |![troll](https://github.com/user-attachments/assets/24ca2a58-6db2-4ff6-8de5-6eb6a6b337b8)|
 
 ### Weapon Logic
 
+|Standard |Shotgun |Wave |Scatter |Chain | 
+| :------------: |:------------: |:------------: | :------------: | :------------: |
+| ![standard_bullet](https://github.com/user-attachments/assets/36c567e6-743e-4093-88ee-e0d4e856ee22) | ![shotgun_bullet](https://github.com/user-attachments/assets/db9f5ff7-ced1-40fc-922b-23f8d040d17c)| ![wave_bullet](https://github.com/user-attachments/assets/92ff47cf-2382-41cc-8d83-414164e14e16) | ![scatter_bullet](https://github.com/user-attachments/assets/5cc0c743-3d08-4a34-b9f9-a4e60f6da317) | ![chain_bullet](https://github.com/user-attachments/assets/ad2ee42a-adb6-4794-acd0-2e0ae1f0fdb7) |
+
 ### Isometric Tile Logic
 
+| Before | After |
+| :------------: |:------------: |
+| ![tile_map_1](https://github.com/user-attachments/assets/ebb86ace-66bd-4edd-944e-4e1f46f6a282) | ![tile_map_3](https://github.com/user-attachments/assets/44cb1e3d-f1b2-44d8-9140-c6730f55077d) | 
+
 ### Leveling Logic
+
 
 
 ## Animation and Visuals - Charlie Edwards
@@ -84,6 +100,10 @@ I originally had a lot of apprehension with this role as I don't have much exper
 ## Game Feel - Martin Nguyen
 
 ### Hit Satisfaction
+
+| Player Hitstun | Enemy Hit | Boss Death |
+| :------------: |:------------: |:------------: |
+| ![hitstun](https://github.com/user-attachments/assets/87f6a16c-21a3-43d1-b8cd-4cd9850c529c) | ![enemy_hit](https://github.com/user-attachments/assets/1fdc4221-895e-47e0-98d6-c7850692a539) | ![boss_death](https://github.com/user-attachments/assets/d3687108-06c2-4db5-babc-a58569d7ff76) |
 
 ### Game Balance
 
