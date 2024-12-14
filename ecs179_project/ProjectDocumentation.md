@@ -97,9 +97,6 @@ Note: Even though this was my main role, there were some aspects of game logic t
 
 - Sign - [Source](https://game-endeavor.itch.io/mystic-woods), Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
 
-
-**Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
-
 ### Game Feel
 
 Note: Other team members also found assets to use. 
@@ -116,11 +113,11 @@ The setting our game is a magical forest filled with a wide range of creatures. 
 
 I helped build the main world and built the island where the introduction cutscene takes place. One issue we noticed during play-testing was that some players had trouble following the linear level to the end. To address this problem we focused on making the scenary, like trees and bushes, better outline the intended path. This dense foliage outlining the path creates an immersive environment that also works toward leading the player in the right direction. 
 
-*Image of dense foliage on outside of path*
+![image](https://github.com/user-attachments/assets/1c650d40-8dd8-46c7-b915-a7a0d419f07a)
 
 I also utilied Godot's particle system to create smoke and energy effects that are used during cutscenes. I wanted to establish that magic was a part of this world early on as the transition into firing magical orbs at the start of the gameplay felt a bit drastic without further context.
 
-*Gif of particle effects*
+|<img width="449" alt="particles1" src="https://github.com/user-attachments/assets/2f673960-88de-40eb-b907-67a036bc273b" />|<img width="574" alt="particles3" src="https://github.com/user-attachments/assets/2a235781-7ac0-408b-8af1-dfa0b83a78c0" />|
 
 ## User Interface and Input - Jason Gao
 
@@ -207,7 +204,7 @@ I utlized the Godot plugin Dialogue Manager to assist with creating dialogue and
 
 Dialogue Manager lets me manage all of the game's dialogue in a single text file, where I can sequentially call dialogue and functions. Once implemented, it gave me a simple, systematic way of implementing new dialogue with the option for branching dialogue. This is done by creating an Actionable node that has a CollisionShape2D as a child. I found this [general tutorial](https://www.youtube.com/watch?v=UhPFk8FSbd8) and this [cutscene tutorial](https://www.youtube.com/watch?v=G_TN8jz4v9o) by the creator of the plugin very useful. Since we do not have any voice acting, I used pictures in the dialogue box to show who is talking.
 
-*picture of dialogue with face pic*
+![dialogue1](https://github.com/user-attachments/assets/7be66754-a455-4856-927c-43ce2c6433d3)
 
 The player is allowed to move during dialogue because some signs, containing dialogue, are placed where enemies may be present; so we decided it was best to always let the player move during dialogue. 
 
@@ -215,7 +212,8 @@ The introduction cutscene gives the context of the game and makes it clear early
 
 I also chose to put an interactable sign right after the first cutscene, at the start of the gameplay, to build ituition in the player to interact with any futures signs they see as interacting with a sign is necessary in order to start the boss fight later.
 
-*pic of first sign*
+<img width="400" alt="first sign1" src="https://github.com/user-attachments/assets/a1c6e126-10e5-4bf6-9b75-715a8b82cb1d" />
+
 
 This first sign just has a simple beware of enemies message that serves to warn the player of future enemies, but mainly is there to make the player want to interact with signs. The second sign is found right before the boss fight and while disguised as just another warning sign, starts the boss fight.
 
