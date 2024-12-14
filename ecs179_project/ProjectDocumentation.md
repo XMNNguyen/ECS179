@@ -2,9 +2,17 @@
 
 ## Summary ##
 
+Necromancer's Burden is a roguelike action game where the player controls a Necromancer who's dog Lucky has just died of old age. The Necromancer has the dark intention of collecting the souls of the innocent in the hope of becoming powerful enough to collect the components required to bring Lucky back.
+
+Defeat various enemies to collect their souls and become more powerful. Unlock new abilities to aid when exploring the world and confronting challenging bosses. Embark on a dangerous and certainly not justified murder rampage so Lucky can bark once again!
+
 ## Resources
 
 ## Gameplay Explanation ##
+
+Necromancer's Burden is a roguelike action game where the player can play through a forest themed level. The player starts on an island and can interact with Lucky by pressing spacebar. After this the player can work their way through the forest defeating various enemies along the way. Control the necromancer with WASD movement controls and interact with signs by pressing spacebar. Attacks are unlocked as you collect souls from the enemies you defeat. Once attacks are unlocked they wil be shown at the bottom of the screen along with a cooldown to indicate when they will trigger next which is done entirely automatically requiring no input from the player. 
+
+Chickens and Trolls have charge attacks. The flying sprout enemies have a ranged attack. When a player is hit there is some screenshake to indicate you have taken damage. When an enemy is hit there are some blood particles and audio effects indicating this has happened. Occassionaly enemies will drop red orbs that can be picked up to regenerate health. At the end of the forest is a sign that can be interacte with using spacebar to start the boss encounter. The boss has ranged attacks that restrict player movement if you are hit in addition to hoardes of enemies at his side. 
 
 # Main Roles #
 
@@ -41,10 +49,6 @@ We used a clickup list to clearly display the goals set at the progress report m
 I managed uploading the web playable version of the game on itch.io which can be found at https://braxai.itch.io/necromancers-burden. 
 
 I worked on the map. Building the level the player would navigate and discussing ideas behind what enemies would be present, where they would be, and how the boss fit into the level. I helped collect asset packs and develop the visual direction the game was going. This included finding the terrain packs, the dog pack, the packs used for the boss and the packs for some of the enemies. 
-
-## Game Logic - Martin Nguyen
-
-Note: Even though this was my main role, there were some aspects of game logic that everyone worked on together.
 
 ## Game Logic - Martin Nguyen
 
