@@ -35,3 +35,14 @@ func _on_start_menu_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_credits_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Credits.tscn")
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Starting_Menu.tscn")
+
+
+func _on_back_pressed_credit() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Victory.tscn")

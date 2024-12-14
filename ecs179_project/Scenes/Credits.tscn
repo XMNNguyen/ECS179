@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://duibph1oo8h4"]
+
+[ext_resource type="Script" path="res://Scripts/starting_menu.gd" id="1_kbssm"]
+[ext_resource type="Texture2D" uid="uid://cxhc415ell1kf" path="res://Assets/Credit_Screen.jpg" id="1_p3ymy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ux2u6"]
+texture = ExtResource("1_p3ymy")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t2pug"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ep6oh"]
+bg_color = Color(0.571397, 0.150307, 0.169373, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfjw3"]
+bg_color = Color(0.44523, 0.107625, 0.123315, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfofv"]
+bg_color = Color(0.460037, 0.239014, 0.257279, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_size = 9
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kbssm")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ux2u6")
+
+[node name="Back" type="Button" parent="."]
+offset_left = 23.0
+offset_top = 546.0
+offset_right = 130.0
+offset_bottom = 616.0
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t2pug")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ep6oh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hfjw3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bfofv")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed_credit"]

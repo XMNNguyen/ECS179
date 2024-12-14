@@ -1915,16 +1915,16 @@ grow_vertical = 0
 theme_override_constants/separation = 21
 script = ExtResource("9_ht573")
 
-[node name="TextureButton" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+[node name="Skill_1" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
 layout_mode = 2
 
-[node name="TextureButton2" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+[node name="Skill_2" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
 layout_mode = 2
 
-[node name="TextureButton3" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+[node name="Skill_3" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
 layout_mode = 2
 
-[node name="TextureButton4" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
+[node name="Skill_4" parent="CanvasLayer2/Skills" instance=ExtResource("9_rtbl1")]
 layout_mode = 2
 
 [node name="Boss" parent="." groups=["Enemies"] instance=ExtResource("9_ewm30")]
