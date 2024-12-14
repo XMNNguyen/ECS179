@@ -54,26 +54,150 @@ I worked on the map. Building the level the player would navigate and discussing
 
 Note: Even though this was my main role, there were some aspects of game logic that everyone worked on together.
 
-### Enemy Logic
-|Chicken |Sprout |Troll |
-| :------------: |:------------: |:------------: |
-|![chicken](https://github.com/user-attachments/assets/61ed009e-23bf-4eff-a5c4-31103b173a42) | ![sprout](https://github.com/user-attachments/assets/2d62c025-7d75-483f-beaf-e85b4605751a) |![troll](https://github.com/user-attachments/assets/24ca2a58-6db2-4ff6-8de5-6eb6a6b337b8)|
-
-### Weapon Logic
-
-|Standard |Shotgun |Wave |Scatter |Chain | 
-| :------------: |:------------: |:------------: | :------------: | :------------: |
-| ![standard_bullet](https://github.com/user-attachments/assets/36c567e6-743e-4093-88ee-e0d4e856ee22) | ![shotgun_bullet](https://github.com/user-attachments/assets/db9f5ff7-ced1-40fc-922b-23f8d040d17c)| ![wave_bullet](https://github.com/user-attachments/assets/92ff47cf-2382-41cc-8d83-414164e14e16) | ![scatter_bullet](https://github.com/user-attachments/assets/5cc0c743-3d08-4a34-b9f9-a4e60f6da317) | ![chain_bullet](https://github.com/user-attachments/assets/ad2ee42a-adb6-4794-acd0-2e0ae1f0fdb7) |
-
 ### Isometric Tile Logic
+
+Since we were implementing an isometric game using a 2D Godot scene, isometric movement/logic needed to created from scratch. In order to implement isometric movement, we needed to add the illusion of the world being 3D. I sectioned this off into 2 main parts.
+
+1. Moving on slopes
+
+One of the first things I did while implementing slope movement was classify all of the slope tiles based on the direction they are facing. This can be seen
+[here in tile_map.gd. ](https://github.com/XMNNguyen/ECS179/blob/95dcc2b0a58341a5020da4d386e76533cbe942f1/ecs179_project/Scripts/tile_map.gd#L31)
+Afterwards, I implemented the different ways that a player can move up a slope based on type. 
+
+The first main type is a slope going directly verticle. To give the illusion of moving on the y axis, all I did was apply a slowdown whenever the player moved up or down making it look like the player is actually climbing a hill instead of moving on a flat plain.
+
+The 2nd main type is a slope with some form of horizontal movement. Just like with the verticle movement, I applied a slowdown whenever the player is moving "up" a slope. For each of the slope types, to create illusion of moving on the slope I needed to apply a y-bias on the character's velocity.y in order to move up a hill. For example lets say we are moving horizontally on a slope tile that is moving up and to the right. Technically if we were to look at it through the character's eyes in 3D, they are moving diagonally up a hill. There are varying y-bias values based on if we are moving on a diagonal slope, horizontal slope, and if we are moving either up or down the slope. However, there is still a bug regarding y_sort in my implementation. Whenever we try to move up a slope that is behind another tile, it looks really janky since the player clips throught the floor and pops up on top of the hill. This is definitely something I would've liked to fix if time permitted, but I decided to focus more on the core gameplay first since I believed polishing that was more important.
+
+This logic can be seen in the 
+[move_on_slope method in player.gd, enemy.gd, or boss.gd.](https://github.com/XMNNguyen/ECS179/blob/95dcc2b0a58341a5020da4d386e76533cbe942f1/ecs179_project/Scripts/player.gd#L374)
+
+2. Distinguishing layers
+
+Basically, since we are using a layering system for our tileset, we need a way for our characters to change layers whenever they move to a new one. Without this, our characters will stay on the same layer and basically be able to glide through layers that are above. 
+
+In order to accomplish this, the first thing I made was a method to change a character's z_index, which can be seen
+[here in the adjust_z_index method in player.gd, enemy.gd, or boss.gd;](https://github.com/XMNNguyen/ECS179/blob/95dcc2b0a58341a5020da4d386e76533cbe942f1/ecs179_project/Scripts/player.gd#L345)
+Basically whenever this method is called, we check the tile the character is on based on the head's position. It will go through each layer from top to bottom and it will set our character's z_index to be the layer_number + 1 of the 1st block/slope tile type we find. For the player this function is called whenever we first enter and exit a slope tile. For enemies and bosses, we just have it called on every process. This mainly worked since enemies were mostly all small. 
+
+Another thing that is done is that based on the player's layer, we create a custom collision border around the map. Technically, we could just set up collision shapes for each tile, however this leads to way to many combinations of tiles + layers to handle. To make this easier I created a method to handle the logic behind placing the boundery tiles. The first thing I did was create and classify different collision barrier tile types seen
+[here in tile_map.gd. ](https://github.com/XMNNguyen/ECS179/blob/95dcc2b0a58341a5020da4d386e76533cbe942f1/ecs179_project/Scripts/tile_map.gd#L15)
+
+The first thing we check is the floor the player is on. On the floor layer, I iterate through every tile and for each tile, check the adjacent tiles. If any adjacent tiles are an empty tile, place a full sized boundery tile on it. The second thing is to check the current layer the player is on. We iterate through all tiles in the layer and if a block type block is found, check adjacent tiles to see if they are empty. To determine the type of wall barrier tile to place, I use a Vector4 to obtain and store any existing adjacent tiles as seen 
+[here ](https://github.com/XMNNguyen/ECS179/blob/95dcc2b0a58341a5020da4d386e76533cbe942f1/ecs179_project/Scripts/tile_map.gd#L128)
+and with this information, we obtain the atlas coords from the wall_bounderies dictionary using this vector as our key and place the tile.
+The code can be seen
+[here in the setup_boundery method. ](https://github.com/XMNNguyen/ECS179/blob/95dcc2b0a58341a5020da4d386e76533cbe942f1/ecs179_project/Scripts/tile_map.gd#L103)
+Now, whenever a player moves into a new layer, we clear the old boundery tiles and create a new boundery based on what layer the player is on.
+
+Overall, isometric logic came out pretty well.
 
 | Before | After |
 | :------------: |:------------: |
-| ![tile_map_1](https://github.com/user-attachments/assets/ebb86ace-66bd-4edd-944e-4e1f46f6a282) | ![tile_map_3](https://github.com/user-attachments/assets/44cb1e3d-f1b2-44d8-9140-c6730f55077d) | 
+|<img src="https://github.com/user-attachments/assets/ebb86ace-66bd-4edd-944e-4e1f46f6a282" width="300" height="300" /> | <img src="https://github.com/user-attachments/assets/44cb1e3d-f1b2-44d8-9140-c6730f55077d" width = "300" height ="300"/> | 
+
+### Enemy Logic
+All enemies that I created were made with a CharacterBody2D. The first thing I did was create the base Enemy class 
+[found here. ](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Enemies/enemy.gd)
+The base enemy class has all methods needed to move on the isometric map, can die, can have their stats distributed based on level (logic found later in Leveling Logic section), and can drop objects. Our game has 3 main different enemy types.
+
+1. [Chicken](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Enemies/chicken.gd)
+
+The chicken is the most basic enemy type that I created. The main job of this enemy is to only act as a minor obstacle for the players to overcome. The main attack pattern involves,
+- Following the player when aggro is on. Aggro is triggered when the distance between player.global_position and chicken.global_position <= aggro_range
+- Charging at the player when attack is triggered. There is a small period of time where the chicken stands still and when charging, we slowly reduce velocity. The attack ends when velocity is less then 10 in both y and x directions.
+  
+2. [Sprout](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Enemies/sprout.gd)
+
+Just like the chicken, this enemy was designed to be a very basic enemy type. This enemy is meant to be a ranged type enemy that fires small pellets at the player. The main attack pattern involves,
+- Following the player when aggro is on. Same logic as before.
+- Stopping and start firing at the player when attack is triggered. I decided to make the shooting attached to the firing animation instead of a traditional cooldown with a timer. This way, the firing animation and the actual firing of the bullet is always in sync.
+  
+3. [Troll](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Enemies/troll.gd) 
+
+The troll is meant to be a slightly larger obstacle for the players to deal with. To achieve this, I made the attack pattern exactly the same as the chicken's attack pattern, but with an added stun when the player is hit. The main attack pattern involves,
+- Following the player when aggro is on same as before.
+- Charging at the player when attack is triggered. Same logic as chicken.
+- When hitting the player, initiate a stun on the player and have the troll hug the player. To determine stun length, a timer is created which is then forwarded to the player using a signal as seen
+[here in the stun method](https://github.com/XMNNguyen/ECS179/blob/619aba6051a728cd3dd510c0312a0aabe96c647d/ecs179_project/Scripts/Enemies/troll.gd#L140)
+When player is stunned, they are not allowed to fire or move.
+
+|Chicken |Sprout |Troll |
+| :------------: |:------------: |:------------: |
+|<img src="https://github.com/user-attachments/assets/61ed009e-23bf-4eff-a5c4-31103b173a42" width = "300" height ="250"/> | <img src="https://github.com/user-attachments/assets/2d62c025-7d75-483f-beaf-e85b4605751a" width = "300" height ="250"/> | <img src="https://github.com/user-attachments/assets/24ca2a58-6db2-4ff6-8de5-6eb6a6b337b8" width = "300" height ="250"/>|
+
+### Spawner logic
+
+For spawners, because we went with a linear style of game, I decided to make the enemy spawner a placeable object. Basically a spawner has a random set of enemies that can spawn from them. When the player is in range and it is off cooldown, it will spawn a set number of enemies within the spawn area. 
+
+The [spawn logic](https://github.com/XMNNguyen/ECS179/blob/219c6ff7f2aa607a5b7fe5579ab086922b8a96c3/ecs179_project/Scripts/spawner.gd#L43) 
+is the following:
+1. Get a random enemy scene path from enemy_types[] and then load it as an enemy.
+2. Assign the enemy a level based on spawner level and then call assign_stats to randomly distribute the enemy stat points
+3. Get a valid spawn location based on if the enemy is within spawn range, not on an empty tile, and not on top of the player and place them there 
+
+### Weapon Logic
+
+For our weapon, our player is able to unlock and fire various different types of bullets. Whenever the 
+[fire method](https://github.com/XMNNguyen/ECS179/blob/a16a79008af77f4103f4b34434faf031295457b3/ecs179_project/Scripts/player.gd#L198)
+is called, the player will try to fire each of the different types of bullets and bullets are only fired if they are unlocked and the bullet is off cooldown. The weapon will automatically fire bullets based on the closest enemy to the player. To determine the closest enemy, we have to iterate through all nodes within the "Enemies" group and check their positions compared to the player's position. This can be seen 
+[here in the get_closest_enemy_position method](https://github.com/XMNNguyen/ECS179/blob/a16a79008af77f4103f4b34434faf031295457b3/ecs179_project/Scripts/player.gd#L179)
+There are 5 main types of bullets
+
+1. [Standard Bullet](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Attacks/standard_bullet.gd)
+
+[**Base Stats**](https://github.com/XMNNguyen/ECS179/blob/2f9af55c9d96b8494b98b073140d522b0ef886c8/ecs179_project/Scripts/player.gd#L20)
+
+This is the base weapon for our player. When fired, a single bullet will come out and then go in the direction of the closest enemy. It will do damage on contact with the enemy's hurtBox.
+  
+2. [Shotgun Bullet](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Attacks/shotgun_bullet.gd)
+
+[**Base Stats**](https://github.com/XMNNguyen/ECS179/blob/2f9af55c9d96b8494b98b073140d522b0ef886c8/ecs179_project/Scripts/player.gd#L33)
+
+This is the 2nd weapon that the player will unlock. When fired, it will fire a volley of bullets towards the nearest enemy. 
+
+To determine each bullet's firing direction, I went with an iterative approach where I iterate through each bullet and even spread them throughout an angle. First we determine the current angle for our bullet, this is calculated by dividing the angle by the number of bullets and then multiplying it by our current bullet number. This is added to the current firing directionn angle. We then need to rotate the bullet angle by angle / 2. If we do not rotate the angle, our shotgun would be firing 1 bullet in the firing direction, and then the rest of the bullets will fan out all in the same direction instead of having the center of the fan be our firing direction.
+
+This code can be seen
+[here in fire_shotgun](https://github.com/XMNNguyen/ECS179/blob/718d8775caa66c48ed5cba3c95c274b95ab08708/ecs179_project/Scripts/player.gd#L252)
+  
+3. [Wave Bullet](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Attacks/wave_bullet.gd)
+
+[**Base Stats**](https://github.com/XMNNguyen/ECS179/blob/2f9af55c9d96b8494b98b073140d522b0ef886c8/ecs179_project/Scripts/player.gd#L27)
+
+This is a melee AOE style of bullet. Basically, we fire 4 different instances of our wave bullet in each cardinal direction. This attack follows the player and can pierce enemies as well. This is the only bullet that doesn't change firing direction based on the closest enemy and instead is based on player position. It is one of the stronger aoe abilities that the player has, but because of its melee nature, there is a huge risk and reward for trying to hit enemies with this ability.
+
+The fire implementation can be seen
+[here in fire_wave](https://github.com/XMNNguyen/ECS179/blob/718d8775caa66c48ed5cba3c95c274b95ab08708/ecs179_project/Scripts/player.gd#L285)
+   
+4. [Scatter Bullet](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Attacks/scatter_bullet.gd)
+
+[**Base Stats**](https://github.com/XMNNguyen/ECS179/blob/2f9af55c9d96b8494b98b073140d522b0ef886c8/ecs179_project/Scripts/player.gd#L40)
+
+This is a grenade style of bullet that on hit, will fire multiple bullets in a 360 degree angle. The spread logic is the exact same as the shotgun bullet. Basically, we first fire a bullet with the will_scatter flag turned on. When this flag is on, on hitting an enemy, it will fire a number of scatter bullets in a 360 degree angle whith the will_scatter flag turned off. This algorithm can be seen
+[here](https://github.com/XMNNguyen/ECS179/blob/38ee1b84ba4aba6d4b6cdd680bd01cf080555301/ecs179_project/Scripts/Attacks/scatter_bullet.gd#L51)
+This is meant to be a more safer AOE alternative to the wave_bullet since it is ranged and can hit many enemies. Multiple bullets can hit the same enemy as well doing some massive single target damage.
+   
+5. [Chain Bullet](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Attacks/chain_bullet.gd)
+
+[**Base Stats**](https://github.com/XMNNguyen/ECS179/blob/2f9af55c9d96b8494b98b073140d522b0ef886c8/ecs179_project/Scripts/player.gd#L45)
+
+This is the final ability that the player can unlock and acts similarly to a chain lightning attack. I was inspired by 
+[Diablo 2's Chain Lightning ability.](https://diablo.fandom.com/wiki/Chain_Lightning_(Diablo_II))
+Basically when the bullet initially hits, it will do an instance of damage and then bounce mode is turned on. On each bounce, it will calculate the closest enemy position to the bullet. If it is within bounce range, the bullet rapidly travels to the enemy. If the bullet is not within bounce range, it will stick to the current target. Once the number of bounces exeeds num_bounces, we kill off the instance of our bullet. This logic can be seen
+[here in the bounce method and _on_hit_box_area_entered method.](https://github.com/XMNNguyen/ECS179/blob/38ee1b84ba4aba6d4b6cdd680bd01cf080555301/ecs179_project/Scripts/Attacks/chain_bullet.gd#L67)
+
+|Standard |Shotgun |Wave |Scatter |Chain | 
+| :------------: |:------------: |:------------: | :------------: | :------------: |
+| <img src="https://github.com/user-attachments/assets/36c567e6-743e-4093-88ee-e0d4e856ee22" width = "300" height ="300"/> | <img src="https://github.com/user-attachments/assets/db9f5ff7-ced1-40fc-922b-23f8d040d17c" width = "300" height ="300"/> | <img src="https://github.com/user-attachments/assets/92ff47cf-2382-41cc-8d83-414164e14e16" width = "300" height ="300"/> | <img src="https://github.com/user-attachments/assets/5cc0c743-3d08-4a34-b9f9-a4e60f6da317" width = "300" height ="300"/> | <img src="https://github.com/user-attachments/assets/ad2ee42a-adb6-4794-acd0-2e0ae1f0fdb7" width = "300" height ="300"/> |
 
 ### Leveling Logic
 
+Orginally, we wanted to make a traditional leveling system where on level up, the player can select from a random set oof various different stat upgrades and powerups. However, we realized that we needed to scale down the game in order to meet the deadline. So for player leveling, we went with creating a psuedo leveling system with the weapons that were already made. Basically, as the player collects more souls, after certain threshholds, they will unlock a new ability. With this, it allowed us to focus on polishing the other aspects of our game.
 
+We also gave enemies a hidden leveling system. By doing this, it allowed us to have a tool to increase the difficulty as players went through the level. Basically, for every level an enemy has, it gives them 1 stat point they can stand. For each stat point, we randomly allocate it into max_health, base_damage, or base_speed.
+
+This can be seen
+[here in enemy.gd](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Enemies/enemy.gd)
 
 ## Animation and Visuals - Charlie Edwards
 
