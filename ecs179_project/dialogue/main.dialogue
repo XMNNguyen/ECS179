@@ -12,7 +12,7 @@ Lucky: Woof!?
 do lucky.create_smoke()
 do wait(1)
 do lucky.become_invisible()
-Necromancer: Noooo!! I my Lucky!
+Necromancer: Noooo!! My Lucky!
 Boss: Mwahahaha!!
 do cutsceneBoss.create_smoke()
 do wait(1)
