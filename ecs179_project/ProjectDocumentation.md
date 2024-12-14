@@ -285,13 +285,18 @@ Much like the Player Hearts, the graphics for the ability cooldowns are also in 
 
 
 ## Movement - Physics - Cyrus Azad
-Note: Even though this was my main role, there were aspects that everyone worked together on. 
+Note: Even though this was my main role, the rest of the group also helped implement some of the processes.
 
+## Player Movement:
 The movement and physics in our game are very simple. The player is given 8 directional movement using the WASD keyboard keys, using the standard Godot movement systems of velocity and move_and_slide() in order to implement this. We had to make functions for the player to be able to move over a slope smoothly, which was done by finding the tile data and adding a movement bias based on the input direction of the player and the type of slope they were on. We also added a helper function adjust_z_index to help keep the player walking on the surface instead of walking through the slopes and disappearing. 
 
+## Enemy Movement/Attacks:
 The enemy movement was implemented the same way, except instead of inputting directions the enemies locked on to and followed the player once the player was in range. We used vectors in order to calculate the direction of the player in reference to the given enemy so that the enemy knew which direction to move and/or attack. We also implemented different attacks for each enemy. Every time the player gets hit by an enemy attack, there is a stunlock where the movement of all enemies and players pauses, and there is an audio queue and camera shake in order to signify to the player that they took damage. The chicken starts a wind up timer once in attack range, and then launches it’s body at the player’s current position as a charge peck attack towards the player at a very increased velocity. The sprout fires a projectile at a given bullet_velocity in the direction of the player. For the troll, we made their attack very similar to the chicken with a wind up and charge, however when the troll hits the player it grabs them, stunning the player for a time given by the stun_timer. We made a signal to show the player that they are stunned and made the player have to be idle until the stun_timer is over. The boss attack is the same as the sprout’s in its movement and physics, but with different animation and stronger stats. 
 
+## Player Abilities:
+
 We also implemented different attacks with different physics mechanics. The base standard bullet simply fires a projectile at the nearest enemy. The shotgun weapon finds the nearest enemy, and then converts a given shotgun angle into radians, with the center of the angle being the location of the nearest enemy. It then divides the angle into different sections based on how many shotgun bullets there are, and fires the bullets in a spread shot within the angle given. The wave bullet is more of a pulse, as it uses vectors to send a short range wave of energy in each diagonal direction of the player, not accounting for enemy position at all. The chain bullet was very interesting to implement, as it shoots a bullet at the nearest enemy similar to the standard bullet, but then once an enemy is hit, it uses the enemy’s global position to find the next nearest enemy, and calculates if it is within a range of bounce_distance. If the enemy is within the range, the bullet then bounces and hits that next enemy, and then repeats for a given number of bounces. 
+
 
 
 # Sub Roles #
@@ -406,3 +411,23 @@ Player_Projectile:https://uppbeat.io/sfx/futuristic-gun-pulse-blaster/4931/19131
 Chicken_Attack:https://pixabay.com/es/sound-effects/chicken-noise-228106/
 
 ## Gameplay Testing - Cyrus Azad
+
+https://docs.google.com/spreadsheets/d/1X2j1hcNl1cKqkbSP1UwaEB2jO-dW82fZK-mUiMTT_Zk/edit?gid=616130533#gid=616130533 
+
+Here are the results of the gameplay tests. Throughout the tests it became clear that the flaws that we did have in our game were a bit troublesome. One of the main flaws was the map, as we did not make a direct path within the map for the player to follow. This led to some of the players walking around aimlessly for a while before I told them where they needed to go. Upon learning this, we made the map much more intuitive with the trees working as a wall guide. There is also a sign at the end that you need to interact with in order to trigger the boss battle. Many of the players did not know what that sign did or that they had to interact with the sign in order to get to the boss battle. 
+
+Some of the other issues mentioned included:
+Grammatical mistakes in dialogue
+Balancing the enemies/boss abilities
+Cooldown timers were too small to read
+There weren’t indicators for when the player unlocks a new ability
+
+It was also very interesting to see the different feedback between testers who played games a lot and those who did not. Watching these testers was quite fun, as the panic and frustration of the players who had not played many roguelike games before was entertaining, whereas the experienced players were more curious about each of the mechanics and specifics rather than just surviving. Many of the testers who played a lot of games focused on critiquing specific gameplay mechanics or aspects of the game, whereas people who did not play as much focused on quality of life changes that would make the game more fun for themselves personally. 
+
+Some of the aspects we could improve further would be:
+Make an easier mode for players who are less experienced so they can enjoy the game more
+Make more dialogue points so that the player is guided much easier
+Make a pause and restart feature
+Make a information page that goes over the player and enemy abilities 
+Expand the map more and make more miniature objectives on the way to the boss
+
