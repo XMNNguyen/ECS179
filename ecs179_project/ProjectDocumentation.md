@@ -73,6 +73,55 @@ Note: Even though this was my main role, there were some aspects of game logic t
 
 ## Animation and Visuals - Charlie Edwards
 
+****Assets Used****
+
+- Necromancer - [Source](https://thestoryteller01.wordpress.com/2015/01/02/skeleton-sprites-6-for-rpg-maker-xp/), Creative Commons Attribution 4.0 International License (CC BY 4.0) with credit to Enterbrain, Ice-Ax and Sebastien Bini
+
+- Dog (Lucky) - [Source, Modern Interior Pack](https://aurora-sprites.wixsite.com/main/sets?lang=en), CC BY-NC 4.0
+
+- Trolls - [Source](https://opengameart.org/node/78138), Creative Commons Attribution (CC BY) version 3.0
+
+- Chickens - [Source](https://opengameart.org/node/11629), Attributed to Daniel Eddeland
+
+- Sprout - [Source](https://chiecola.itch.io/won-won-drone), Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+
+- Boss - [Source](https://opengameart.org/content/bosses-and-monsters-spritesheets-ars-notoria), Creative Commons Attribution (CC BY) version 3.0 with credit to Stephen Challener (Redshrike)
+
+- Projectiles - [Source](https://bdragon1727.itch.io/free-effect-and-bullet-16x16), Free to use on non-commercial games
+
+- Tileset - [Source](https://opengameart.org/content/isometric-64x64-outside-tileset), Creative Commons Attribution 4.0 International License (CC BY 4.0) with credit to Yar
+
+- Hearts - [Source](https://pixel-boy.itch.io/ninja-adventure-asset-pack), Creative Commons Zero (CC0) 
+
+- Potions - [Source](https://opengameart.org/content/potion-bottles), Creative Commons Zero (CC0)
+
+- Sign - [Source](https://game-endeavor.itch.io/mystic-woods), Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+
+**Describe how your work intersects with game feel, graphic design, and world-building. Include your visual style guide if one exists.**
+
+### Game Feel
+
+Note: Other team members also found assets to use. 
+
+To establish a cohesive game feel, we selected assets from free resources that harmonize stylistically, maintaining a consistent level of detail as best as we could. Since our game can have many enemies and projectiles on screen at once, it was important to choose enemies and projectiles that could be quickly and clearly seen to keep the game feeling fair. This meant enemies needed to have distinct silohettes and colors while still fiting with the visual style. 
+
+### Visual Style
+
+We decided early on in development that we did not want this game to take itself too seriously, which we wanted to reflect in the visual style. This also worked in our favor while working with free assets as assets that slightly clashed with one another only added to the this goal of a not super serious game. 
+
+The setting our game is a magical forest filled with a wide range of creatures. The main visual style was built around the tilemap that we found early on into development. All characters and items found throughout the game were selected with the tilemap in mind.  We initally planned on adding different environments, keeping the same style while introducing new textures, but due to time limitations we settled on the single environment. 
+
+### World Building
+
+I helped build the main world and built the island where the introduction cutscene takes place. One issue we noticed during play-testing was that some players had trouble following the linear level to the end. To address this problem we focused on making the scenary, like trees and bushes, better outline the intended path. This dense foliage outlining the path creates an immersive environment that also works toward leading the player in the right direction. 
+
+*Image of dense foliage on outside of path*
+
+I also utilied Godot's particle system to create smoke and energy effects that are used during cutscenes. I wanted to establish that magic was a part of this world early on as the transition into firing magical orbs at the start of the gameplay felt a bit drastic without further context.
+
+*Gif of particle effects*
+
 ## User Interface and Input - Jason Gao
 
 ## Movement - Physics - Cyrus Azad
@@ -118,6 +167,22 @@ I originally had a lot of apprehension with this role as I don't have much exper
 ### Visual Clutter Balance
 
 ## Narrative Design - Charlie Edwards
+
+I utlized the Godot plugin Dialogue Manager to assist with creating dialogue and to have the option for branching dialogue trees. [Source](https://github.com/nathanhoad/godot_dialogue_manager/tree/main), [License](https://github.com/nathanhoad/godot_dialogue_manager/blob/main/LICENSE)
+
+Dialogue Manager lets me manage all of the game's dialogue in a single text file, where I can sequentially call dialogue and functions. Once implemented, it gave me a simple, systematic way of implementing new dialogue with the option for branching dialogue. This is done by creating an Actionable node that has a CollisionShape2D as a child. I found this [general tutorial](https://www.youtube.com/watch?v=UhPFk8FSbd8) and this [cutscene tutorial](https://www.youtube.com/watch?v=G_TN8jz4v9o) by the creator of the plugin very useful. Since we do not have any voice acting, I used pictures in the dialogue box to show who is talking.
+
+*picture of dialogue with face pic*
+
+The player is allowed to move during dialogue because some signs, containing dialogue, are placed where enemies may be present; so we decided it was best to always let the player move during dialogue. 
+
+The introduction cutscene gives the context of the game and makes it clear early on that this is a light-hearted game, not meant to be taken too seriously. The death of the dog, Lucky, establishes the motivation of the Necromancer's rampage and shows how despicably evil the boss is. We wanted something early on in the story to grab the player's attention and utlize most people's love for animals as motivation to complete the game, reuniting the Necromancer and Lucky. 
+
+I also chose to put an interactable sign right after the first cutscene, at the start of the gameplay, to build ituition in the player to interact with any futures signs they see as interacting with a sign is necessary in order to start the boss fight later.
+
+*pic of first sign*
+
+This first sign just has a simple beware of enemies message that serves to warn the player of future enemies, but mainly is there to make the player want to interact with signs. The second sign is found right before the boss fight and while disguised as just another warning sign, starts the boss fight.
 
 ## Audio - Jason Gao
 
