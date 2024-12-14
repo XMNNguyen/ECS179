@@ -495,7 +495,7 @@ func _on_take_damage(damage : float) -> void:
 	
 	# take away health
 	health -= damage
-	if health < 0: # Making sure that health doesn't go negative
+	if health <= 0: # Making sure that health doesn't go negative
 		health = 0
 		Audio.death.play()
 		get_tree().change_scene_to_file("res://Scenes/Death_Page.tscn")

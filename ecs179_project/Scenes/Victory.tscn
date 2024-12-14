@@ -89,9 +89,9 @@ vertical_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 422.0
-offset_top = 433.0
+offset_top = 421.0
 offset_right = 734.0
-offset_bottom = 636.0
+offset_bottom = 639.0
 
 [node name="Start_Menu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -101,6 +101,16 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_673xu")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_56pt3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_s81n8")
 text = "Start Menu"
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+theme_override_styles/focus = SubResource("StyleBoxEmpty_668dy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pwph6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_i1qm1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7edeh")
+text = "Credits
+"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -112,4 +122,5 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7edeh")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/Start_Menu" to="." method="_on_start_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -9,7 +9,7 @@
 [sub_resource type="Shortcut" id="Shortcut_6yiyu"]
 events = [SubResource("InputEventKey_ig5x5")]
 
-[node name="TextureButton" type="TextureButton"]
+[node name="Skills" type="TextureButton"]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 100.0
 offset_bottom = 100.0

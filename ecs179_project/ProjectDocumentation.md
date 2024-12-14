@@ -124,6 +124,41 @@ I also utilied Godot's particle system to create smoke and energy effects that a
 
 ## User Interface and Input - Jason Gao
 
+Inputs:
+
+-WASD for movement
+
+-(space) to interact
+
+-Mouse right click for interactions for press() in home screen, control screen, death screen and credits screen.
+
+Starting, Controls, Death, and Credits Screen:
+
+In all of these scenes, they use the same button graphic and functionality. The background of these scenes were photoshopped and implemented using the panel node in godot.
+
+![image](https://github.com/XMNNguyen/ECS179/blob/18aee89737581bd5729f492e1759206b0f40f1c6/ecs179_project/READMEassets/Start_Screen.jpg)
+
+Player Hearts:
+
+The player has 8 hearts and has indices of 0.5, which totals to 16 health. Every time the health is at an odd number, it will display a half heart. The hearts are contained in a HBoxContainer so that each heart can be equally indented and individually customized by updating each individual child(each heart by frames in the sprite sheet) with indexes. This acts as a way to identify how much health is left. 
+
+![image](https://github.com/XMNNguyen/ECS179/blob/18aee89737581bd5729f492e1759206b0f40f1c6/ecs179_project/READMEassets/Hearts_UI.jpg)
+
+Souls Counter:
+
+The soul is made by using a label node and an AnimatedSprite2D within a CanvasLayer. The label has a script that shows the amount of souls collected by getting the global script of souls_counter. This Graphic is used to determine how many souls you have collected, and how much you need to get the next ability.
+
+![image](https://github.com/XMNNguyen/ECS179/blob/e883c44724cae16ea60c7550d9beeca014232ccb/ecs179_project/READMEassets/Souls.jpg)
+![image](https://github.com/XMNNguyen/ECS179/blob/e883c44724cae16ea60c7550d9beeca014232ccb/ecs179_project/READMEassets/Souls_2.jpg)
+
+Ability Cooldowns:
+
+Much like the Player Hearts, the graphics for the ability cooldowns are also in a HBoxContainer, and each ability’s cooldown and graphic are updated through the indices of children. This is to help the player know when certain abilities are up to auto fire, so that it can be used for desired purposes, such as getting close to the boss when the shotgun ability is going to be up.
+
+![image](https://github.com/XMNNguyen/ECS179/blob/e883c44724cae16ea60c7550d9beeca014232ccb/ecs179_project/READMEassets/Abilities_UI.jpg)
+![image](https://github.com/XMNNguyen/ECS179/blob/e883c44724cae16ea60c7550d9beeca014232ccb/ecs179_project/READMEassets/Abilities_UI_2.jpg)
+
+
 ## Movement - Physics - Cyrus Azad
 Note: Even though this was my main role, there were aspects that everyone worked together on. 
 
@@ -185,5 +220,19 @@ I also chose to put an interactable sign right after the first cutscene, at the 
 This first sign just has a simple beware of enemies message that serves to warn the player of future enemies, but mainly is there to make the player want to interact with signs. The second sign is found right before the boss fight and while disguised as just another warning sign, starts the boss fight.
 
 ## Audio - Jason Gao
+
+For the audio, I made a scene that contains all of the audio used and set it as auto load, that way the audio can be accessed anywhere throughout the scripts. For most of the audio I found online, I had edited it in Audacity to fit the run time and how it fits with the gameplay. The sound style is made with a bit of realism, where the sound changes depending on what terrain type you are on. This is implemented by creating custom data in the tile map, where the water tiles and ground tiles are identified as different integers. There are sfx where the enemy and player shoots, also when they get hit, making it more engaging and interactive.
+
+Death:https://pixabay.com/sound-effects/bone-break-sound-269658/
+
+Walk_Grass:https://pixabay.com/sound-effects/rustling-grass-4-101281/
+
+Walk_Water:https://www.soundeffectsplus.com/product/footsteps-walking-in-water-slow-01/
+
+Sprout_Attack:https://uppbeat.io/sfx/magic-spell-sparkle-blast/8696/22666
+
+Player_Projectile:https://uppbeat.io/sfx/futuristic-gun-pulse-blaster/4931/19131
+
+Chicken_Attack:https://pixabay.com/es/sound-effects/chicken-noise-228106/
 
 ## Gameplay Testing - Cyrus Azad

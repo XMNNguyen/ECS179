@@ -6,9 +6,9 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3e6w5"]
 texture = ExtResource("2_5l7y1")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mevup"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywv7c"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptuls"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6g7t6"]
 bg_color = Color(0.571397, 0.150307, 0.169373, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
@@ -16,7 +16,7 @@ corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 shadow_size = 9
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn7nk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kgkh"]
 bg_color = Color(0.44523, 0.107625, 0.123315, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
@@ -24,8 +24,8 @@ corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 shadow_size = 9
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k64ge"]
-bg_color = Color(0.728068, 0.211223, 0.23184, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqjpa"]
+bg_color = Color(0.460037, 0.239014, 0.257279, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -69,10 +69,10 @@ theme_override_constants/separation = 27
 [node name="Back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
-theme_override_styles/focus = SubResource("StyleBoxEmpty_mevup")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ptuls")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qn7nk")
-theme_override_styles/normal = SubResource("StyleBoxFlat_k64ge")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ywv7c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6g7t6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6kgkh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_aqjpa")
 text = "Back"
 
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_button_pressed_back"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
