@@ -127,7 +127,7 @@ When player is stunned, they are not allowed to fire or move.
 
 ### Spawner logic
 
-For spawners, because we went with a linear style of game, I decided to make the enemy spawner a placeable object. Basically a spawner has a random set of enemies that can spawn from them. When the player is in range and it is off cooldown, it will spawn a set number of enemies within the spawn area. 
+For spawners, because we went with a linear style of game, I decided to make the enemy spawner a placeable object. By making the spawner a placeable object, it allows us to scale the levels of enemies to create a difficulty curve. Basically a spawner has a random set of enemies that can spawn from them. When the player is in range and it is off cooldown, it will spawn a set number of enemies within the spawn area. 
 
 The [spawn logic](https://github.com/XMNNguyen/ECS179/blob/219c6ff7f2aa607a5b7fe5579ab086922b8a96c3/ecs179_project/Scripts/spawner.gd#L43) 
 is the following:
@@ -316,7 +316,45 @@ I originally had a lot of apprehension with this role as I don't have much exper
 
 ## Game Feel - Martin Nguyen
 
+### Vampire Survivor Inspiration
+
+Since we wanted the game to be inspired by vampire survivors, we wanted the combat to feel close to vampire survivors as best as possible. There were 2 main decisions.
+
+The first was the auto firing aspect. This allowed us to have multiple weapons without having to increase the skill cap of our game allowing players to always feel extremely powerful no matter the skill level.
+
+The second was always having constant waves of enemies. The way we placed spawners on the map allowed for multiple waves of enemies to come from all different directions. This can create for some very explosive combat.
+
+There is one decision that we made that was different from vampire survivor like games and that is to make our game a linear level instead of time based. The one thing I never liked about rogue likes is the fact that sometimes your build can get extremely messed up due to rng, making you not prepared for any of the bosses. By making our game linear, it allows players to take as much time farming to prepare what they need in order to fight the final boss. They can technically just fight whenver they want like for example speed running straight from the start to the end if they wanted too despite how hard we made the boss fight.
+
+### Drop Collection
+
+This is a very minor thing, but adding drops to our game made collecting exp much more fun. Basically, on death, enemies drop a soul. If the soul is close enough to the player, it will lerp towards the player and on contact, souls are addded to the player's soul count. Another drop are health pickups. I decided to make health pickups drop very frequently. This is because 1, there is no way to upgrade our hp so every point of hp is precious and 2, our hp pool is very low. A single half heart hit can feel like a lot so having these health drops drop frequently helps with lessening the load of needing to manage hp in a bullet hell setting.
+
+[Here is the soul_drop code](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/soul_drop.gd)
+and 
+[here is the health_drop code](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/health_drop.gd)
 ### Hit Satisfaction
+
+I broke down hit satisfaction into 3 different parts.
+
+1. Shake (Camera Shake, Enemy Shake)
+
+Shake is implemented in the following way. Whenever we signal to shake, the first thing we need to do is lerp our shake strength to 0. By lerping the shake strength to 0, this slowly lessens the shake until it stops. Afterwards, we randomly offset the camera in a random position with a max of shake strength distance away, creating our shake effect. There are 2 areas I added shake too, the camera and the enemy sprites. For the camera, I wanted shake to be fast and violent since it was the player that was getting hit. By doing this, it gives the player a notification that you were hit. For the enemy sprites, I wanted shake to be subtle, to make it seem as the enemy was slightly pushed by our attacks.
+
+Camera shake is implemented 
+[here ](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/player_camera.gd)
+and enemy sprite shake is implemented
+[here.](https://github.com/XMNNguyen/ECS179/blob/main/ecs179_project/Scripts/Enemies/enemy_shake.gd)
+
+2. Time stop/slowdown
+
+Time stop is implemented by setting our games time_scale below 1. Basically, we first set the time scale to some value below 1. Once we do that, we create a timer that is not effected by the time scale and after it stops, set the time_scale back to 1. Code can be seen 
+[here in player.gd](https://github.com/XMNNguyen/ECS179/blob/c8cf44b20b05988b2cc3a684b109f717b32de225/ecs179_project/Scripts/player.gd#L474).
+There are 2 areas that I apply time slowdown. The first is when the player gets hit. This is a very bullet hell style of rogue like so adding time slow after the player gets hit increases the feeling of impact by that hit. It also is a way to give a player a small break to process the information in front of them. This was especially important to have because of the bullet hell nature of this game. The 2nd area was on boss death. By slowing down time after the boss dies, it gives player time to process that the boss died since it is pretty hard to notice due to the sheer number of enemies on the screen at once. It also is just a cool effect to have overall.
+
+3. Particles
+
+For particles, I used godot's particle system. All particles that I created were made using 2DCpuParticle nodes. The main thing I wanted to add were blood effects for when players and enemies get hit. This is just another visual indicator that we hit/got hit and adds another level of impact. I also used Charlie's smoke particles after the boss was killed as well. Basically, I replaced all deleted enemies with smoke particles creating the look that they exploded. It was just overall satisfying to add.
 
 | Player Hitstun | Enemy Hit | Boss Death |
 | :------------: |:------------: |:------------: |
@@ -324,7 +362,13 @@ I originally had a lot of apprehension with this role as I don't have much exper
 
 ### Game Balance
 
+The first aspect of balance was player level balance. Basically, what I wanted was to have the player have a need to farm early levels and slowly move up in power as they traverse. I decided to go with a exponential leveling curve. The first reason is because it gives the player a reason to stay in the earlier regions to farm for their first upgrade. The second reason is because it makes the farming experience less dull because once you get the dopamine hit of getting that first upgrade, you will be constantly getting new different weapons which is extremely satisfying. The spawners and enemy types were placed around the map to support the exponential leveling curve.
+
+The 2nd aspect of balance was boss balance. Initially, I went with balancing the boss around unlocking your 3rd-4th weapon and if I could personally beat the boss. However after looking at playtests and also the Final Festival, I found that I probably made it way too hard because I already had a lot of practice beating this game. Due to this, I made the boss have less hp and increased some damage of a few weapons. This makes killing the boss less daunting plus the boss already is difficult enough with it placing fire traps and the swarms of enemies that you have to deal with.
+
 ### Visual Clutter Balance
+
+There were a few things I did in order to reduce visual clutter. The first was cleaning up the center of the map path and adding an obvious border. During the final festival and game feedback we got, we found that players would get pretty lost and also get ambushed by enemies hiding in trees or bushes, which is not fun at all. I removed a lot of decoration from the center of the path and to make the path to the boss clearer, I added a tree border that indicates that you are going on a path. The second thing was zoom out the camera a bit. We noticed that even if players would go on the right path, they sometimes would backtrack because they think they are in the middle of the map at times. By zooming out the camera, it is a lot easier to see the path border from the center of the path.
 
 ## Narrative Design - Charlie Edwards
 
