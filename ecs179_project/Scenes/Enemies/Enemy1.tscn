@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvj7xvknvxb0p"]
+
+[ext_resource type="Texture2D" uid="uid://crt0h1217ngnp" path="res://icon.svg" id="1_7dcxe"]
+
+[sub_resource type="GDScript" id="GDScript_qpc2n"]
+script/source = "class_name Enemy1
+extends Enemy
+
+#NOTE: this was createdd only for testing the spawner
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	# NOTE: when we start making enemy scenes, we probably should adjust the z_index based on the head position since we are doing an isometric game,
+	# 	    it will most likely be very similar to how I did it for player.gd
+	adjust_z_index(global_position)
+	_current_health -= 1
+	die()
+	
+
+	
+"
+
+[node name="Enemy1" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+script = SubResource("GDScript_qpc2n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.999998, -6)
+scale = Vector2(0.515625, 0.476563)
+texture = ExtResource("1_7dcxe")

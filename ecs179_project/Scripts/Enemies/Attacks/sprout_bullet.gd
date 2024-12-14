@@ -1,14 +1,12 @@
 class_name SproutBullet
 extends CharacterBody2D
 
+
 enum state {
 			CREATE,
 			TRAVELING, 
 			DEATH,
 			}
-
-@onready var animationTree:AnimationTree = $AnimationTree
-@onready var state_machine = animationTree["parameters/playback"]
 
 var damage: float = 0.5
 var cur_state: state = state.CREATE
@@ -18,6 +16,10 @@ var state_keys = [
 	"death"
 ]
 var _timer:Timer
+
+@onready var animationTree:AnimationTree = $AnimationTree
+@onready var state_machine = animationTree["parameters/playback"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

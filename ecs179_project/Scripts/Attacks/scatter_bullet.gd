@@ -8,9 +8,6 @@ enum state {
 			DEATH,
 			}
 
-@onready var animationTree:AnimationTree = $AnimationTree
-@onready var state_machine = animationTree["parameters/playback"]
-
 var damage: float = 1
 var bullet_speed: float = 100
 var num_projectiles: int = 5
@@ -27,6 +24,10 @@ var state_keys = [
 ]
 
 var _timer:Timer
+
+@onready var animationTree:AnimationTree = $AnimationTree
+@onready var state_machine = animationTree["parameters/playback"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -59,19 +60,23 @@ func scatter() -> void:
 		# get the current segment of the angle we are currently on
 		var angle = angle_radians / num_projectiles
 		
-		# for this iteration take the base fire_direction and move the angle based on current segment
-		# rotate the angle about angle_radians/2 in order to have the center of our angle be towards the firing direction
-		var rotation: float = velocity.normalized().angle() + (angle * i) - (angle_radians/2)
+			# for this iteration take the base fire_direction and move the angle based on current segment
+		var rotation: float = (
+								velocity.normalized().angle() + # get the fire direction as our center of the angle
+								(angle * i) - # rotate by the current angle segment the bullet should be on
+								(angle_radians/2)) # rotate the angle to have our angle center be the mid point of the angle
 		
 		# we want to right rotate or else the fire angle is 90 degrees off
 		new_bullet.velocity = Vector2.RIGHT.rotated(rotation) * bullet_speed 
 		new_bullet.rotation = rotation
+		new_bullet.global_position = global_position + (Vector2.RIGHT.rotated(rotation) * 20)
+		
+		# turns scatter off for these bullets
 		new_bullet.will_scatter = false
 		new_bullet.damage = damage
 		new_bullet.time_to_live = 1
 		new_bullet.z_index = z_index
 		get_tree().root.add_child(new_bullet)
-		new_bullet.global_position = global_position + (Vector2.RIGHT.rotated(rotation) * 20)
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:

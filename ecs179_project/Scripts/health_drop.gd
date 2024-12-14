@@ -2,13 +2,13 @@ class_name HealthDrop
 extends Node2D
 
 
-@onready var player: Player = $"/root/World/Player"
-@onready var tile_map: TileMap = $"/root/World/TileMap"
-
 var heal_ammount: float = -0.5
 var lerp_speed: float = 0.1
 
 var _cur_lerp_speed: float = 0
+
+@onready var player: Player = $"/root/World/Player"
+@onready var tile_map: TileMap = $"/root/World/TileMap"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,17 +37,17 @@ func move_to_player(delta: float) -> void:
 		global_position = global_position.lerp(player.global_position, _cur_lerp_speed)
 
 
-# helper function to adjust the z_index depending on what layer the drop is supposed to be on
+# helper function to adjust the z_index depending on what layer the player is supposed to be on
 func adjust_z_index(position: Vector2) -> void:
-	# get coordianates of the tile drop is on then get the tile data
+	# get coordianates of the tile player is standing on then get the tile data
 	var enemy_tile_position:Vector2i = tile_map.local_to_map(position - Vector2(0, 16))
 	var new_z_index:int = 0
 	
-	for i in range(tile_map.layers.keys().size()):
+	# iterate through the layers starting from the top and set the new index based on the z_index of the first block/slope tile we see
+	for i in range(tile_map.layers.keys().size(), 0, -1):
 		if (tile_map.get_cell_source_id(i, enemy_tile_position) != -1 &&
 			tile_map.get_cell_atlas_coords(i, enemy_tile_position) not in tile_map.other):
-			new_z_index += 1
-		else:
+			new_z_index = i + 1
 			break
 			
 	z_index = max(new_z_index, 1)

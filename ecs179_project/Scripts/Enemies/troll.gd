@@ -1,6 +1,7 @@
 class_name Troll
 extends Enemy
 
+
 enum state {
 			ATTACK,
 			IDLE, 
@@ -33,6 +34,7 @@ var state_keys = [
 var _on_slope: bool = false
 var _attacking: bool = false
 var _grabbing: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

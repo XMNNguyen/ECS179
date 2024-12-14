@@ -1,12 +1,13 @@
 class_name WaveBullet
 extends CharacterBody2D
 
+
 var damage: float = 1
+
+var _timer:Timer
 
 @onready var animationTree:AnimationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
-
-var _timer:Timer
 
 
 # Called when the node enters the scene tree for the first time.

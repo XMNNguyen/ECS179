@@ -1,14 +1,12 @@
 class_name Chicken
 extends Enemy
 
+
 enum state {
 			ATTACK,
 			IDLE, 
 			MOVE
 			}
-
-@onready var animationTree:AnimationTree = $AnimationTree
-@onready var state_machine = animationTree["parameters/playback"]
 
 var cur_state: state = state.IDLE
 var wind_up_timer:Timer
@@ -26,6 +24,10 @@ var state_keys = [
 
 var _on_slope: bool = false
 var _pecking: bool = false
+
+@onready var animationTree:AnimationTree = $AnimationTree
+@onready var state_machine = animationTree["parameters/playback"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -117,6 +119,7 @@ func peck_attack() -> void:
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
+	# if we hit the player's hurtBox, damage the player
 	if area.name == "hurtBox" && area.get_parent().name == "Player":
 		signals.player_take_damage.emit(base_damage)
 
@@ -124,9 +127,11 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 func _on_boss_died() -> void:
 	# kill of enemy and replace with smoke particles
 	self._current_health = 0
+	
 	var smoke_instance := smoke_scene.instantiate() as SmokeParticles
 	$"/root/World".add_child(smoke_instance)
 	smoke_instance.emitting = true
 	smoke_instance.z_index = z_index
 	smoke_instance.global_position = global_position
+	
 	self.die()

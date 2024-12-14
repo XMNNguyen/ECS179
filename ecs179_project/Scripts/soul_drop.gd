@@ -2,13 +2,15 @@ class_name SoulDrop
 extends Node2D
 
 
-@onready var player: Player = $"/root/World/Player"
-@onready var tile_map: TileMap = $"/root/World/TileMap"
 
 var soul_amount: int = 1
 var lerp_speed: float = 0.1
 
 var _cur_lerp_speed: float = 0
+
+
+@onready var player: Player = $"/root/World/Player"
+@onready var tile_map: TileMap = $"/root/World/TileMap"
 
 
 # Called when the node enters the scene tree for the first time.

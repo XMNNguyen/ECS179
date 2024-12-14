@@ -8,9 +8,6 @@ enum state {
 			TRAVELING, 
 			}
 
-@onready var animationTree:AnimationTree = $AnimationTree
-@onready var state_machine = animationTree["parameters/playback"]
-
 var damage: float = 1
 var bounce_speed: float = 600
 var bounce_distance: float = 200
@@ -26,6 +23,10 @@ var state_keys = [
 
 var _timer:Timer
 var _cur_bounce: int = 0
+
+@onready var animationTree:AnimationTree = $AnimationTree
+@onready var state_machine = animationTree["parameters/playback"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

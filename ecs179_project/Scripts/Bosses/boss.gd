@@ -1,6 +1,7 @@
 class_name Boss
 extends CharacterBody2D
 
+
 var potion_scene: PackedScene = preload("res://Scenes/potion.tscn")
 var blood_scene: PackedScene = preload("res://Scenes/Enemies/Blood_Particles.tscn")
 var smoke_scene: PackedScene = preload("res://Scenes/smoke_particles.tscn")
@@ -23,8 +24,10 @@ var _dialogue = false
 @onready var tile_map: TileMapController = $"/root/World/TileMap"
 @onready var actionable_finder: Area2D = $ActionableFinder
 
+
 func assign_stats() -> void:
 	var stat_num: int
+	# for every level, assign a single stat point
 	for i in range(level):
 		# get the stat to upgrade
 		stat_num = randi_range(0, 2)
@@ -38,12 +41,16 @@ func assign_stats() -> void:
 				base_damage += 1.5 
 			2:
 				base_speed += 2 
-
+	
+	# increase the sould drop amount based on level
 	soul_amount += level
 
 
 func _on_take_damage(damage: int) -> void:
+	# reduce our hp
 	_current_health -= damage
+	
+	# start hit effects
 	Audio.enemy_hit.play()
 	$AnimatedSprite2D.shake()
 	var blood := blood_scene.instantiate() as BloodParticles
@@ -54,16 +61,20 @@ func _on_take_damage(damage: int) -> void:
 # function that tries to free our boss instance once health is depleted
 func die() -> void:
 	if _current_health <= 0:
+		# signal that our boss died
 		signals.boss_died.emit()
 		
+		# spawn the elixir of life
 		var potion_instance := potion_scene.instantiate() as PotionDrop
 		$"/root/World".add_child(potion_instance)
 		potion_instance.global_position = global_position
 		
+		# spawn a smoke particle instance
 		var smoke_instance := smoke_scene.instantiate() as SmokeParticles
 		$"/root/World".add_child(smoke_instance)
 		smoke_instance.global_position = global_position
-
+		
+		# kill the boss
 		queue_free()
 		Audio.boss_death.play()
 
@@ -80,12 +91,13 @@ func adjust_z_index(position: Vector2) -> void:
 	var boss_tile_position: Vector2i = tile_map.local_to_map(position - Vector2(0, 16))
 	var new_z_index: int = 0
 	
+	# starting from the top layer, iterate through the layers until we see a block or slope type tile
 	for i in range(tile_map.layers.keys().size(), 0, -1):
 		if (tile_map.get_cell_source_id(i, boss_tile_position) != -1 &&
 			tile_map.get_cell_atlas_coords(i, boss_tile_position) not in tile_map.other):
 			new_z_index = i + 1
 			break
-			
+	
 	z_index = max(new_z_index, 1)
 
 

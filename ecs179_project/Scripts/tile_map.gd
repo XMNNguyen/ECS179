@@ -68,14 +68,8 @@ func _ready() -> void:
 	setup_boundery(layers.LEVEL_1, 0)
 
 
-# TODO: set up script to check player position and set up collision boxes accordingly
-func _process(delta: float) -> void:
-	pass
-	
-
 # NOTE: we are assuming that the player is set 1 layer above where they actually are due to Y-sort
 # sets up a collision bounderies in the current layer
-
 func clear_boundery(current_layer: layers, source: int):
 	var offset_direction: Array[Vector2i] = [
 											 Vector2i(-1, 0), Vector2i(1, 0), 

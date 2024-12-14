@@ -10,11 +10,10 @@ extends Node2D
 @export var level: int = 1
 
 var _spawn_timer: Timer
+var boss_dead = false
 
 @onready var player: Player = %Player
 @onready var tile_map: TileMap = %TileMap
-
-var boss_dead = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -74,11 +73,13 @@ func refresh_spawn_timer() -> void:
 
 
 func get_random_spawn_location() -> Vector2:
+	# return a random position within spawn_radius range
 	return (
 			global_position + 
 			Vector2(randf_range(-spawn_radius, spawn_radius),
 					randf_range(-spawn_radius, spawn_radius))
 		   )
+
 
 func _on_boss_died() -> void:
 	boss_dead = true

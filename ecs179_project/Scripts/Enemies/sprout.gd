@@ -1,14 +1,12 @@
 class_name Sprout
 extends Enemy
 
+
 enum state {
 			ATTACK,
 			IDLE, 
 			MOVE
 			}
-
-@onready var animationTree:AnimationTree = $AnimationTree
-@onready var state_machine = animationTree["parameters/playback"]
 
 var cur_state: state = state.IDLE
 var wind_up_timer:Timer
@@ -23,13 +21,18 @@ var state_keys = [
 	"Idle",
 	"Move"
 ]
+
 var bullet = preload("res://Scenes/Enemies/Attacks/sprout_bullet.tscn")
 var projectile_speed: float = 120
-
 var _on_slope: bool = false
+
+@onready var animationTree:AnimationTree = $AnimationTree
+@onready var state_machine = animationTree["parameters/playback"]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# connect to group and signals
 	add_to_group("Enemies")
 	signals.take_damage.connect(_on_take_damage)
 	signals.boss_died.connect(_on_boss_died)

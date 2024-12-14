@@ -48,24 +48,15 @@ var on_slope: bool = false
 @export var chain_attack_cd: float = 2
 @export var num_chain_bounces: int = 10
 
-# AUDIO
-@onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
-
-# OTHER
-@onready var health: float = maxHeart
-@onready var animationTree:AnimationTree = $AnimationTree
-@onready var state_machine = animationTree["parameters/playback"]
-@onready var tile_map: TileMapController = %TileMap
-@onready var actionable_finder: Area2D = $ActionableFinder
-
-var wave_bullet = preload("res://Scenes/Attacks/wave_bullet.tscn")
-var standard_bullet = preload("res://Scenes/Attacks/standard_bullet.tscn")
-var shotgun_bullet = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
-var scatter_bullet = preload("res://Scenes/Attacks/scatter_bullet.tscn")
-var chain_bullet = preload("res://Scenes/Attacks/chain_bullet.tscn")
-var blood_particles = preload("res://Scenes/blood_particles.tscn")
-var smoke_particles = preload("res://Scenes/smoke_particles.tscn")
-var energy_particles = preload("res://Scenes/energy_particles.tscn")
+# SCENES
+var wave_bullet: PackedScene = preload("res://Scenes/Attacks/wave_bullet.tscn")
+var standard_bullet: PackedScene = preload("res://Scenes/Attacks/standard_bullet.tscn")
+var shotgun_bullet: PackedScene = preload("res://Scenes/Attacks/shotgun_bullet.tscn")
+var scatter_bullet: PackedScene = preload("res://Scenes/Attacks/scatter_bullet.tscn")
+var chain_bullet: PackedScene = preload("res://Scenes/Attacks/chain_bullet.tscn")
+var blood_particles: PackedScene = preload("res://Scenes/blood_particles.tscn")
+var smoke_particles: PackedScene = preload("res://Scenes/smoke_particles.tscn")
+var energy_particles: PackedScene = preload("res://Scenes/energy_particles.tscn")
 
 var blend_position : Vector2 = Vector2.ZERO
 var blend_paths = [
@@ -77,21 +68,31 @@ var state_keys = [
 	"move"
 ]
 
-# WEAPON TIMERS
+# TIMERS
 var _standard_weapon_timer: Timer
 var _wave_weapon_timer: Timer
 var _shotgun_weapon_timer: Timer
 var _scatter_weapon_timer: Timer
 var _chain_weapon_timer: Timer
-
 var _cc_timer: Timer
 var _pause_timer: Timer
 
 var _dialogue = false
-
 var ground_type = "Terrain"
 
+# AUDIO
+@onready var projectile_sound: AudioStreamPlayer2D = $ProjectileSound
+
+# OTHER
+@onready var health: float = maxHeart
+@onready var animationTree:AnimationTree = $AnimationTree
+@onready var state_machine = animationTree["parameters/playback"]
+@onready var tile_map: TileMapController = %TileMap
+@onready var actionable_finder: Area2D = $ActionableFinder
+
+
 func _ready() -> void:
+	# connect signals and set stun particles to off
 	signals.collect_soul.connect(on_soul_collect)
 	signals.player_take_damage.connect(_on_take_damage)
 	signals.player_stunned.connect(_on_player_stun)
@@ -126,8 +127,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+	# get the controller input
 	var input_vector = Input.get_vector("left", "right", "up", "down")
-
+	
+	# set state to IDLE or MOVE based on if we are moving or not
 	if input_vector == Vector2.ZERO:
 		state = IDLE
 		velocity = Vector2.ZERO
@@ -152,9 +155,11 @@ func _physics_process(delta):
 	move_and_slide()
 	state_machine.travel(state_keys[state])
 	animationTree.set(blend_paths[state], blend_position)
-
+	
+	# fire player weapons
 	fire()
 	
+	# if we have interacted with an interactable, initiate cutscene
 	if Input.is_action_just_pressed("ui_accept") and _dialogue == false:
 		var actionables = actionable_finder.get_overlapping_areas()
 		if actionables.size() > 0:
@@ -168,14 +173,18 @@ func on_soul_collect(amount: int) -> void:
 
 
 func get_tile_type() -> int:
+	# get tile position and type
 	var tile_position: Vector2i = tile_map.local_to_map(self.position)
 	var tile_type: TileData = tile_map.get_cell_tile_data(1, tile_position)
+	
+	# return the tile type
 	if tile_type:
 		var data = tile_type.get_custom_data(ground_type)
 		return data
 	else:
 		return 0
-		
+
+
 func get_closest_enemy_position() -> Vector2:
 	# get all enemies within our world scene
 	var enemies_in_scene: Array[Node] = get_tree().get_nodes_in_group("Enemies")
@@ -231,9 +240,13 @@ func fire() -> void:
 			fire_chain(closest_enemy_position)
 			Input.action_press("spell_4")
 
+
 # fires the standard weapon from player
 func fire_standard(enemy_position: Vector2) -> void:
+	# get the normalize direction vector towards the enemy
 	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	
+	# initialize bullet and stats
 	var new_bullet := standard_bullet.instantiate() as StandardBullet
 	new_bullet.velocity = fire_direction * standard_bullet_speed
 	new_bullet.rotation = fire_direction.angle()
@@ -242,6 +255,7 @@ func fire_standard(enemy_position: Vector2) -> void:
 	add_child(new_bullet)
 	new_bullet.global_position = global_position
 	
+	# set cooldown
 	_standard_weapon_timer = Timer.new()
 	_standard_weapon_timer.one_shot = true
 	add_child(_standard_weapon_timer)
@@ -250,8 +264,10 @@ func fire_standard(enemy_position: Vector2) -> void:
 
 # fires the shotgun weapon from player
 func fire_shotgun(enemy_position: Vector2) -> void:
+	# get the normalized direction vector towards the enemy
 	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
 	
+	# iterate through the bullets in our angle and adjust their firing direction accordingly
 	for i in range(num_shotgun_bullets):
 		var new_bullet := shotgun_bullet.instantiate() as ShotgunBullet
 		
@@ -263,18 +279,22 @@ func fire_shotgun(enemy_position: Vector2) -> void:
 		var angle = angle_radians / num_shotgun_bullets
 		
 		# for this iteration take the base fire_direction and move the angle based on current segment
-		# rotate the angle about angle_radians/2 in order to have the center of our angle be towards the firing direction
-		var rotation: float = fire_direction.angle() + (angle * i) - (angle_radians/2)
+		var rotation: float = (
+								fire_direction.angle() + # get the fire direction as our center of the angle
+								(angle * i) - # rotate by the current angle segment the bullet should be on
+								(angle_radians/2)) # rotate the angle to have our angle center be the mid point of the angle
 		
 		# we want to right rotate or else the fire angle is 90 degrees off
 		new_bullet.velocity = Vector2.RIGHT.rotated(rotation) * shotgun_bullet_speed 
 		new_bullet.rotation = rotation
 		
+		# adjust stats and spawn
 		new_bullet.damage = shotgun_bullet_damage
 		new_bullet.z_index = z_index
 		add_child(new_bullet)
 		new_bullet.global_position = global_position
 	
+	# set cooldown
 	_shotgun_weapon_timer = Timer.new()
 	_shotgun_weapon_timer.one_shot = true
 	add_child(_shotgun_weapon_timer)
@@ -292,6 +312,7 @@ func fire_wave(enemy_position: Vector2) -> void:
 										]
 	# fire 1 wave bullet in each of the specified directions
 	for fire_direction in fire_directions:
+		# initialize the bullet and stats
 		var new_bullet := wave_bullet.instantiate() as WaveBullet
 		new_bullet.velocity = fire_direction * wave_bullet_speed
 		new_bullet.rotation = fire_direction.angle()
@@ -300,6 +321,7 @@ func fire_wave(enemy_position: Vector2) -> void:
 		add_child(new_bullet)
 		new_bullet.global_position = global_position
 	 
+	# set cooldown
 	_wave_weapon_timer = Timer.new()
 	_wave_weapon_timer.one_shot = true
 	add_child(_wave_weapon_timer)
@@ -307,7 +329,10 @@ func fire_wave(enemy_position: Vector2) -> void:
 
 
 func fire_scatter(enemy_position: Vector2) -> void:
+	# get the normalized firing direction
 	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	
+	# initialize the bullet and stats
 	var new_bullet := scatter_bullet.instantiate() as ScatterBullet
 	new_bullet.velocity = fire_direction * scatter_bullet_speed
 	new_bullet.rotation = fire_direction.angle()
@@ -318,6 +343,7 @@ func fire_scatter(enemy_position: Vector2) -> void:
 	add_child(new_bullet)
 	new_bullet.global_position = global_position
 	
+	# set cooldown
 	_scatter_weapon_timer = Timer.new()
 	_scatter_weapon_timer.one_shot = true
 	add_child(_scatter_weapon_timer)
@@ -325,7 +351,10 @@ func fire_scatter(enemy_position: Vector2) -> void:
 
 
 func fire_chain(enemy_position: Vector2) -> void:
+	# get the normalized firing direction
 	var fire_direction: Vector2 = (enemy_position - global_position).normalized()
+	
+	# initialize the bullet and stats
 	var new_bullet := chain_bullet.instantiate() as ChainBullet
 	new_bullet.velocity = fire_direction * chain_bullet_speed
 	new_bullet.rotation = fire_direction.angle()
@@ -335,6 +364,7 @@ func fire_chain(enemy_position: Vector2) -> void:
 	add_child(new_bullet)
 	new_bullet.global_position = global_position
 	
+	# set cooldown
 	_chain_weapon_timer = Timer.new()
 	_chain_weapon_timer.one_shot = true
 	add_child(_chain_weapon_timer)
@@ -347,6 +377,7 @@ func adjust_z_index() -> void:
 	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
 	var new_z_index:int = -1
 	
+	# iterate through the current tile position starting from the top, if we see a slope or block, set the z_index to the z_index of the tile we saw
 	for i in range(tile_map.layers.keys().size(), -1, -1):
 		if (tile_map.get_cell_source_id(i, player_tile_position) != -1 &&
 			tile_map.get_cell_atlas_coords(i, player_tile_position) not in tile_map.other &&
@@ -354,9 +385,12 @@ func adjust_z_index() -> void:
 			tile_map.get_cell_atlas_coords(i, player_tile_position) not in tile_map.wall_bounderies):
 			new_z_index = i + 1
 			break
+	
+	# if our new z_index is different from the current one, signal that the player entered a new layer to the tile_map
 	if z_index != new_z_index && new_z_index > -1:
 		signals.entered_new_layer.emit(max(new_z_index, 1), z_index)
 	
+	# if our new_z_index is valid, set z_index to the new one
 	if new_z_index > -1:
 		z_index = max(new_z_index, 1)
 
@@ -366,6 +400,7 @@ func is_on_slope() -> bool:
 	# get coordianates of the tile player is standing on then get the tile data
 	var player_tile_position:Vector2i = tile_map.local_to_map($Head.global_position - Vector2(0, 16))
 	
+	# check if there is a slope on the layer we are on and below as well
 	return (tile_map.get_cell_atlas_coords(z_index, player_tile_position) in tile_map.slopes ||
 			tile_map.get_cell_atlas_coords(z_index - 1, player_tile_position) in tile_map.slopes)
 			
@@ -429,33 +464,19 @@ func move_on_slope(input_vector : Vector2) -> void:
 			velocity.y -= diagonal_bias
 		elif input_vector.x == 1:
 			velocity.y += diagonal_bias
-	
-
-#func _on_hurt_box_area_entered(area: Area2D) -> void: # When a damaging collision hits the player
-	#if area.name == "hitBox": # Change this to the name of the collision that will damage the player
-		#health -= 0.5
-		#if health < 0: # Making sure that health doesn't go negative
-			#health = 0
-		#healthChange.emit(health)
-		#if health == 0:
-			#pass # Actions for player death here
-	#if area.name == "hitBox2": # This can be the hit box of a boss doing double damage
-		#health -= 2
-		#if health < 0: # Making sure that health doesn't go negative
-			#health = 0
-		#healthChange.emit(health)
-		#if health == 0:
-			#pass # Actions for player death here
 
 
+# teleport player to boss arena
 func start_boss_fight() -> void:
 	position.x = 1000
 	position.y = -950
 
+
 func create_smoke() -> void:
 	var smoke := smoke_particles.instantiate() as SmokeParticles
 	add_child(smoke)
-	
+
+
 func create_energy() -> void:
 	var energy := energy_particles.instantiate() as EnergyParticles
 	add_child(energy)
@@ -507,7 +528,10 @@ func _on_take_damage(damage : float) -> void:
 
 
 func _on_player_stun(cc_timer: Timer, time: float) -> void:
+	# stop the player
 	velocity = Vector2(0, 0)
+	
+	# set up particles and cc_timer
 	$Stun_Particles.visible = true
 	_cc_timer = cc_timer
 	add_child(_cc_timer)
@@ -520,14 +544,18 @@ func _on_boss_death() -> void:
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:
+	# if we are idle, do not make sound
 	if $AnimatedSprite2D.animation == "idle": 
 		return
+	# if we are not idle, check tile type and play the corresponding sound
 	if $AnimatedSprite2D.animation == "move":
+		# WATER
 		if get_tile_type() == 1:
 			if Audio.walk_water.playing:
 				return
 			else:
 				Audio.walk_water.play()
+		# GRASS
 		else:
 			if Audio.walk_grass.playing:
 				return

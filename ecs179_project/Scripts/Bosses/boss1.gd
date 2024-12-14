@@ -1,11 +1,15 @@
 class_name Boss1
 extends Boss
 
+
 enum state {
 	ATTACK,
 	IDLE,
 	MOVE
 }
+
+@export var attack_cooldown: float = 0.8  
+@export var projectile_scene: PackedScene = preload("res://Scenes/Enemies/Attacks/boss_attack.tscn")
 
 var cur_state: state = state.IDLE
 var attack_timer: Timer  
@@ -22,11 +26,8 @@ var state_keys = [
 ]
 
 
-@export var attack_cooldown: float = 0.8  
-@export var projectile_scene: PackedScene = preload("res://Scenes/Enemies/Attacks/boss_attack.tscn")
-
-
 func _ready() -> void:
+	# connect groups and signals
 	add_to_group("Enemies")
 	signals.take_damage.connect(_on_take_damage)
 
@@ -48,25 +49,36 @@ func _ready() -> void:
 
 # Called every frame
 func _process(delta: float) -> void:
+	# If our target is not set, make sure the target is our player
 	if not target:
 		target = get_node_or_null("/root/World/Player")
 		return
 
+	# adjust the z_index
 	adjust_z_index(global_position)
+	
+	# if we are currently aggro on the target, start behavior script
 	if _aggro:
+		# do not move if we are attacking
 		if cur_state == state.ATTACK:
 			return  
-
+		
+		# if we are within attack range and our attack is off cooldown, start our attack
 		if global_position.distance_to(target.global_position) <= attack_range:
 			if attack_timer.is_stopped(): 
 				start_attack()
+				
+		# otherwise move towards the target
 		else:
 			follow_target()
+	
+	# if we are within aggro range, set aggro to true
 	elif global_position.distance_to(target.global_position) <= aggro_range:
 		_aggro = true
 
 
 func follow_target() -> void:
+	# if we do not have a target, don't move
 	if not target:
 		return
 
@@ -80,6 +92,7 @@ func follow_target() -> void:
 
 
 func start_attack() -> void:
+	# if we do not have a target, do not attack
 	if not target:
 		return
 

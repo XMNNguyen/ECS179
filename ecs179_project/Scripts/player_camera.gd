@@ -1,13 +1,16 @@
 class_name PlayerCamera
 extends Camera2D
 
+
 @export var shake_strength:float = 30
 @export var fade: float = 5
 
 var _cur_shake_strength = 0
 
+
 func _ready() -> void:
 	signals.shake_camera.connect(_on_shake)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

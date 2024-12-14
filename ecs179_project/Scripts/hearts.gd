@@ -1,6 +1,7 @@
 extends HBoxContainer
 
-@onready var HeartGuiClass = preload("res://Scenes/Heart_Ui.tscn")
+@onready var HeartGuiClass: PackedScene = preload("res://Scenes/Heart_Ui.tscn")
+
 
 func _ready() -> void:
 	pass 
@@ -25,8 +26,8 @@ func updateHearts(currentHealth: float): # Updates the Heart containers
 		for i in range(currentHealth, hearts.size()):
 			hearts[i].update(false)
 	else:
-		var whole_hearts = currentHealth # If health is not a whole number, it will generate a half heart for the 0.5 health
-		var indices = 0
+		var whole_hearts: float = currentHealth # If health is not a whole number, it will generate a half heart for the 0.5 health
+		var indices: int = 0
 		while whole_hearts >= 1:
 			hearts[indices].update(true)
 			whole_hearts -= 1
